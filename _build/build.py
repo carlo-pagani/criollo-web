@@ -76,7 +76,8 @@ def documento(ruta, titulo, descripcion, cuerpo, jsonld=None, scripts=(), sin_in
         ld += '<script type="application/ld+json">' + json.dumps(bloque, ensure_ascii=False) + "</script>\n"
     js = "".join(f'<script src="{r(s)}" defer></script>' for s in ("assets/sitio.js",) + tuple(scripts))
     titulo_completo = titulo if titulo.startswith(D["nombre"]) else f"{titulo} · {D['nombre']}"
-    robots = '<meta name="robots" content="noindex">' if sin_indice else ""
+    # Mientras el sitio esté en revisión (borradores legales sin aprobar), ninguna página se ofrece a los buscadores
+    robots = '<meta name="robots" content="noindex, nofollow">' if sin_indice or D.get("borradores_legales") else ""
     return f"""<!doctype html>
 <html lang="es-EC">
 <head>
