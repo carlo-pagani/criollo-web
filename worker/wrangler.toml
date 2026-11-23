@@ -12,8 +12,8 @@ TOPE_VISITANTE_USD = "1"    # dólares por día de un mismo visitante
 LLAMADAS_POR_HORA = "60"    # llamadas por hora de un mismo visitante
 
 # Precios en dólares (servicios de salud: IVA 0 %). Vacío = ese servicio todavía no se cobra en línea.
-PRECIO_CONSULTA_USD = ""
-PRECIO_SEGUNDA_USD = ""
+PRECIO_CONSULTA_USD = "50"
+PRECIO_SEGUNDA_USD = "250"
 
 # Sitios de vista previa autorizados, separados por comas (el dominio del doctor ya está en el código)
 ORIGENES_EXTRA = "https://carlo-pagani.github.io"
