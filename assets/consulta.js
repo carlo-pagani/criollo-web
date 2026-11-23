@@ -344,6 +344,20 @@
       el('div', { class: 'botones' }, [el('a', { class: 'btn btn-neutro', href: BASE, texto: 'Volver al inicio' })])]);
   };
 
+  function pronto() {
+    var c = {}; try { c = JSON.parse(document.getElementById('ce-contacto').textContent); } catch (e) { /* sin datos de contacto */ }
+    raiz.innerHTML = '';
+    raiz.appendChild(el('div', { class: 'ce-caja' }, [
+      el('p', { class: 'rotulo', style: 'color:var(--acento)', texto: 'Muy pronto' }),
+      el('h2', { texto: 'La consulta express en línea se activa en los próximos días' }),
+      el('p', { class: 'ce-sub', texto: 'Estamos terminando de prepararla para que pueda contar su caso y enviar sus estudios desde aquí. Mientras tanto, el consultorio le atiende directamente y le indica cómo hacer llegar sus estudios.' }),
+      el('div', { class: 'botones' }, [
+        c.whatsapp ? el('a', { class: 'btn', href: c.whatsapp, rel: 'noopener', texto: 'Escribir por WhatsApp' }) : null,
+        c.tel ? el('a', { class: 'btn btn-neutro', href: 'tel:' + c.tel, texto: 'Llamar al ' + c.telefono }) : null]),
+      el('p', { class: 'ce-nota', texto: 'Si tiene una señal de alarma (deformidad tras un golpe, pérdida de fuerza o de sensibilidad, fiebre con una herida que supura), no espere: acuda a emergencias o llame al 911.' })
+    ]));
+  }
+
   function pintar() { (P[E.pantalla] || P.inicio)(); }
 
   // ---------- Arranque ----------
@@ -355,6 +369,9 @@
     if (c.envio && c.envio.url) CFG.envio = c.envio;
     if (E.pantalla === 'estudios' || E.pantalla === 'datos' || E.pantalla === 'enviar' || E.pantalla === 'demo') { /* los archivos no sobreviven a una recarga */ if (E.pantalla !== 'datos') E.pantalla = 'estudios'; }
     E.pensando = false;
+    // Mientras el consultorio no tenga activo el canal donde recibe los casos, la consulta no se ofrece al público:
+    // se muestra un aviso con el contacto directo. Con ?prueba=1 se puede recorrer completa (no envía ni cobra).
+    if (!CFG.envio.url && new URLSearchParams(location.search).get('prueba') !== '1') return pronto();
     pintar();
   });
 })();

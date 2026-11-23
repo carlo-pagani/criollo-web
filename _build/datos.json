@@ -1,12 +1,12 @@
 {
-  "_nota": "Datos que se repiten en todo el sitio. Lo que va entre corchetes está pendiente del doctor: se muestra resaltado hasta que se complete.",
+  "_nota": "Datos que se repiten en todo el sitio. Lo que va entre corchetes está pendiente del doctor. Con \"publicado\": true, lo pendiente se omite del sitio; con false, se muestra resaltado para revisarlo.",
   "dominio": "https://doctorfelipecriollo.com",
   "nombre": "Dr. Felipe Criollo Palacios",
   "nombre_completo": "Felipe Sebastián Criollo Palacios",
   "especialidad": "Cirujano ortopedista oncólogo",
-  "telefono": "[TELÉFONO ÚNICO]",
-  "telefono_enlace": "",
-  "whatsapp_enlace": "",
+  "telefono": "099 182 7823",
+  "telefono_enlace": "+593991827823",
+  "whatsapp_enlace": "https://wa.me/593991827823",
   "correo": "[CORREO DEL CONSULTORIO]",
   "horario_citimed": "[HORARIO EN CITIMED]",
   "horario_metropolitano": "[HORARIO EN EL HOSPITAL METROPOLITANO]",
@@ -20,5 +20,7 @@
   "ruc": "[RUC DEL DOCTOR]",
   "direccion_citimed": "Centro Médico CITIMED, piso 6, consultorio 628, Av. Mariana de Jesús y Nuño de Valderrama, Quito",
   "borradores_legales": true,
-  "revision_medica": "[FECHA DE REVISIÓN DEL DOCTOR]"
+  "revision_medica": "[FECHA DE REVISIÓN DEL DOCTOR]",
+  "publicado": true,
+  "_telefono_nota": "PROVISIONAL: es el número que mostraba el sitio anterior (099-182-7823). Falta que el doctor confirme el teléfono único."
 }

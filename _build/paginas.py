@@ -22,14 +22,24 @@ def cta(ruta, motivo=None, texto="Iniciar consulta express", clase="btn"):
 
 
 def revisado(extra=""):
-    return (f'<p class="revision">Escrito y revisado por el {D["nombre"]}, {D["especialidad"].lower()}. Última revisión: {D["revision_medica"]}. '
+    if D["revision_medica"].startswith("["):
+        return f'<p class="revision">{extra}Esta página es informativa y no reemplaza una consulta: cada caso necesita una valoración personal.</p>'
+    return (f'<p class="revision">Revisado por el {D["nombre"]}, {D["especialidad"].lower()}. Última revisión: {D["revision_medica"]}. '
             f'{extra}Esta página es informativa y no reemplaza una consulta: cada caso necesita una valoración personal.</p>')
+
+
+# Frases que dependen de un dato que puede faltar
+def precio(clave, con, sin):
+    return con.format(D[clave]) if not D[clave].startswith("[") else sin
+
+
+CORREO_O_SITIO = D["correo"] if not D["correo"].startswith("[") else "los canales de contacto de este sitio"
 
 
 def ld_pagina_medica(ruta, titulo, descripcion, tema):
     return {"@context": "https://schema.org", "@type": "MedicalWebPage", "name": titulo, "description": descripcion,
             "url": D["dominio"] + "/" + ruta, "inLanguage": "es-EC", "about": {"@type": "MedicalCondition", "name": tema},
-            "author": {"@id": D["dominio"] + "/#medico"}, "reviewedBy": {"@id": D["dominio"] + "/#medico"}, "audience": "https://schema.org/Patient"}
+            "author": {"@id": D["dominio"] + "/#medico"}, "audience": "https://schema.org/Patient"}
 
 
 # ---------------------------------------------------------------- Inicio
@@ -39,82 +49,94 @@ pagina(ruta=r, prioridad="1.0",
        descripcion="Cirujano ortopedista oncólogo en Quito. Tumores óseos y de partes blandas, metástasis en extremidades, segunda opinión y traumatología. Consulta express en línea con subida de estudios.",
        jsonld=[MEDICO_LD, {"@context": "https://schema.org", "@type": "WebSite", "name": D["nombre"], "url": D["dominio"] + "/", "inLanguage": "es-EC"}],
        cuerpo=f"""
-<section class="portada"><div class="contenedor">
-<div class="texto">
-<p class="antetitulo">Ortopedia oncológica y traumatología · Quito</p>
-<h1>{D['nombre']}</h1>
-<p class="lema">Diagnóstico y cirugía de tumores óseos y de partes blandas, metástasis en brazos y piernas, y traumatología compleja. Formado en ortopedia oncológica en la Universidad Militar Nueva Granada, Bogotá.</p>
-<div class="botones">{cta(r)}<a class="btn btn-neutro" href="{rel(r, 'segunda-opinion/')}">Pedir una segunda opinión</a></div>
-<p class="nota">Cuente su caso y suba sus estudios antes de la cita. El doctor los revisa personalmente.</p>
+<section class="negatoscopio"><div class="contenedor">
+<div>
+<p class="antetitulo">{D['especialidad']} · Quito</p>
+<h1>Tumores óseos y sarcomas, tratados por <span class="marcador">quien los opera</span>.</h1>
+<p class="lema">Soy el {D['nombre']}. Cuénteme su caso y suba sus estudios: los reviso personalmente antes de la cita.</p>
 </div>
-<div class="foto"><figure>{img(r, 'felipe-retrato', 'Retrato del Dr. Felipe Criollo Palacios con bata blanca', eager=True)}<figcaption>{D['especialidad']} · CITIMED, Quito</figcaption></figure></div>
+<figure class="placa">{img(r, 'felipe-retrato', 'Retrato del Dr. Felipe Criollo Palacios con bata blanca', eager=True)}<span class="lado" aria-hidden="true">D</span><figcaption><span>Criollo Palacios, F.</span><span>CITIMED · Quito</span></figcaption></figure>
+<nav class="visor" aria-labelledby="visor-t">
+<div class="visor-titulo"><h2 id="visor-t">¿Qué le trae hoy?</h2><p>Elija su situación y empezamos por ahí.</p></div>
+<ul>
+<li><a href="{rel(r,'consulta-express/')}?motivo=tumor"><span class="rotulo">Placa 01</span><strong>Noté un bulto o un dolor en el hueso</strong><span>Le hago las preguntas de una primera consulta y recibo sus estudios.</span></a></li>
+<li><a href="{rel(r,'segunda-opinion/')}"><span class="rotulo">Placa 02</span><strong>Ya tengo un diagnóstico</strong><span>Segunda opinión antes de una cirugía o un tratamiento largo.</span></a></li>
+<li><a href="{rel(r,'consulta-express/')}?motivo=lesion"><span class="rotulo">Placa 03</span><strong>Tuve una lesión o una fractura</strong><span>Traumatología: fracturas, lesiones deportivas, mano y prótesis.</span></a></li>
+<li><a href="{rel(r,'para-colegas/')}"><span class="rotulo">Placa 04</span><strong>Soy médico y quiero referir</strong><span>Qué enviar, cómo le respondo y cómo vuelve su paciente.</span></a></li>
+</ul>
+</nav>
 </div></section>
 
-<section class="franja" aria-label="Trayectoria"><div class="contenedor">
-<div><strong>Ortopedia oncológica</strong><span>Universidad Militar Nueva Granada, Bogotá</span></div>
-<div><strong>Directivo en SOLCA</strong><span>Ex jefe del Servicio de Ortopedia Oncológica, Quito</span></div>
-<div><strong>Investigación</strong><span>Biopsia percutánea en ortopedia oncológica, serie de 152 pacientes, 2015</span></div>
-<div><strong>Docente de posgrado</strong><span>Ortopedia oncológica, Universidad Central del Ecuador; invitado en la USFQ</span></div>
-<div><strong>Sociedades científicas</strong><span>ISOLS, SLATME y Sociedad Ecuatoriana de Oncología</span></div>
-</div></section>
+<section class="ficha" aria-label="Trayectoria"><div class="contenedor"><dl>
+<div><dt>Subespecialidad</dt><dd>Ortopedia oncológica<small>Universidad Militar Nueva Granada, Bogotá</small></dd></div>
+<div><dt>Cargo</dt><dd>Ex jefe del Servicio de Ortopedia Oncológica<small>Directivo en SOLCA Quito</small></dd></div>
+<div><dt>Investigación</dt><dd>152 pacientes<small>Serie de biopsia percutánea, publicada en 2015</small></dd></div>
+<div><dt>Docencia y sociedades</dt><dd>Posgrado de Ortopedia<small>Universidad Central del Ecuador · ISOLS · SLATME</small></dd></div>
+</dl></div></section>
 
 <section class="seccion"><div class="contenedor">
-<h2>Especialidades</h2>
-<p class="entrada">Dos campos, un mismo cirujano: la ortopedia oncológica, que pocos especialistas practican en el país, y la traumatología de todos los días.</p>
-<div class="rejilla">
-<article class="tarjeta destacada"><p class="eti">Su campo de mayor experiencia</p><h3>Ortopedia oncológica</h3>
-<ul><li><a href="{rel(r,'especialidades/tumores-oseos/')}">Tumores óseos benignos y malignos</a></li><li><a href="{rel(r,'especialidades/sarcoma-de-partes-blandas/')}">Sarcomas de partes blandas</a></li><li><a href="{rel(r,'especialidades/metastasis-oseas/')}">Metástasis en huesos de brazos y piernas</a></li><li><a href="{rel(r,'especialidades/fractura-patologica/')}">Fracturas patológicas</a></li><li><a href="{rel(r,'especialidades/salvamento-de-extremidad/')}">Cirugía de salvamento de extremidad</a></li></ul>
-<a class="mas" href="{rel(r,'segunda-opinion/')}">Cómo pedir una segunda opinión</a></article>
-<article class="tarjeta"><p class="eti" style="color:var(--gris)">Atención general</p><h3>Traumatología y ortopedia</h3>
-<ul><li>Fracturas y luxaciones</li><li>Lesiones deportivas</li><li>Cirugía de mano</li><li>Prótesis de cadera y rodilla</li><li>Diagnóstico de lesiones musculoesqueléticas</li></ul>
+<p class="antetitulo">Lo primero que conviene saber</p>
+<p class="tesis">Antes de la biopsia, <span class="marcador">el cirujano</span>. El trayecto de la aguja decide cómo será la operación.</p>
+<div class="tesis-pie"><p>En un posible tumor maligno, la biopsia es el primer paso de la cirugía. Si se toma por el lugar equivocado, la operación debe ser más amplia y la reconstrucción, más difícil.</p><a class="btn btn-linea" href="{rel(r,'biopsia/')}">Por qué importa quién la planifica</a></div>
+</div></section>
+
+<hr class="incision">
+
+<section class="seccion"><div class="contenedor">
+<p class="antetitulo">Especialidades</p>
+<h2>Dos campos, un mismo cirujano</h2>
+<div class="campos">
+<article><span class="rotulo" style="color:var(--acento)">Su campo de mayor experiencia</span><h3>Ortopedia oncológica</h3>
+<ol><li><a href="{rel(r,'especialidades/tumores-oseos/')}">Tumores óseos benignos y malignos</a></li><li><a href="{rel(r,'especialidades/sarcoma-de-partes-blandas/')}">Sarcomas de partes blandas</a></li><li><a href="{rel(r,'especialidades/metastasis-oseas/')}">Metástasis en huesos de brazos y piernas</a></li><li><a href="{rel(r,'especialidades/fractura-patologica/')}">Fracturas patológicas</a></li><li><a href="{rel(r,'especialidades/salvamento-de-extremidad/')}">Cirugía de salvamento de extremidad</a></li></ol></article>
+<article><span class="rotulo" style="color:var(--gris)">Atención general</span><h3>Traumatología y ortopedia</h3>
+<ol><li><span>Fracturas y luxaciones</span></li><li><span>Lesiones deportivas</span></li><li><span>Cirugía de mano</span></li><li><span>Prótesis de cadera y rodilla</span></li></ol>
 <a class="mas" href="{rel(r,'especialidades/traumatologia/')}">Ver traumatología</a></article>
 </div>
 </div></section>
 
-<section class="seccion arena"><div class="contenedor dos">
+<section class="seccion oscura"><div class="contenedor dos">
 <div class="texto">
 <p class="antetitulo">Segunda opinión</p>
-<h2>¿Ya tiene un diagnóstico, una resonancia o una biopsia?</h2>
-<p class="entrada">Envíe sus estudios antes de viajar a Quito. El doctor los revisa y le dice si su caso necesita una cita presencial, una teleconsulta o la valoración de otro especialista. Pensado para pacientes de provincia, del exterior y para quien debe tomar una decisión importante sobre su tratamiento.</p>
-<div class="botones" style="margin-top:28px"><a class="btn" href="{rel(r,'segunda-opinion/')}">Ver cómo funciona</a>{cta(r,'segunda','Enviar mis estudios','btn btn-neutro')}</div>
+<h2>Una decisión que no tiene vuelta atrás merece <span class="marcador">una segunda mirada</span>.</h2>
+<p class="entrada">Si ya tiene un diagnóstico, una resonancia o una biopsia, envíe sus estudios antes de viajar a Quito. El doctor los revisa, le entrega un informe escrito y se lo explica por videollamada.</p>
+<div class="botones" style="margin-top:30px"><a class="btn" href="{rel(r,'segunda-opinion/')}">Cómo funciona y qué enviar</a>{cta(r,'segunda','Enviar mis estudios','btn btn-neutro')}</div>
 </div>
-<div class="media">{img(r,'felipe-quirofano','El Dr. Felipe Criollo Palacios operando junto a otro cirujano','8/7')}</div>
+<div class="media"><figure class="montada">{img(r,'felipe-quirofano','El Dr. Felipe Criollo Palacios operando junto a otro cirujano','8/7')}<figcaption><span>Quirófano</span><span>Quito</span></figcaption></figure></div>
 </div></section>
 
 <section class="seccion"><div class="contenedor">
 <p class="antetitulo">Consulta express</p>
 <h2>Su caso, ordenado antes de la cita</h2>
-<p class="entrada">Un asistente con inteligencia artificial le hace las preguntas que el doctor haría en la primera consulta. Usted responde con sus palabras, sube sus estudios y el doctor recibe una ficha completa para decidir el mejor siguiente paso.</p>
+<p class="entrada">Un asistente con inteligencia artificial le hace las preguntas que el doctor haría en la primera consulta. Usted responde con sus palabras y sube sus estudios. La valoración la hace el doctor.</p>
 <ol class="pasos">
-<li><strong>Elija el motivo</strong><span>Masa o tumor, lesión o fractura, dolor articular o control después de una cirugía.</span></li>
-<li><strong>Cuente su caso</strong><span>El asistente le pregunta una cosa a la vez: cuándo empezó, cómo evoluciona, qué tratamientos recibió.</span></li>
+<li><strong>Elija el motivo</strong><span>Masa o tumor, lesión, dolor articular o control de una cirugía.</span></li>
+<li><strong>Cuente su caso</strong><span>Una pregunta a la vez: cuándo empezó, cómo evoluciona, qué tratamientos recibió.</span></li>
 <li><strong>Suba sus estudios</strong><span>Radiografías, resonancias, tomografías, informes o biopsias.</span></li>
-<li><strong>Confirme y envíe</strong><span>Revise el resumen, autorice el uso de sus datos de salud y pague {D['precio_consulta']}, que se descuenta de su consulta.</span></li>
-<li><strong>El doctor responde</strong><span>Su equipo le contacta para proponerle una cita presencial, una teleconsulta o la derivación adecuada.</span></li>
+<li><strong>Confirme y envíe</strong><span>Revisa el resumen y autoriza el uso de sus datos de salud{precio('precio_consulta', ', y paga {}, que se descuenta de su consulta', '')}.</span></li>
+<li><strong>El doctor responde</strong><span>Su equipo le contacta con la propuesta: cita, teleconsulta o derivación.</span></li>
 </ol>
-<div class="botones" style="margin-top:32px;align-items:center">{cta(r)}<p class="nota" style="max-width:620px">El asistente no diagnostica ni receta: ordena su información para el doctor. Si describe una señal de alarma, le indica acudir de inmediato a emergencias. <a href="{rel(r,'cuando-consultar/')}">Cuándo consultar sin esperar</a></p></div>
+<div class="botones" style="margin-top:40px;align-items:center">{cta(r)}<p class="nota" style="max-width:600px">El asistente no diagnostica ni receta. Si describe una señal de alarma, le indica acudir a emergencias. <a href="{rel(r,'cuando-consultar/')}">Cuándo consultar sin esperar</a></p></div>
 </div></section>
 
 <section class="seccion blanca"><div class="contenedor">
-<h2>Lo que conviene saber</h2>
-<p class="entrada">Respuestas del doctor a las preguntas que más angustian, escritas para pacientes y familias.</p>
+<p class="antetitulo">Para leer con calma</p>
+<h2>Las preguntas que más angustian</h2>
 <div class="rejilla chica">
-<a class="tarjeta" href="{rel(r,'biopsia/')}"><span class="eti">Antes de cualquier biopsia</span><strong>Por qué la biopsia de un tumor óseo debe planificarla el cirujano que va a operar</strong></a>
 <a class="tarjeta" href="{rel(r,'especialidades/tumores-oseos/')}"><span class="eti">Tumores óseos</span><strong>¿Es benigno o maligno? Cómo se estudia un tumor en el hueso</strong></a>
+<a class="tarjeta" href="{rel(r,'especialidades/sarcoma-de-partes-blandas/')}"><span class="eti">Partes blandas</span><strong>Un bulto que crece: por qué estudiarlo antes de operarlo</strong></a>
 <a class="tarjeta" href="{rel(r,'especialidades/fractura-patologica/')}"><span class="eti">Fracturas</span><strong>Cuándo sospechar un tumor detrás de una fractura</strong></a>
-<a class="tarjeta" href="{rel(r,'especialidades/sarcoma-de-partes-blandas/')}"><span class="eti">Partes blandas</span><strong>Un bulto que crece: cuándo no conviene operarlo sin estudiarlo antes</strong></a>
+<a class="tarjeta" href="{rel(r,'cuando-consultar/')}"><span class="eti">Señales de alarma</span><strong>Lo que no debe esperar a una cita</strong></a>
 </div>
 </div></section>
 
 <section class="seccion"><div class="contenedor dos">
 <div class="texto">
-<h2>Dónde atiendo</h2>
-<p style="margin-top:16px;font-size:18px;font-weight:600">Consulta privada del {D['nombre']}</p>
-<p style="margin-top:8px;color:var(--texto)">{D['direccion_citimed']}</p>
-<p style="margin-top:8px;color:var(--texto)">También atiende en el Hospital Metropolitano, Quito.</p>
-<div class="botones" style="margin-top:24px"><a class="btn btn-linea" href="{rel(r,'donde-atiendo/')}">Horarios y cómo llegar</a><a class="btn btn-neutro" href="{rel(r,'fuera-de-quito/')}">Si vive fuera de Quito</a></div>
+<p class="antetitulo">Dónde atiendo</p>
+<h2>CITIMED y Hospital Metropolitano, Quito</h2>
+<p class="entrada">{D['direccion_citimed']}.</p>
+<div class="botones" style="margin-top:28px"><a class="btn btn-linea" href="{rel(r,'donde-atiendo/')}">Horarios y cómo llegar</a><a class="btn btn-neutro" href="{rel(r,'fuera-de-quito/')}">Si vive fuera de Quito</a></div>
 </div>
-<div class="media">{img(r,'felipe-consultorio','El Dr. Felipe Criollo Palacios en su consultorio de CITIMED','10/9')}</div>
+<div class="media"><figure class="montada">{img(r,'felipe-consultorio','El Dr. Felipe Criollo Palacios en su consultorio de CITIMED','10/9')}<figcaption><span>Consultorio 628</span><span>CITIMED</span></figcaption></figure></div>
 </div></section>
 """)
 
@@ -268,7 +290,7 @@ pagina(ruta=r, prioridad="0.9", titulo="Segunda opinión en ortopedia oncológic
 <ol class="pasos">
 <li><strong>Cuente su caso</strong><span>En la consulta express, elija «Segunda opinión». Un asistente le pregunta por el diagnóstico, el tratamiento propuesto y cómo llegó hasta aquí.</span></li>
 <li><strong>Suba sus documentos</strong><span>Informes, imágenes y patología. Más abajo está la lista exacta.</span></li>
-<li><strong>Autorice y pague</strong><span>Autoriza el uso de sus datos de salud para la revisión y paga {D['precio_segunda']}.</span></li>
+<li><strong>Autorice el envío</strong><span>Autoriza el uso de sus datos de salud para la revisión{precio('precio_segunda', ' y paga {}', '')}.</span></li>
 <li><strong>El doctor revisa</strong><span>Revisa personalmente sus estudios. Si falta algo importante, su equipo se lo pide.</span></li>
 <li><strong>Recibe su informe</strong><span>Un informe escrito y una videollamada con el doctor para explicárselo y responder sus preguntas.</span></li>
 </ol>
@@ -292,7 +314,7 @@ pagina(ruta=r, prioridad="0.9", titulo="Segunda opinión en ortopedia oncológic
 <h2>Qué recibe</h2>
 <ul><li>Un <strong>informe escrito</strong> del {D['nombre']} con su lectura del caso, su opinión sobre el diagnóstico y el tratamiento propuesto, y los estudios adicionales que recomendaría si hacen falta.</li><li>Una <strong>videollamada</strong> para explicarle el informe a usted y a su familia.</li><li>Si su caso lo requiere, la propuesta de una cita presencial en Quito, organizada para que sea una sola visita. <a href="{rel(r,'fuera-de-quito/')}">Si vive fuera de Quito</a>.</li></ul>
 <h2>Cuánto cuesta</h2>
-<p>La segunda opinión con informe escrito y videollamada cuesta {D['precio_segunda']}. Se paga en línea al enviar el caso. <span class="pendiente">[CONFIRMAR SI SE DESCUENTA DE UNA CIRUGÍA O CONSULTA POSTERIOR]</span></p>
+<p>{precio('precio_segunda', 'La segunda opinión con informe escrito y videollamada cuesta {}. Se paga en línea al enviar el caso.', 'El consultorio le informa el valor de la segunda opinión antes de iniciar la revisión.')} <span class="pendiente">[CONFIRMAR SI SE DESCUENTA DE UNA CIRUGÍA O CONSULTA POSTERIOR]</span></p>
 <h2>Lo que la segunda opinión no es</h2>
 <p>No es una atención de urgencia ni reemplaza el seguimiento con su médico tratante. Si su médico le refirió, el doctor puede enviarle también a él el informe, con su autorización. Si presenta una <a href="{rel(r,'cuando-consultar/')}">señal de alarma</a>, acuda a emergencias.</p>
 <h2>Preguntas frecuentes</h2>
@@ -360,7 +382,7 @@ pagina(ruta=r, prioridad="0.8", titulo="Para colegas que refieren pacientes",
 <ul><li>Resumen clínico breve y su pregunta concreta.</li><li>Imágenes, idealmente en DICOM, e informes de radiología.</li><li>Informe de patología, si existe.</li><li>Sus datos de contacto para la respuesta.</li></ul>
 <div class="caja"><p>Pídale al paciente su autorización para compartir sus datos de salud conmigo. El formulario para colegas incluye esa constancia.</p></div>
 <h2>Cómo le respondo</h2>
-<p><span class="pendiente">[CONFIRMAR CON EL DOCTOR: INFORME ESCRITO, LLAMADA O AMBOS, Y POR QUÉ CANAL]</span> Si el paciente necesita una valoración presencial, mi equipo lo coordina y le mantengo al tanto de la conducta. Para casos urgentes, llámeme directamente: {D['telefono']}.</p>
+<p><span class="pendiente">[CONFIRMAR CON EL DOCTOR: INFORME ESCRITO, LLAMADA O AMBOS, Y POR QUÉ CANAL]</span> Si el paciente necesita una valoración presencial, mi equipo lo coordina y le mantengo al tanto de la conducta. Para casos urgentes, llame al consultorio: {D['telefono']}.</p>
 <h2>El paciente vuelve a usted</h2>
 <p>Mi trabajo es resolver la parte de ortopedia oncológica. El control general, el manejo de otras enfermedades y el seguimiento que no sea de mi especialidad se mantienen con el médico que refiere, y le envío la información necesaria para continuar.</p>
 <div class="botones" style="margin:32px 0">{cta(r,'colega','Enviar un caso')}<a class="btn btn-neutro" href="{rel(r,'perfil/')}">Ver mi perfil y publicaciones</a></div>
@@ -404,7 +426,7 @@ pagina(ruta=r, prioridad="0.8", titulo="Dónde atiendo: CITIMED y Hospital Metro
 <div class="rejilla">
 <article class="tarjeta destacada"><p class="eti">Consulta privada</p><h3>Centro Médico CITIMED</h3>
 <p>Piso 6, consultorio 628<br>Av. Mariana de Jesús y Nuño de Valderrama, Quito</p>
-<p>Horario: {D['horario_citimed']}</p><p>Teléfono: {tel}</p>
+<p>Horario: {D['horario_citimed']}</p><p>Teléfono: {tel}</p>{f'<p><a href="{D["whatsapp_enlace"]}" rel="noopener">Escribir por WhatsApp</a></p>' if D["whatsapp_enlace"] else ""}
 {mapa('CITIMED+Mariana+de+Jesus+Quito', 'Mapa de CITIMED')}</article>
 <article class="tarjeta"><p class="eti">Atención hospitalaria</p><h3>Hospital Metropolitano</h3>
 <p>Av. Mariana de Jesús y Nicolás Arteta, Quito</p>
@@ -455,7 +477,7 @@ r = "preguntas-frecuentes/"
 FAQ = [
     ("¿La consulta express reemplaza a la cita?", "No. Prepara la cita: el doctor llega a ella conociendo su caso y sus estudios, y usted no repite la historia desde cero."),
     ("¿El asistente con inteligencia artificial me da un diagnóstico?", "No. El asistente solo hace preguntas y ordena sus respuestas para el doctor. No diagnostica, no receta y no reemplaza la valoración médica. Quien revisa su caso y decide el siguiente paso es el doctor."),
-    ("¿Cuánto cuesta la consulta express?", f"{D['precio_consulta']}. Se paga en línea al enviar el caso y se descuenta del valor de su consulta."),
+    ("¿Cuánto cuesta la consulta express?", precio("precio_consulta", "{}. Se paga en línea al enviar el caso y se descuenta del valor de su consulta.", "El consultorio le informa el valor antes de que usted pague. Ese valor se descuenta de su consulta.")),
     ("¿Cuándo me responden?", "El equipo del doctor le contacta cuando su caso esté revisado. El tiempo depende del número de casos y de la complejidad del suyo. Si tiene una señal de alarma, no espere la respuesta: acuda a emergencias."),
     ("¿Quién ve mis datos y mis estudios?", "Solo el doctor y su equipo, para valorar su caso, conforme a la Ley Orgánica de Protección de Datos Personales. Los detalles están en el aviso de privacidad."),
     ("¿Qué archivos puedo subir?", "Radiografías, resonancias, tomografías, informes y biopsias, en PDF o imagen (JPG, PNG o HEIC). Si tiene un disco de imágenes en formato DICOM, envíe el enlace de descarga del centro de imagen."),
@@ -468,7 +490,7 @@ pagina(ruta=r, prioridad="0.6", titulo="Preguntas frecuentes",
        jsonld=[{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ if not a.startswith("[")]},
                migas_ld(r, [("", "Inicio")], "Preguntas frecuentes")],
        cuerpo=cabeza(r, [("", "Inicio")], "", "Preguntas frecuentes") +
-       '<section class="seccion"><div class="contenedor estrecho">' + "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in FAQ) +
+       '<section class="seccion"><div class="contenedor estrecho">' + "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in FAQ if not (D.get("publicado") and a.startswith("["))) +
        f'<div class="botones" style="margin-top:32px">{cta(r)}</div></div></section>')
 
 # ---------------------------------------------------------------- Consulta express (la aplicación)
@@ -486,7 +508,8 @@ pagina(ruta=r, prioridad="0.9", titulo="Consulta express",
 <div id="ce" class="ce" aria-live="polite">
 <noscript><p>La consulta express necesita JavaScript. También puede escribir al consultorio: {D['telefono']}.</p></noscript>
 </div>
-<p class="nota" style="margin-top:24px;max-width:760px">El asistente no diagnostica ni receta. Si describe una señal de alarma, le pedirá acudir a emergencias. Sus datos se tratan conforme al <a href="{rel(r,'privacidad/')}">aviso de privacidad</a> y las <a href="{rel(r,'condiciones/')}">condiciones del servicio</a>.</p>
+<script type="application/json" id="ce-contacto">{{"telefono": "{D['telefono']}", "tel": "{D['telefono_enlace']}", "whatsapp": "{D['whatsapp_enlace']}"}}</script>
+<p class="nota" style="margin-top:24px;max-width:760px">El asistente no diagnostica ni receta. Si describe una señal de alarma, le pedirá acudir a emergencias. Sus datos se tratan conforme al <a href="{rel(r,'privacidad/')}">aviso de privacidad</a>.</p>
 </div></section>
 <link rel="stylesheet" href="{rel(r,'assets/consulta.css')}">""")
 
@@ -499,10 +522,9 @@ pagina(ruta=r, legal=True, prioridad="0.3", titulo="Aviso de privacidad y tratam
        descripcion="Cómo el Dr. Felipe Criollo Palacios trata los datos personales y de salud que recibe a través de este sitio, conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador.",
        cuerpo=cabeza(r, [("", "Inicio")], "", "Aviso de privacidad") + f"""
 <section class="seccion"><div class="contenedor"><div class="prosa">
-{BORRADOR}
-<p>Última actualización: [FECHA DE APROBACIÓN]</p>
+<div class="caja"><p><strong>Hoy este sitio no recoge datos personales.</strong> No tiene formularios activos ni cookies publicitarias o de analítica. La consulta express en línea todavía no está en funcionamiento; lo que sigue describe cómo se tratarán los datos cuando se active, y se actualizará antes de esa fecha.</p></div>
 <h2>1. Quién es el responsable</h2>
-<p>El responsable del tratamiento de sus datos es {D['nombre_completo']}, médico cirujano ortopedista oncólogo, con RUC {D['ruc']}, domicilio en {D['direccion_citimed']}, y correo {D['correo']}. Para cualquier consulta sobre sus datos puede escribir a ese correo.</p>
+<p>El responsable del tratamiento de sus datos es {D['nombre_completo']}, médico cirujano ortopedista oncólogo, con domicilio en {D['direccion_citimed']}. Para cualquier consulta sobre sus datos puede comunicarse por {CORREO_O_SITIO}.</p>
 <h2>2. Qué datos tratamos</h2>
 <ul><li><strong>Datos de identificación y contacto</strong>: nombre, cédula o pasaporte, fecha de nacimiento, correo, teléfono y ciudad.</li><li><strong>Datos de salud</strong>: el motivo de consulta, lo que usted cuenta al asistente, los estudios, informes e imágenes que sube y el resumen de su caso. La Ley Orgánica de Protección de Datos Personales los considera <strong>datos sensibles</strong>.</li><li><strong>Datos de facturación y pago</strong>: nombre o razón social, cédula o RUC, dirección y la constancia del pago. No recibimos ni guardamos el número completo de su tarjeta: el pago lo procesa directamente la plataforma de pagos.</li><li><strong>Datos técnicos mínimos</strong>: para evitar abusos del asistente, el sistema cuenta las solicitudes por conexión usando un código derivado de la dirección IP, que no permite identificarle y se borra a diario. El sitio no usa cookies publicitarias. [CONFIRMAR SI SE ACTIVA ANALÍTICA Y CUÁL]</li></ul>
 <h2>3. Para qué los usamos</h2>
@@ -516,7 +538,7 @@ pagina(ruta=r, legal=True, prioridad="0.3", titulo="Aviso de privacidad y tratam
 <h2>6. Cuánto tiempo los conservamos</h2>
 <p>Los datos de su caso se conservan mientras sean necesarios para atenderle. Si su caso pasa a formar parte de su historia clínica, se conserva el tiempo que exige la normativa sanitaria. Los datos de facturación se conservan el tiempo que exige la normativa tributaria. [PLAZOS CONCRETOS A DEFINIR CON EL ABOGADO]</p>
 <h2>7. Sus derechos</h2>
-<p>Usted puede ejercer en cualquier momento sus derechos de acceso, rectificación y actualización, eliminación, oposición, portabilidad, y suspensión del tratamiento, así como revocar su consentimiento, escribiendo a {D['correo']} con una copia de su documento de identidad. Le responderemos en el plazo que fija la ley. Si considera que sus derechos no fueron atendidos, puede acudir a la Superintendencia de Protección de Datos Personales.</p>
+<p>Usted puede ejercer en cualquier momento sus derechos de acceso, rectificación y actualización, eliminación, oposición, portabilidad, y suspensión del tratamiento, así como revocar su consentimiento, escribiendo a {CORREO_O_SITIO} con una copia de su documento de identidad. Le responderemos en el plazo que fija la ley. Si considera que sus derechos no fueron atendidos, puede acudir a la Superintendencia de Protección de Datos Personales.</p>
 <h2>8. Seguridad</h2>
 <p>Las comunicaciones del sitio viajan cifradas. Los casos se guardan en un espacio de acceso restringido al doctor y su equipo. Le pedimos no enviar por el sitio contraseñas ni datos completos de tarjetas.</p>
 <h2>9. Menores de edad</h2>
@@ -526,14 +548,14 @@ pagina(ruta=r, legal=True, prioridad="0.3", titulo="Aviso de privacidad y tratam
 </div></div></section>""")
 
 r = "condiciones/"
-pagina(ruta=r, legal=True, prioridad="0.3", titulo="Condiciones del servicio",
+pagina(ruta=r, legal=True, servicio=True, prioridad="0.3", titulo="Condiciones del servicio",
        descripcion="Condiciones de la consulta express y la segunda opinión en línea del Dr. Felipe Criollo Palacios.",
        cuerpo=cabeza(r, [("", "Inicio")], "", "Condiciones del servicio") + f"""
 <section class="seccion"><div class="contenedor"><div class="prosa">
 {BORRADOR}
 <p>Última actualización: [FECHA DE APROBACIÓN]</p>
 <h2>1. Quién presta el servicio</h2>
-<p>La consulta express y la segunda opinión las presta {D['nombre_completo']}, RUC {D['ruc']}, médico cirujano ortopedista oncólogo, con consultorio en {D['direccion_citimed']}.</p>
+<p>La consulta express y la segunda opinión las presta {D['nombre_completo']}, médico cirujano ortopedista oncólogo, con consultorio en {D['direccion_citimed']}.</p>
 <h2>2. Qué es la consulta express</h2>
 <p>Es una preconsulta en línea. Usted cuenta su caso a un asistente con inteligencia artificial, que le hace preguntas y ordena sus respuestas, y sube sus estudios. El doctor revisa la información y su equipo le contacta para proponerle el siguiente paso: una cita presencial, una teleconsulta, estudios adicionales o la derivación a otro especialista.</p>
 <h2>3. Qué no es</h2>
@@ -555,7 +577,7 @@ pagina(ruta=r, legal=True, prioridad="0.3", titulo="Condiciones del servicio",
 </div></div></section>""")
 
 r = "consentimiento/"
-pagina(ruta=r, legal=True, prioridad="0.3", titulo="Consentimiento para el tratamiento de datos de salud",
+pagina(ruta=r, legal=True, servicio=True, prioridad="0.3", titulo="Consentimiento para el tratamiento de datos de salud",
        descripcion="Texto del consentimiento que el paciente otorga en la consulta express y la segunda opinión del Dr. Felipe Criollo Palacios.",
        cuerpo=cabeza(r, [("", "Inicio")], "", "Consentimiento para el tratamiento de datos de salud") + f"""
 <section class="seccion"><div class="contenedor"><div class="prosa">
@@ -563,7 +585,7 @@ pagina(ruta=r, legal=True, prioridad="0.3", titulo="Consentimiento para el trata
 <p>Este es el texto completo de la autorización que usted otorga al marcar la casilla antes de enviar su caso.</p>
 <div class="caja"><p>Autorizo de forma libre, específica, informada e inequívoca a {D['nombre_completo']} a tratar mis datos personales y los datos de salud que entrego en este formulario, incluidos los estudios, informes e imágenes que adjunto, con la finalidad de valorar mi caso, preparar mi atención y contactarme con la propuesta de siguiente paso, conforme al aviso de privacidad, que declaro haber leído.</p>
 <p>Entiendo que el asistente con inteligencia artificial solo ordena mi información y no emite diagnósticos, y que mis datos serán procesados por proveedores tecnológicos que pueden estar fuera del Ecuador, con garantías adecuadas.</p>
-<p>Sé que puedo revocar esta autorización y ejercer mis derechos de acceso, rectificación, eliminación, oposición, portabilidad y suspensión escribiendo a {D['correo']}.</p></div>
+<p>Sé que puedo revocar esta autorización y ejercer mis derechos de acceso, rectificación, eliminación, oposición, portabilidad y suspensión escribiendo a {CORREO_O_SITIO}.</p></div>
 <h2>Si un médico le refiere</h2>
 <div class="caja"><p>Autorizo, además, que el informe de mi caso se envíe al médico que me refirió. [CASILLA OPCIONAL]</p></div>
 <h2>Si envía el caso un médico o un familiar</h2>
@@ -582,7 +604,7 @@ pagina(ruta=r, prioridad="0.2", titulo="Declaración de accesibilidad",
 <h2>Limitaciones conocidas</h2>
 <p>Los documentos que suben los pacientes y algunos artículos científicos enlazados pertenecen a terceros y pueden no ser accesibles.</p>
 <h2>Cómo avisarnos</h2>
-<p>Si encuentra una barrera, escríbanos a {D['correo']} o llame al {D['telefono']}. Le ayudaremos por otro medio y corregiremos el problema.</p>
+<p>Si encuentra una barrera, escríbanos por {CORREO_O_SITIO} o llame al {D['telefono']}. Le ayudaremos por otro medio y corregiremos el problema.</p>
 <p>Fecha de esta declaración: [FECHA DE PUBLICACIÓN]</p>
 </div></div></section>""")
 

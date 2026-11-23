@@ -18,6 +18,27 @@ def pend(texto):
     return re.sub(r"\[([A-ZÁÉÍÓÚÑ0-9][^\]]*)\]", r'<span class="pendiente">[\1]</span>', texto)
 
 
+PEND = r"\[[A-ZÁÉÍÓÚÑ0-9][^\]]*\]"
+
+
+def limpiar(cuerpo):
+    """Sitio publicado: quita con cuidado todo lo que sigue pendiente, para que nada se vea a medio hacer.
+    Elimina el elemento más pequeño (frase suelta, viñeta, fila, tarjeta, pregunta) que contiene un dato pendiente,
+    y después los títulos y listas que hayan quedado vacíos."""
+    cuerpo = re.sub(r'\s*<span class="pendiente">[^<]*</span>', "", cuerpo)
+    for etiqueta in ("li", "tr", "p", "details", "article"):
+        patron = re.compile(rf"<{etiqueta}\b[^>]*>(?:(?!<{etiqueta}\b|</{etiqueta}>).)*?{PEND}(?:(?!<{etiqueta}\b).)*?</{etiqueta}>", re.S)
+        cuerpo = patron.sub("", cuerpo)
+    # lo que quedó como etiqueta sin dato («Horario:», una fila de tabla sin contenido)
+    cuerpo = re.sub(r"<tr>\s*<th>[^<]*</th>\s*<td>\s*</td>\s*</tr>", "", cuerpo)
+    cuerpo = re.sub(r"<(p|li)\b[^>]*>[^<]*:\s*</\1>", "", cuerpo)
+    for _ in range(3):
+        cuerpo = re.sub(r"<(ul|ol|tbody|table|p|li)\b[^>]*>\s*</\1>", "", cuerpo)
+        cuerpo = re.sub(r"<table>\s*<tbody>\s*</tbody>\s*</table>", "", cuerpo)
+        cuerpo = re.sub(r"<h2\b[^>]*>[^<]*</h2>\s*(?=<h2\b|</div>|<div class=\"botones\")", "", cuerpo)
+    return cuerpo
+
+
 def rel(ruta_pagina, destino):
     """Enlace relativo desde una página (p. ej. 'segunda-opinion/') hacia otra ('' es el inicio)."""
     nivel = ruta_pagina.count("/")
@@ -57,13 +78,13 @@ def pie(ruta):
     return f"""<footer class="pie">
 <div class="contenedor">
 <div class="columnas">
-<div><h2>Consulta privada</h2><p>{D['direccion_citimed']}</p><p style="margin-top:8px">También atiende en el Hospital Metropolitano, Quito.</p><p style="margin-top:8px">Teléfono: {tel_html}</p></div>
+<div><h2>Consulta privada</h2><p>{D['direccion_citimed']}</p><p style="margin-top:8px">También atiende en el Hospital Metropolitano, Quito.</p><p style="margin-top:8px">Teléfono: {tel_html}</p>{f'<p style="margin-top:8px"><a href="{D["whatsapp_enlace"]}" rel="noopener">Escribir por WhatsApp</a></p>' if D["whatsapp_enlace"] else ""}</div>
 <div><h2>Pacientes</h2><ul><li><a href="{r('consulta-express/')}">Consulta express</a></li><li><a href="{r('segunda-opinion/')}">Segunda opinión</a></li><li><a href="{r('fuera-de-quito/')}">Si vive fuera de Quito</a></li><li><a href="{r('cuando-consultar/')}">Cuándo consultar sin esperar</a></li><li><a href="{r('preguntas-frecuentes/')}">Preguntas frecuentes</a></li></ul></div>
 <div><h2>Especialidad</h2><ul><li><a href="{r('especialidades/tumores-oseos/')}">Tumores óseos</a></li><li><a href="{r('especialidades/sarcoma-de-partes-blandas/')}">Sarcoma de partes blandas</a></li><li><a href="{r('especialidades/metastasis-oseas/')}">Metástasis óseas</a></li><li><a href="{r('biopsia/')}">La biopsia en un tumor óseo</a></li><li><a href="{r('casos-y-publicaciones/')}">Casos y publicaciones</a></li></ul></div>
 <div><h2>El doctor</h2><ul><li><a href="{r('perfil/')}">Perfil y formación</a></li><li><a href="{r('para-colegas/')}">Para colegas que refieren</a></li><li><a href="{D['instagram']}" rel="noopener">Instagram</a></li></ul></div>
 </div>
 <p class="aviso-medico">La información de este sitio es educativa y no reemplaza una consulta médica. Ante una urgencia, acuda a emergencias o llame al 911.</p>
-<div class="legal"><span>© {datetime.date.today().year} {D['nombre']} · {D['especialidad']}</span><span><a href="{r('privacidad/')}">Privacidad</a> · <a href="{r('condiciones/')}">Condiciones del servicio</a> · <a href="{r('accesibilidad/')}">Accesibilidad</a></span></div>
+<div class="legal"><span>© {datetime.date.today().year} {D['nombre']} · {D['especialidad']}</span><span><a href="{r('privacidad/')}">Privacidad</a>{"" if D.get("borradores_legales") else f' · <a href="{r("condiciones/")}">Condiciones del servicio</a>'} · <a href="{r('accesibilidad/')}">Accesibilidad</a></span></div>
 </div>
 </footer>"""
 
@@ -77,7 +98,7 @@ def documento(ruta, titulo, descripcion, cuerpo, jsonld=None, scripts=(), sin_in
     js = "".join(f'<script src="{r(s)}" defer></script>' for s in ("assets/sitio.js",) + tuple(scripts))
     titulo_completo = titulo if titulo.startswith(D["nombre"]) else f"{titulo} · {D['nombre']}"
     # Mientras el sitio esté en revisión (borradores legales sin aprobar), ninguna página se ofrece a los buscadores
-    robots = '<meta name="robots" content="noindex, nofollow">' if sin_indice or D.get("borradores_legales") else ""
+    robots = '<meta name="robots" content="noindex, nofollow">' if sin_indice or not D.get("publicado") else ""
     return f"""<!doctype html>
 <html lang="es-EC">
 <head>
@@ -89,14 +110,15 @@ def documento(ruta, titulo, descripcion, cuerpo, jsonld=None, scripts=(), sin_in
 <meta property="og:type" content="website"><meta property="og:locale" content="es_EC">
 <meta property="og:title" content="{html.escape(titulo_completo)}"><meta property="og:description" content="{html.escape(descripcion)}">
 <meta property="og:url" content="{canonica}"><meta property="og:image" content="{D['dominio']}/assets/img/og.jpg">
-<meta name="theme-color" content="#7A1F2B">
+<meta name="theme-color" content="#1F272C">
 <link rel="icon" href="{r('assets/img/icono.svg')}" type="image/svg+xml">
-<link rel="preload" href="{r('assets/fuentes/literata-latin.woff2')}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{r('assets/fuentes/gloock-latin.woff2')}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{r('assets/fuentes.css')}">
 <link rel="stylesheet" href="{r('assets/sitio.css')}">
 {ld}{js}
 </head>
 <body>
+<div class="regla" aria-hidden="true"><i></i></div>
 {cabecera(ruta)}
 <main id="contenido">
 {cuerpo}
@@ -152,16 +174,19 @@ def main():
     urls = []
     for p in paginas:
         ruta = p["ruta"]
-        cuerpo = pend(p["cuerpo"])
+        cuerpo = limpiar(p["cuerpo"]) if D.get("publicado") else pend(p["cuerpo"])
+        if D.get("publicado") and re.search(PEND, cuerpo):
+            raise SystemExit(f"Quedó un dato pendiente visible en /{ruta}: {re.search(PEND, cuerpo).group(0)}")
         if not D.get("borradores_legales") and p.get("legal"):
             cuerpo = re.sub(r'<div class="caja borrador">.*?</div>', "", cuerpo, flags=re.S)
-        doc = documento(ruta, p["titulo"], p["descripcion"], cuerpo, p.get("jsonld"), p.get("scripts", ()), p.get("sin_indice", False))
+        oculta = p.get("sin_indice", False) or bool(p.get("servicio") and D.get("borradores_legales"))
+        doc = documento(ruta, p["titulo"], p["descripcion"], cuerpo, p.get("jsonld"), p.get("scripts", ()), oculta)
         destino = os.path.join(RAIZ, ruta, "index.html") if ruta else os.path.join(RAIZ, "index.html")
         if p.get("archivo"):
             destino = os.path.join(RAIZ, p["archivo"])
         os.makedirs(os.path.dirname(destino), exist_ok=True)
         open(destino, "w", encoding="utf-8").write(doc)
-        if not p.get("sin_indice"):
+        if not p.get("sin_indice") and not (p.get("servicio") and D.get("borradores_legales")):
             urls.append((ruta, p.get("prioridad", "0.6")))
     # Direcciones del WordPress anterior. GitHub Pages no admite redirecciones 301: cada una es una página mínima
     # con enlace canónico y salto inmediato a la página nueva.

@@ -1,148 +1,259 @@
-/* Sitio del Dr. Felipe Criollo Palacios.
-   Toda la paleta vive en :root: para cambiarla basta con editar estas variables (la paleta definitiva está por elegir). */
+/* Sitio del Dr. Felipe Criollo Palacios · dirección visual «Negatoscopio».
+   La idea: la radiografía contra la luz. Película oscura, hueso claro y un único acento, el violeta de genciana
+   con el que el cirujano marca la piel antes de operar. Toda la paleta vive en :root. */
 :root{
-  --vino:#7A1F2B;--vino-osc:#5A1520;--vino-claro:#F1E3E5;
-  --tinta:#221B1C;--texto:#3B3133;--suave:#4A3F41;--gris:#6B5E60;
-  --fondo:#FAF7F4;--blanco:#FFFFFF;--arena:#F3ECE6;--linea:#E7DFD9;--linea2:#D9CEC8;
-  --oro:#8A5F14;--alerta:#A3262A;--alerta-texto:#8A1C20;--alerta-fondo:#FBECEC;
-  --borde-fuerte:#B8ACA8;--foco:#C98A1B;--pendiente:#FFF4D6;
-  --pie-fondo:#221B1C;--pie-texto:#E7DFD9;--pie-suave:#C9BDB6;--pie-enlace:#F3D9A4;--pie-linea:#3B3133;
-  --serif:'Literata',Georgia,'Times New Roman',serif;
-  --sans:'Libre Franklin',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
-  --ancho:1200px;
+  --pelicula:#1F272C;      /* la placa: bandas oscuras, portada y pie */
+  --pelicula-2:#2A343A;    /* relieve sobre la película */
+  --hueso:#EDE7D8;         /* fondo principal */
+  --hueso-claro:#F6F2E7;   /* tarjetas y superficies iluminadas */
+  --luz:#BFC9CE;           /* luz de placa: líneas y texto sobre película */
+  --tinta:#262B2F;         /* texto */
+  --acento:#4E2C86;        /* violeta de genciana: botones y trazos del marcador */
+  --acento-osc:#3A1F66;
+  --acento-luz:#C3B1EA;    /* el mismo marcador visto sobre la película */
+  --texto:#333A3F;--suave:#48525A;--gris:#5E686F;
+  --linea:#D5CDB9;--linea2:#BDB49C;--borde-fuerte:#8F8873;
+  --alerta:#A3262A;--alerta-texto:#8A1C20;--alerta-fondo:#F8E4DF;
+  --foco:#E0A72E;--pendiente:#FFE9A8;
+  /* alias que usan las páginas interiores y la consulta express */
+  --vino:var(--acento);--vino-osc:var(--acento-osc);--blanco:var(--hueso-claro);--fondo:var(--hueso);--arena:#E3DCC9;--oro:var(--gris);
+  --pie-fondo:var(--pelicula);--pie-texto:#D9DFE2;--pie-suave:#9FACB3;--pie-enlace:var(--acento-luz);--pie-linea:#3A464D;
+  --titulo:'Gloock',Georgia,'Times New Roman',serif;
+  --sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --ancho:1180px;
+  /* trazo del marcador quirúrgico (subrayado a mano) */
+  --trazo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9.5C40 4 78 11 118 7.5s86-5 126-1c20 2 38 3 53 .5' fill='none' stroke='%234E2C86' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  --trazo-luz:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9.5C40 4 78 11 118 7.5s86-5 126-1c20 2 38 3 53 .5' fill='none' stroke='%23C3B1EA' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
-body{margin:0;background:var(--fondo);color:var(--tinta);font-family:var(--sans);font-size:17px;line-height:1.6}
+body{margin:0;background:var(--hueso);color:var(--tinta);font-family:var(--sans);font-size:17px;line-height:1.6}
 img{max-width:100%;height:auto;display:block}
-a{color:var(--vino)}a:hover{color:var(--vino-osc)}
+a{color:var(--acento);text-underline-offset:3px}a:hover{color:var(--acento-osc)}
 :focus-visible{outline:3px solid var(--foco);outline-offset:2px;border-radius:2px}
-h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;color:var(--tinta);margin:0}
-h1{font-size:clamp(36px,5vw,60px);line-height:1.05}
-h2{font-size:clamp(28px,3.2vw,40px)}
-h3{font-size:clamp(21px,2vw,26px);line-height:1.25}
+h1,h2,h3{font-family:var(--titulo);font-weight:400;line-height:1.1;color:var(--tinta);margin:0;letter-spacing:-.005em}
+h1{font-size:clamp(36px,5.2vw,68px);line-height:1.02}
+h2{font-size:clamp(28px,3.4vw,44px)}
+h3{font-size:clamp(21px,2vw,27px);line-height:1.2}
 p{margin:0}
-.saltar{position:absolute;left:-9999px;top:0;background:var(--tinta);color:#fff;padding:12px 16px;z-index:100}
+.saltar{position:absolute;left:-9999px;top:0;background:var(--acento);color:#fff;padding:12px 16px;z-index:100}
 .saltar:focus{left:16px;top:16px}
-.contenedor{max-width:var(--ancho);margin:0 auto;padding:0 24px}
+.contenedor{max-width:var(--ancho);margin:0 auto;padding:0 28px}
 .estrecho{max-width:780px}
-@media (max-width:600px){.contenedor{padding:0 16px}}
+@media (max-width:600px){.contenedor{padding:0 18px}}
+
+/* Rótulo de placa: la tipografía de las etiquetas que identifican una radiografía */
+.rotulo,.antetitulo,.tarjeta .eti,.migas{font-family:var(--mono);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:500}
+.antetitulo{color:var(--gris);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.antetitulo::before{content:"";width:22px;height:2px;background:var(--acento)}
+/* Subrayado con el marcador quirúrgico */
+.marcador{background:var(--trazo) no-repeat 0 100%/100% .28em;padding-bottom:.12em}
 
 /* Cabecera */
-.cabecera{background:var(--blanco);border-bottom:1px solid var(--linea);position:sticky;top:0;z-index:30}
-.cabecera .contenedor{display:flex;align-items:center;justify-content:space-between;gap:12px 28px;padding-top:14px;padding-bottom:14px}
-.marca{text-decoration:none;color:var(--tinta);display:flex;flex-direction:column;line-height:1.15}
-.marca strong{font-family:var(--serif);font-size:22px;font-weight:600}
-.marca span{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--gris);margin-top:3px}
-.menu{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:15px;align-items:center}
-.menu a{color:var(--texto);text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
-.menu a:hover,.menu a[aria-current=page]{color:var(--vino);border-bottom-color:var(--vino)}
-.menu .btn{border-bottom:0;padding:10px 16px;color:#fff}
-.menu .btn:hover{color:#fff}
-.abrir-menu{display:none;font:inherit;font-weight:600;background:none;border:1px solid var(--linea2);border-radius:6px;padding:10px 14px;min-height:44px;color:var(--tinta);cursor:pointer}
-@media (max-width:980px){
+.cabecera{background:var(--hueso);border-bottom:1px solid var(--linea);position:sticky;top:0;z-index:30}
+.cabecera .contenedor{display:flex;align-items:center;justify-content:space-between;gap:12px 28px;padding-top:13px;padding-bottom:13px}
+.marca{text-decoration:none;color:var(--tinta);display:flex;flex-direction:column;line-height:1.1}
+.marca strong{font-family:var(--titulo);font-size:23px;font-weight:400}
+.marca span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);margin-top:5px}
+.menu{display:flex;flex-wrap:wrap;gap:6px 24px;font-size:15.5px;align-items:center}
+.menu a{color:var(--texto);text-decoration:none;padding:6px 0;background:var(--trazo) no-repeat 0 100%/0 .3em;transition:background-size .25s}
+.menu a:hover,.menu a[aria-current=page]{color:var(--tinta);background-size:100% .3em}
+.menu .btn{background:var(--acento);padding:10px 18px;color:#fff}
+.menu .btn:hover{background:var(--acento-osc);color:#fff}
+.abrir-menu{display:none;font:inherit;font-weight:600;background:none;border:1px solid var(--borde-fuerte);border-radius:3px;padding:10px 14px;min-height:44px;color:var(--tinta);cursor:pointer}
+@media (max-width:1020px){
   .abrir-menu{display:block}
-  .menu{display:none;position:absolute;left:0;right:0;top:100%;background:var(--blanco);border-bottom:1px solid var(--linea);flex-direction:column;align-items:stretch;padding:8px 16px 20px;gap:0}
+  .menu{display:none;position:absolute;left:0;right:0;top:100%;background:var(--hueso);border-bottom:1px solid var(--linea);flex-direction:column;align-items:stretch;padding:8px 18px 20px;gap:0}
   .menu.abierto{display:flex}
-  .menu a{padding:14px 0;border-bottom:1px solid var(--linea)}
-  .menu .btn{margin-top:12px;text-align:center}
+  .menu a{padding:14px 0;border-bottom:1px solid var(--linea);background:none}
+  .menu .btn{margin-top:12px;text-align:center;border-bottom:0}
 }
 
-/* Botones */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:600;font-size:16px;background:var(--vino);color:#fff;text-decoration:none;border:1px solid var(--vino);border-radius:6px;padding:13px 22px;min-height:44px;cursor:pointer;text-align:center}
-.btn:hover{background:var(--vino-osc);color:#fff}
-.btn-linea{background:transparent;color:var(--vino)}
-.btn-linea:hover{background:var(--vino);color:#fff}
+/* Botones: rectos, como una etiqueta, sin sombras ni degradados */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:inherit;font-weight:600;font-size:16px;background:var(--acento);color:#fff;text-decoration:none;border:1.5px solid var(--acento);border-radius:3px;padding:13px 22px;min-height:46px;cursor:pointer;text-align:center;transition:background .15s,color .15s}
+.btn:hover{background:var(--acento-osc);border-color:var(--acento-osc);color:#fff}
+.btn-linea{background:transparent;color:var(--acento)}
+.btn-linea:hover{background:var(--acento);color:#fff}
 .btn-neutro{background:transparent;color:var(--tinta);border-color:var(--borde-fuerte)}
-.btn-neutro:hover{background:var(--arena);color:var(--tinta)}
-.btn[disabled]{background:var(--borde-fuerte);border-color:var(--borde-fuerte);cursor:not-allowed}
+.btn-neutro:hover{background:var(--tinta);border-color:var(--tinta);color:var(--hueso)}
+.btn[disabled]{background:var(--linea2);border-color:var(--linea2);cursor:not-allowed}
 .botones{display:flex;flex-wrap:wrap;gap:12px}
 
+/* ---------- Portada: el negatoscopio ---------- */
+.negatoscopio{background:var(--pelicula);color:var(--luz);position:relative;overflow:hidden}
+.negatoscopio::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 78% 42%,rgba(191,201,206,.13),transparent 70%);pointer-events:none}
+.negatoscopio .contenedor{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:56px;align-items:center;padding-top:72px;padding-bottom:0}
+.negatoscopio .antetitulo{color:var(--luz)}
+.negatoscopio .antetitulo::before{background:var(--acento-luz)}
+.negatoscopio h1{color:#F4F1E8}
+.negatoscopio h1 .marcador{background-image:var(--trazo-luz)}
+.negatoscopio .lema{margin-top:26px;font-size:20px;line-height:1.5;max-width:560px;color:var(--luz)}
+/* La placa del doctor colgada del visor */
+.placa{margin:0;position:relative;justify-self:end;width:100%;max-width:400px;background:#F4F1E8;padding:10px 10px 0;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 0 90px rgba(191,201,206,.28)}
+.placa::before,.placa::after{content:"";position:absolute;top:-9px;width:34px;height:18px;background:#8B979D;border-radius:2px;box-shadow:inset 0 -3px 0 rgba(0,0,0,.25)}
+.placa::before{left:18%}.placa::after{right:18%}
+.placa img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top}
+.placa figcaption{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta);display:flex;justify-content:space-between;gap:12px;padding:9px 2px 10px}
+.placa .lado{position:absolute;top:22px;right:22px;font-family:var(--mono);font-weight:500;font-size:15px;color:#fff;border:1.5px solid #fff;width:28px;height:28px;display:flex;align-items:center;justify-content:center;mix-blend-mode:difference}
+/* El visor: cuatro placas para elegir por dónde empezar */
+.visor{grid-column:1/-1;margin-top:56px;background:linear-gradient(#FBF9F2,#EFEADC);color:var(--tinta);border-radius:4px 4px 0 0;padding:26px 28px 30px;box-shadow:0 0 120px rgba(191,201,206,.22)}
+.visor-titulo{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 24px;margin-bottom:18px}
+.visor-titulo h2{font-size:clamp(24px,2.4vw,32px)}
+.visor-titulo p{font-size:15px;color:var(--gris)}
+.visor ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.visor a{display:flex;flex-direction:column;gap:8px;height:100%;min-height:148px;background:var(--pelicula);color:var(--luz);text-decoration:none;padding:18px 18px 16px;border-radius:2px;position:relative;transition:transform .2s,background .2s,color .2s}
+.visor a .rotulo{color:var(--acento-luz);font-size:11.5px}
+.visor a strong{font-family:var(--titulo);font-weight:400;font-size:22px;line-height:1.15;color:#F4F1E8}
+.visor a span:last-child{font-size:14.5px;line-height:1.45;margin-top:auto}
+.visor a::after{content:"→";position:absolute;right:16px;top:14px;font-size:18px;color:var(--acento-luz);transition:transform .2s}
+.visor a:hover,.visor a:focus-visible{background:var(--acento);color:#EDE6FA;transform:translateY(-4px)}
+.visor a:hover::after{transform:translateX(4px);color:#fff}
+.visor a:hover .rotulo{color:#fff}
+@media (max-width:980px){
+  .negatoscopio .contenedor{grid-template-columns:1fr;gap:40px;padding-top:48px}
+  .placa{justify-self:start;max-width:300px}
+  .visor ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .visor{margin-top:8px;padding:22px 18px 24px}
+}
+@media (max-width:520px){.visor ul{grid-template-columns:1fr}.visor a{min-height:0}}
+
+/* Ficha técnica: la trayectoria leída como los datos al pie de una placa */
+.ficha{border-bottom:1px solid var(--linea);background:var(--hueso)}
+.ficha dl{margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.ficha div{padding:26px 24px 26px 0;border-right:1px solid var(--linea);margin-right:24px}
+.ficha div:last-child{border-right:0;margin-right:0}
+.ficha dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--gris);margin-bottom:8px}
+.ficha dd{margin:0;font-family:var(--titulo);font-size:21px;line-height:1.2}
+.ficha dd small{display:block;font-family:var(--sans);font-size:14.5px;color:var(--suave);margin-top:6px;line-height:1.4}
+@media (max-width:900px){.ficha dl{grid-template-columns:repeat(2,minmax(0,1fr))}.ficha div{border-right:0;margin-right:0;border-bottom:1px solid var(--linea)}}
+@media (max-width:520px){.ficha dl{grid-template-columns:1fr}}
+
+/* Línea de incisión: separador punteado con sus marcas transversales, como se dibuja sobre la piel */
+.incision{height:18px;border:0;margin:0 auto;max-width:var(--ancho);background:
+  repeating-linear-gradient(90deg,var(--acento) 0 14px,transparent 14px 24px) 0 50%/100% 2px no-repeat,
+  repeating-linear-gradient(90deg,transparent 0 118px,var(--acento) 118px 120px) 0 50%/100% 14px no-repeat;opacity:.75}
+
 /* Bloques */
-.seccion{padding:80px 0}
-.seccion.blanca{background:var(--blanco);border-top:1px solid var(--linea)}
+.seccion{padding:88px 0}
+.seccion.blanca{background:var(--hueso-claro);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
 .seccion.arena{background:var(--arena)}
-@media (max-width:600px){.seccion{padding:56px 0}}
-.antetitulo{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--oro);font-weight:600;margin-bottom:12px}
-.entrada{margin-top:14px;color:var(--suave);max-width:680px;font-size:18px}
-.nota{font-size:14px;color:var(--gris)}
-.portada{background:var(--blanco)}
-.portada .contenedor{display:flex;flex-wrap:wrap;gap:48px;align-items:center;padding-top:64px;padding-bottom:72px}
-.portada .texto{flex:999 1 520px;min-width:0}
-.portada .foto{flex:1 1 320px;min-width:0;display:flex;justify-content:center}
-.portada .foto figure{margin:0;width:100%;max-width:420px}
-.portada .foto img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:12px;border:1px solid var(--linea)}
-.portada figcaption{font-size:13px;color:var(--gris);text-align:center;margin-top:10px}
-.portada .lema{margin-top:22px;font-size:20px;line-height:1.5;color:var(--suave);max-width:600px}
-.portada .botones{margin-top:32px}
-.portada .nota{margin-top:18px}
-.cabeza-pagina{background:var(--blanco);border-bottom:1px solid var(--linea);padding:56px 0 48px}
-.migas{font-size:14px;color:var(--gris);margin-bottom:16px}
-.migas a{color:var(--gris)}
+.seccion.oscura{background:var(--pelicula);color:var(--luz)}
+.seccion.oscura h2,.seccion.oscura h3{color:#F4F1E8}
+.seccion.oscura .antetitulo{color:var(--luz)}.seccion.oscura .antetitulo::before{background:var(--acento-luz)}
+.seccion.oscura .entrada{color:var(--luz)}
+.seccion.oscura a:not(.btn){color:var(--acento-luz)}
+.seccion.oscura .marcador{background-image:var(--trazo-luz)}
+.seccion.oscura .btn-neutro{color:#F4F1E8;border-color:var(--luz)}
+.seccion.oscura .btn-neutro:hover{background:#F4F1E8;color:var(--pelicula)}
+.seccion.oscura .btn:not(.btn-neutro){background:#F4F1E8;border-color:#F4F1E8;color:var(--pelicula)}
+.seccion.oscura .btn:not(.btn-neutro):hover{background:var(--acento-luz);border-color:var(--acento-luz)}
+@media (max-width:600px){.seccion{padding:60px 0}}
+.entrada{margin-top:16px;color:var(--suave);max-width:660px;font-size:19px;line-height:1.55}
+.nota{font-size:14.5px;color:var(--gris)}
+.cabeza-pagina{background:var(--pelicula);color:var(--luz);padding:60px 0 52px}
+.cabeza-pagina h1{color:#F4F1E8;font-size:clamp(34px,4.4vw,56px);max-width:900px}
+.cabeza-pagina .entrada{color:var(--luz)}
+.cabeza-pagina .antetitulo{color:var(--luz)}.cabeza-pagina .antetitulo::before{background:var(--acento-luz)}
+.migas{color:var(--pie-suave);margin-bottom:22px;font-size:11.5px}
+.migas a{color:var(--pie-suave)}
 
-.franja{background:var(--vino);color:#fff}
-.franja .contenedor{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px 32px;padding-top:32px;padding-bottom:32px}
-.franja strong{display:block;font-family:var(--serif);font-size:19px;font-weight:600}
-.franja span{font-size:15px;color:var(--vino-claro)}
+/* Dos campos: la especialidad principal pesa más que la general */
+.campos{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:0;margin-top:44px;border-top:2px solid var(--tinta)}
+.campos article{padding:32px 36px 36px 0}
+.campos article+article{padding:32px 0 36px 36px;border-left:1px solid var(--linea2)}
+.campos h3{font-size:clamp(26px,2.8vw,38px);margin:10px 0 18px}
+.campos ol{list-style:none;margin:0;padding:0;counter-reset:c}
+.campos li{counter-increment:c;border-bottom:1px solid var(--linea);display:flex;align-items:baseline;gap:16px}
+.campos li::before{content:counter(c,decimal-leading-zero);font-family:var(--mono);font-size:12.5px;color:var(--gris)}
+.campos li a,.campos li span{flex:1;display:flex;justify-content:space-between;gap:12px;padding:13px 0;color:var(--tinta);text-decoration:none;font-size:18px}
+.campos li a::after{content:"→";color:var(--acento);transition:transform .2s}
+.campos li a:hover{color:var(--acento)}.campos li a:hover::after{transform:translateX(5px)}
+.campos .mas{display:inline-block;margin-top:22px;font-weight:600}
+@media (max-width:860px){.campos{grid-template-columns:1fr}.campos article,.campos article+article{padding:28px 0;border-left:0}.campos article+article{border-top:1px solid var(--linea2)}}
 
-.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px;margin-top:40px}
-.rejilla.chica{grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px}
-.tarjeta{background:var(--blanco);border:1px solid var(--linea);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:12px}
-.tarjeta.destacada{border:2px solid var(--vino)}
-.tarjeta .eti{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--vino);font-weight:600}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;margin-top:40px}
+.rejilla.chica{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px}
+.tarjeta{background:var(--hueso-claro);border:1px solid var(--linea);border-radius:2px;padding:26px;display:flex;flex-direction:column;gap:12px}
+.tarjeta.destacada{border:0;border-top:3px solid var(--acento);background:var(--hueso-claro)}
+.tarjeta .eti{color:var(--acento);font-size:11.5px}
 .tarjeta p{color:var(--suave);font-size:16px}
 .tarjeta ul{margin:0;padding-left:20px;color:var(--texto);display:flex;flex-direction:column;gap:6px}
 .tarjeta .mas{margin-top:auto;font-weight:600}
-a.tarjeta{text-decoration:none;color:inherit}
-a.tarjeta:hover{border-color:var(--vino)}
-a.tarjeta strong{font-size:19px;color:var(--tinta)}
+a.tarjeta{text-decoration:none;color:inherit;transition:background .2s,color .2s,transform .2s}
+a.tarjeta strong{font-family:var(--titulo);font-weight:400;font-size:22px;line-height:1.2;color:var(--tinta)}
+a.tarjeta:hover{background:var(--pelicula);border-color:var(--pelicula);transform:translateY(-3px)}
+a.tarjeta:hover strong{color:#F4F1E8}a.tarjeta:hover p{color:var(--luz)}a.tarjeta:hover .eti{color:var(--acento-luz)}
 
-.pasos{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:16px;counter-reset:paso}
-.pasos li{background:var(--blanco);border-top:3px solid var(--vino);border-radius:4px;padding:20px;display:flex;flex-direction:column;gap:6px;counter-increment:paso}
-.pasos li::before{content:"Paso " counter(paso);font-size:14px;font-weight:600;color:var(--vino)}
-.pasos strong{font-size:18px}
-.pasos span{font-size:15px;color:var(--suave)}
+/* Pasos: el número va dentro del círculo que el cirujano traza con el marcador */
+.pasos{list-style:none;margin:44px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:28px 22px;counter-reset:paso}
+.pasos li{display:flex;flex-direction:column;gap:8px;counter-increment:paso;position:relative;padding-top:66px}
+.pasos li::before{content:counter(paso);position:absolute;top:0;left:0;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-family:var(--titulo);font-size:24px;color:var(--acento);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M27 4C13 3 4 13 5 27c1 13 11 21 23 20 12-1 20-10 19-23C46 12 37 5 24 5' fill='none' stroke='%234E2C86' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.pasos strong{font-family:var(--titulo);font-weight:400;font-size:22px;line-height:1.2}
+.pasos span{font-size:15.5px;color:var(--suave)}
+.seccion.oscura .pasos span{color:var(--luz)}.seccion.oscura .pasos strong{color:#F4F1E8}
+.seccion.oscura .pasos li::before{color:var(--acento-luz);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Cpath d='M27 4C13 3 4 13 5 27c1 13 11 21 23 20 12-1 20-10 19-23C46 12 37 5 24 5' fill='none' stroke='%23C3B1EA' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E")}
 
-.dos{display:flex;flex-wrap:wrap;gap:40px 64px;align-items:center}
+.dos{display:flex;flex-wrap:wrap;gap:44px 72px;align-items:center}
 .dos>.texto{flex:999 1 480px;min-width:0}
 .dos>.media{flex:1 1 340px;min-width:0}
-.dos>.media img{width:100%;border-radius:12px;object-fit:cover}
+.dos>.media img{width:100%;border-radius:2px;object-fit:cover}
+/* Foto montada como una placa, con su rótulo */
+.montada{margin:0;background:#F4F1E8;padding:8px 8px 0;border-radius:2px}
+.montada figcaption{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--tinta);padding:8px 2px 9px;display:flex;justify-content:space-between;gap:10px}
+.seccion:not(.oscura) .montada{background:var(--pelicula)}.seccion:not(.oscura) .montada figcaption{color:var(--luz)}
+
+/* Una idea grande por pantalla */
+.tesis{font-family:var(--titulo);font-size:clamp(30px,4.2vw,58px);line-height:1.08;max-width:1000px}
+.tesis-pie{display:flex;flex-wrap:wrap;gap:20px 48px;align-items:center;margin-top:36px}
+.tesis-pie p{max-width:520px;font-size:18px}
 
 /* Texto largo */
 .prosa{max-width:760px}
-.prosa h2{font-size:clamp(24px,2.6vw,32px);margin:48px 0 14px}
-.prosa h3{font-size:21px;margin:32px 0 10px}
+.prosa h2{font-size:clamp(25px,2.7vw,34px);margin:52px 0 14px}
+.prosa h3{font-size:22px;margin:32px 0 10px}
 .prosa p,.prosa ul,.prosa ol{margin:0 0 16px;color:var(--texto)}
 .prosa ul,.prosa ol{padding-left:24px}
 .prosa li{margin-bottom:6px}
-.prosa .caja{background:var(--blanco);border:1px solid var(--linea);border-left:4px solid var(--vino);border-radius:6px;padding:18px 22px;margin:24px 0}
+.prosa li::marker{color:var(--acento)}
+.prosa .caja{background:var(--hueso-claro);border:1px solid var(--linea);border-left:4px solid var(--acento);border-radius:2px;padding:18px 22px;margin:24px 0}
 .prosa .caja p:last-child{margin-bottom:0}
-.prosa table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:15px}
-.prosa th,.prosa td{text-align:left;border-bottom:1px solid var(--linea);padding:10px 8px;vertical-align:top}
-.prosa th{font-weight:600;background:var(--arena)}
-.revision{font-size:14px;color:var(--gris);border-top:1px solid var(--linea);margin-top:40px;padding-top:16px}
-.alarma-caja{border:2px solid var(--alerta);background:var(--alerta-fondo);border-radius:8px;padding:18px 22px;margin:24px 0}
+.prosa table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:15.5px}
+.prosa th,.prosa td{text-align:left;border-bottom:1px solid var(--linea);padding:11px 10px;vertical-align:top}
+.prosa th{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;font-weight:500;color:var(--gris);background:transparent;border-bottom:2px solid var(--tinta)}
+.prosa tbody th{border-bottom:1px solid var(--linea);white-space:nowrap}
+.revision{font-family:var(--mono);font-size:12.5px;color:var(--gris);border-top:1px solid var(--linea2);margin-top:44px;padding-top:16px;line-height:1.6}
+.alarma-caja{border:2px solid var(--alerta);background:var(--alerta-fondo);border-radius:2px;padding:18px 22px;margin:24px 0;color:var(--tinta)}
 .alarma-caja strong{color:var(--alerta-texto)}
-.pendiente{background:var(--pendiente);border-radius:3px;padding:0 3px}
+.pendiente{background:var(--pendiente);color:var(--tinta);border-radius:2px;padding:0 3px;font-family:var(--mono);font-size:.82em}
 
 /* Preguntas frecuentes */
 details{border-top:1px solid var(--linea2);padding:18px 0}
 details:last-of-type{border-bottom:1px solid var(--linea2)}
-summary{font-weight:600;cursor:pointer;min-height:24px}
+summary{font-weight:600;cursor:pointer;min-height:24px;font-size:18px}
+summary::marker{color:var(--acento)}
 details p{margin-top:10px;color:var(--suave)}
 
 /* Pie */
 .pie{background:var(--pie-fondo);color:var(--pie-texto);font-size:15px}
-.pie .contenedor{padding-top:48px;padding-bottom:32px}
-.pie a{color:var(--pie-enlace)}
+.pie .contenedor{padding-top:56px;padding-bottom:32px}
+.pie a{color:var(--pie-texto);text-decoration-color:var(--pie-linea)}
+.pie a:hover{color:var(--pie-enlace)}
 .pie .columnas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:32px}
-.pie h2{font-family:var(--sans);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--pie-suave);margin-bottom:12px;font-weight:600}
+.pie h2{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--pie-suave);margin-bottom:14px;font-weight:500}
 .pie ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
-.pie .legal{border-top:1px solid var(--pie-linea);margin-top:40px;padding-top:20px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--pie-suave)}
-.pie .aviso-medico{font-size:13px;color:var(--pie-suave);margin-top:24px;max-width:860px}
+.pie .legal{border-top:1px solid var(--pie-linea);margin-top:40px;padding-top:20px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--pie-suave)}
+.pie .aviso-medico{font-size:13.5px;color:var(--pie-suave);margin-top:28px;max-width:860px}
 
 /* Mapa */
-.mapa{width:100%;aspect-ratio:4/3;border:0;border-radius:10px;background:var(--arena)}
+.mapa{width:100%;aspect-ratio:4/3;border:0;border-radius:2px;background:var(--arena)}
 .mapa-sustituto{display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:15px;color:var(--suave)}
-.pie .pendiente{color:var(--tinta)}
+
+/* Regla de la placa: la escala en centímetros al borde, que avanza con la lectura */
+.regla{position:fixed;left:0;top:0;bottom:0;width:18px;z-index:20;pointer-events:none;display:none;
+  background:repeating-linear-gradient(180deg,var(--borde-fuerte) 0 1px,transparent 1px 10px) 0 0/7px 100% no-repeat,
+             repeating-linear-gradient(180deg,var(--borde-fuerte) 0 1px,transparent 1px 50px) 0 0/13px 100% no-repeat;opacity:.55}
+.regla i{position:absolute;left:0;width:18px;height:3px;background:var(--acento);top:0}
+@media (min-width:1280px){.regla{display:block}}
