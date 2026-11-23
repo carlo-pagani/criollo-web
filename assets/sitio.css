@@ -292,7 +292,7 @@ h3{letter-spacing:-.015em}
 .cabeza-pagina h1{color:var(--tinta)}.cabeza-pagina .entrada{color:var(--suave)}.cabeza-pagina .antetitulo{color:var(--acento)}
 .migas{color:var(--suave)}.migas a{color:var(--suave)}
 .seccion.blanca{border:0}.seccion.arena{background:var(--hueso-claro)}
-.seccion.oscura{background:radial-gradient(900px 500px at 78% 40%,#2B3FA8 0%,#16245A 38%,#0B1430 75%)}
+.seccion.oscura{background:radial-gradient(900px 520px at 78% 40%,#1F4E96 0%,#16335F 40%,#12284C 78%)}
 .seccion.oscura h2,.seccion.oscura h3,.cabeza-pagina.oscura h1{color:#fff}
 .seccion.oscura .btn:not(.btn-neutro){background:#fff;border-color:#fff;color:var(--tinta)}
 .tarjeta,.caja,.paso,details,.aviso,.nota-caja,table{border-radius:18px}
