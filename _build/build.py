@@ -48,13 +48,33 @@ def rel(ruta_pagina, destino):
     return (pre + destino) or "./"
 
 
-MENU = [
+# Páginas con contenido clínico redactado para el sitio nuevo. Se publican cuando el doctor las haya leído:
+# basta poner "contenido_clinico": true en datos.json.
+CLINICAS = ("especialidades/", "biopsia/", "cuando-consultar/", "casos-y-publicaciones/", "para-colegas/", "preguntas-frecuentes/")
+def retenida(ruta):
+    return not D.get("contenido_clinico") and ruta.startswith(CLINICAS)
+
+MENU = [(r, t) for r, t in [
     ("especialidades/", "Especialidades"),
     ("segunda-opinion/", "Segunda opinión"),
-    ("perfil/", "Sobre el doctor"),
+    ("perfil/", "El doctor"),
     ("para-colegas/", "Para colegas"),
-    ("donde-atiendo/", "Dónde atiendo"),
-]
+    ("fuera-de-quito/", "Fuera de Quito"),
+    ("donde-atiendo/", "Dónde atiende"),
+] if not retenida(r)]
+
+
+def sin_enlaces_retenidos(doc):
+    """Quita los enlaces a páginas que todavía no se publican: los botones y viñetas desaparecen, el resto queda como texto."""
+    if D.get("contenido_clinico"):
+        return doc
+    pat = "(?:" + "|".join(re.escape(c) for c in CLINICAS) + ")"
+    href = rf'href="(?:\.\./)*{pat}[^"]*"'
+    doc = re.sub(rf'<li>\s*<a\b[^>]*{href}[^>]*>.*?</a>\s*</li>', "", doc, flags=re.S)
+    doc = re.sub(rf'<a\b[^>]*class="[^"]*btn[^"]*"[^>]*{href}[^>]*>.*?</a>', "", doc, flags=re.S)
+    doc = re.sub(rf'<a\b[^>]*{href}[^>]*class="[^"]*btn[^"]*"[^>]*>.*?</a>', "", doc, flags=re.S)
+    doc = re.sub(rf'<a\b[^>]*{href}[^>]*>(.*?)</a>', r"\1", doc, flags=re.S)
+    return doc
 
 
 def cabecera(ruta):
@@ -64,9 +84,9 @@ def cabecera(ruta):
     return f"""<a class="saltar" href="#contenido">Saltar al contenido</a>
 <header class="cabecera">
 <div class="contenedor">
-<a class="marca" href="{rel(ruta, '')}"><strong>{D['nombre']}</strong><span>{D['especialidad']} · Quito</span></a>
+<a class="marca" href="{rel(ruta, '')}"><strong>Dr. Felipe Criollo</strong><span>Traumatología y ortopedia oncológica</span></a>
 <button class="abrir-menu" type="button" aria-expanded="false" aria-controls="menu">Menú</button>
-<nav class="menu" id="menu" aria-label="Principal">{items}<a class="btn" href="{rel(ruta, 'consulta-express/')}">Consulta express</a></nav>
+<nav class="menu" id="menu" aria-label="Principal"><a href="{rel(ruta, '')}#asistente">Guía inteligente</a>{items}<a class="btn" href="{D['whatsapp_enlace']}" rel="noopener">Agendar cita →</a></nav>
 </div>
 </header>"""
 
@@ -75,12 +95,13 @@ def pie(ruta):
     r = lambda d: rel(ruta, d)
     tel = D["telefono"]
     tel_html = f'<a href="tel:{D["telefono_enlace"]}">{tel}</a>' if D["telefono_enlace"] else pend(tel)
+    ESPECIALIDAD = f"""<div><h2>Especialidad</h2><ul><li><a href="{r('especialidades/tumores-oseos/')}">Tumores óseos</a></li><li><a href="{r('especialidades/sarcoma-de-partes-blandas/')}">Sarcoma de partes blandas</a></li><li><a href="{r('especialidades/metastasis-oseas/')}">Metástasis óseas</a></li><li><a href="{r('biopsia/')}">La biopsia en un tumor óseo</a></li><li><a href="{r('casos-y-publicaciones/')}">Casos y publicaciones</a></li></ul></div>""" if D.get("contenido_clinico") else f"""<div><h2>En línea</h2><ul><li><a href="{r('')}#asistente">Guía inteligente</a></li><li><a href="{r('')}#oncologia">Ortopedia oncológica</a></li><li><a href="{r('')}#servicios">Servicios</a></li></ul></div>"""
     return f"""<footer class="pie">
 <div class="contenedor">
 <div class="columnas">
-<div><h2>Consulta privada</h2><p>{D['direccion_citimed']}</p><p style="margin-top:8px">También atiende en el Hospital Metropolitano, Quito.</p><p style="margin-top:8px">Teléfono: {tel_html}</p>{f'<p style="margin-top:8px"><a href="{D["whatsapp_enlace"]}" rel="noopener">Escribir por WhatsApp</a></p>' if D["whatsapp_enlace"] else ""}</div>
+<div><h2>Consulta privada</h2><p>{D['direccion_citimed']}</p><p style="margin-top:8px">También atiende en el Hospital Metropolitano y en el Hospital Vozandes, Quito.</p><p style="margin-top:8px">Teléfono: {tel_html}</p>{f'<p style="margin-top:8px"><a href="{D["whatsapp_enlace"]}" rel="noopener">Escribir por WhatsApp</a></p>' if D["whatsapp_enlace"] else ""}</div>
 <div><h2>Pacientes</h2><ul><li><a href="{r('consulta-express/')}">Consulta express</a></li><li><a href="{r('segunda-opinion/')}">Segunda opinión</a></li><li><a href="{r('fuera-de-quito/')}">Si vive fuera de Quito</a></li><li><a href="{r('cuando-consultar/')}">Cuándo consultar sin esperar</a></li><li><a href="{r('preguntas-frecuentes/')}">Preguntas frecuentes</a></li></ul></div>
-<div><h2>Especialidad</h2><ul><li><a href="{r('especialidades/tumores-oseos/')}">Tumores óseos</a></li><li><a href="{r('especialidades/sarcoma-de-partes-blandas/')}">Sarcoma de partes blandas</a></li><li><a href="{r('especialidades/metastasis-oseas/')}">Metástasis óseas</a></li><li><a href="{r('biopsia/')}">La biopsia en un tumor óseo</a></li><li><a href="{r('casos-y-publicaciones/')}">Casos y publicaciones</a></li></ul></div>
+{ESPECIALIDAD}
 <div><h2>El doctor</h2><ul><li><a href="{r('perfil/')}">Perfil y formación</a></li><li><a href="{r('para-colegas/')}">Para colegas que refieren</a></li><li><a href="{D['instagram']}" rel="noopener">Instagram</a></li></ul></div>
 </div>
 <p class="aviso-medico">La información de este sitio es educativa y no reemplaza una consulta médica. Ante una urgencia, acuda a emergencias o llame al 911.</p>
@@ -99,6 +120,17 @@ def documento(ruta, titulo, descripcion, cuerpo, jsonld=None, scripts=(), sin_in
     titulo_completo = titulo if titulo.startswith(D["nombre"]) else f"{titulo} · {D['nombre']}"
     # Mientras el sitio esté en revisión (borradores legales sin aprobar), ninguna página se ofrece a los buscadores
     robots = '<meta name="robots" content="noindex, nofollow">' if sin_indice or not D.get("publicado") else ""
+    if ruta == "" and not sin_indice:
+        portada = open(os.path.join(RAIZ, "_build", "portada.html"), encoding="utf-8").read()
+        cab = f"""<title>{html.escape(titulo_completo)}</title>
+<meta name="description" content="{html.escape(descripcion)}">
+{robots}<link rel="canonical" href="{canonica}">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_EC">
+<meta property="og:title" content="{html.escape(titulo_completo)}"><meta property="og:description" content="{html.escape(descripcion)}">
+<meta property="og:url" content="{canonica}"><meta property="og:image" content="{D['dominio']}/assets/img/og.jpg">
+<meta name="theme-color" content="#12284C"><link rel="icon" href="assets/img/icono.svg" type="image/svg+xml">
+{ld}"""
+        return portada.replace("{{CABEZA}}", cab)
     return f"""<!doctype html>
 <html lang="es-EC">
 <head>
@@ -110,15 +142,14 @@ def documento(ruta, titulo, descripcion, cuerpo, jsonld=None, scripts=(), sin_in
 <meta property="og:type" content="website"><meta property="og:locale" content="es_EC">
 <meta property="og:title" content="{html.escape(titulo_completo)}"><meta property="og:description" content="{html.escape(descripcion)}">
 <meta property="og:url" content="{canonica}"><meta property="og:image" content="{D['dominio']}/assets/img/og.jpg">
-<meta name="theme-color" content="#1F272C">
+<meta name="theme-color" content="#12284C">
 <link rel="icon" href="{r('assets/img/icono.svg')}" type="image/svg+xml">
-<link rel="preload" href="{r('assets/fuentes/gloock-latin.woff2')}" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="{r('assets/fuentes.css')}">
+<link rel="preload" href="{r('assets/fuentes/plusjakartasans-latin.woff2')}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{r('assets/jakarta.css')}">
 <link rel="stylesheet" href="{r('assets/sitio.css')}">
 {ld}{js}
 </head>
 <body>
-<div class="regla" aria-hidden="true"><i></i></div>
 {cabecera(ruta)}
 <main id="contenido">
 {cuerpo}
@@ -174,13 +205,15 @@ def main():
     urls = []
     for p in paginas:
         ruta = p["ruta"]
+        if retenida(ruta):
+            continue
         cuerpo = limpiar(p["cuerpo"]) if D.get("publicado") else pend(p["cuerpo"])
         if D.get("publicado") and re.search(PEND, cuerpo):
             raise SystemExit(f"Quedó un dato pendiente visible en /{ruta}: {re.search(PEND, cuerpo).group(0)}")
         if not D.get("borradores_legales") and p.get("legal"):
             cuerpo = re.sub(r'<div class="caja borrador">.*?</div>', "", cuerpo, flags=re.S)
         oculta = p.get("sin_indice", False) or bool(p.get("servicio") and D.get("borradores_legales"))
-        doc = documento(ruta, p["titulo"], p["descripcion"], cuerpo, p.get("jsonld"), p.get("scripts", ()), oculta)
+        doc = sin_enlaces_retenidos(documento(ruta, p["titulo"], p["descripcion"], cuerpo, p.get("jsonld"), p.get("scripts", ()), oculta))
         destino = os.path.join(RAIZ, ruta, "index.html") if ruta else os.path.join(RAIZ, "index.html")
         if p.get("archivo"):
             destino = os.path.join(RAIZ, p["archivo"])
@@ -190,7 +223,7 @@ def main():
             urls.append((ruta, p.get("prioridad", "0.6")))
     # Direcciones del WordPress anterior. GitHub Pages no admite redirecciones 301: cada una es una página mínima
     # con enlace canónico y salto inmediato a la página nueva.
-    for vieja, nueva in [("about", "perfil/"), ("services", "especialidades/"), ("contact", "donde-atiendo/"), ("hello-world", "")]:
+    for vieja, nueva in [("about", "perfil/"), ("services", ""), ("contact", "donde-atiendo/"), ("hello-world", "")]:
         destino_url = D["dominio"] + "/" + nueva
         os.makedirs(os.path.join(RAIZ, vieja), exist_ok=True)
         open(os.path.join(RAIZ, vieja, "index.html"), "w", encoding="utf-8").write(

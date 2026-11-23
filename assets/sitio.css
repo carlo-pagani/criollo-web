@@ -257,3 +257,49 @@ details p{margin-top:10px;color:var(--suave)}
              repeating-linear-gradient(180deg,var(--borde-fuerte) 0 1px,transparent 1px 50px) 0 0/13px 100% no-repeat;opacity:.55}
 .regla i{position:absolute;left:0;width:18px;height:3px;background:var(--acento);top:0}
 @media (min-width:1280px){.regla{display:block}}
+
+/* ===================================================================================================
+   TEMA «CLÍNICA» (nov. 2026). Dirección aprobada: blanco luminoso, azul marino y azul vivo, letra
+   Plus Jakarta Sans, botones en píldora y tarjetas redondeadas. Reemplaza los valores anteriores.
+   =================================================================================================== */
+:root{
+  --pelicula:#12284C;--pelicula-2:#1B3766;--hueso:#FFFFFF;--hueso-claro:#F4F8FD;--luz:#C9D6EA;--tinta:#12284C;
+  --acento:#1F6FEB;--acento-osc:#1557C0;--acento-luz:#8DBBFF;--texto:#33435E;--suave:#55647D;--gris:#55647D;
+  --linea:#E3EAF4;--linea2:#C9D6EA;--borde-fuerte:#A9B8D0;--arena:#EAF2FD;
+  --pie-fondo:#0E1F3D;--pie-texto:#D5DEEE;--pie-suave:#93A3BF;--pie-enlace:#8DBBFF;--pie-linea:#22355C;
+  --titulo:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;--sans:var(--titulo);--mono:var(--titulo);
+  --trazo:linear-gradient(transparent,transparent);--trazo-luz:linear-gradient(transparent,transparent);
+}
+body{font-size:16.5px;line-height:1.65;color:var(--texto)}
+h1,h2,h3{font-weight:800;letter-spacing:-.03em;line-height:1.12;color:var(--tinta)}
+h3{letter-spacing:-.015em}
+.marcador{background:none;padding:0;color:var(--acento)}
+.cabeza-pagina .marcador,.seccion.oscura .marcador{color:#8DBBFF}
+.rotulo,.antetitulo,.tarjeta .eti,.migas{font-size:12px;letter-spacing:.14em;font-weight:700}
+.antetitulo{color:var(--acento)}.antetitulo::before{display:none}
+.regla,.incision{display:none}
+.cabecera{background:#ffffffeb;backdrop-filter:blur(10px)}
+.cabecera .contenedor{padding-top:16px;padding-bottom:16px}
+.marca strong{font-size:18px;font-weight:800;letter-spacing:-.02em}
+.marca span{font-size:11px;letter-spacing:0;text-transform:none;font-weight:500;margin-top:3px}
+.menu{font-size:14.5px;font-weight:600}.menu a{background:none;color:var(--tinta)}.menu a:hover,.menu a[aria-current=page]{color:var(--acento)}
+.btn,.menu .btn{border-radius:99px;background:var(--tinta);border-color:var(--tinta);font-weight:700;font-size:15px;padding:13px 24px;transition:transform .15s,box-shadow .15s}
+.btn:hover,.menu .btn:hover{background:var(--tinta);border-color:var(--tinta);transform:translateY(-2px);box-shadow:0 10px 24px #12284c33;color:#fff}
+.btn-linea,.btn-neutro{background:#fff;color:var(--tinta);border-color:var(--linea);box-shadow:0 2px 10px #12284c14}
+.btn-linea:hover,.btn-neutro:hover{background:#fff;color:var(--tinta);border-color:var(--linea)}
+.abrir-menu{border-radius:99px;border-color:var(--linea)}
+.cabeza-pagina{background:linear-gradient(100deg,#F3F8FF 0%,#EAF2FD 55%,#DCE9FA 100%);color:var(--suave);padding:64px 0 56px}
+.cabeza-pagina h1{color:var(--tinta)}.cabeza-pagina .entrada{color:var(--suave)}.cabeza-pagina .antetitulo{color:var(--acento)}
+.migas{color:var(--suave)}.migas a{color:var(--suave)}
+.seccion.blanca{border:0}.seccion.arena{background:var(--hueso-claro)}
+.seccion.oscura{background:radial-gradient(900px 500px at 78% 40%,#2B3FA8 0%,#16245A 38%,#0B1430 75%)}
+.seccion.oscura h2,.seccion.oscura h3,.cabeza-pagina.oscura h1{color:#fff}
+.seccion.oscura .btn:not(.btn-neutro){background:#fff;border-color:#fff;color:var(--tinta)}
+.tarjeta,.caja,.paso,details,.aviso,.nota-caja,table{border-radius:18px}
+.tarjeta{border:1px solid var(--linea);box-shadow:0 4px 18px #12284c0d}
+img{border-radius:22px}.cabecera img,.pie img{border-radius:0}
+.pie h2{font-size:15px;letter-spacing:0;font-weight:800}
+:focus-visible{border-radius:8px}
+.pasos li::before{background:#EAF2FF!important;border-radius:50%;font-weight:800;font-size:18px;width:44px;height:44px;color:var(--acento)}
+.pasos li{padding-top:58px}.pasos strong{font-weight:800;font-size:18px;letter-spacing:-.015em}
+th{font-family:var(--titulo)}

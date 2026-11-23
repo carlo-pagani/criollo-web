@@ -333,36 +333,30 @@ cv = f'<a class="btn btn-linea" href="{rel(r, D["cv_pdf"])}">Descargar currícul
 pagina(ruta=r, prioridad="0.9", titulo="Perfil y formación",
        descripcion="Formación, cargos, publicaciones y sociedades científicas del Dr. Felipe Criollo Palacios, cirujano ortopedista oncólogo en Quito.",
        jsonld=[MEDICO_LD, migas_ld(r, [("", "Inicio")], "Perfil")],
-       cuerpo=cabeza(r, [("", "Inicio")], "Sobre el doctor", D["nombre"], "Cirujano ortopedista oncólogo. Consulta privada en CITIMED y atención en el Hospital Metropolitano, Quito.") + f"""
+       cuerpo=cabeza(r, [("", "Inicio")], "Sobre el doctor", D["nombre"], "Cirujano ortopedista oncólogo. Atiende en su consultorio de Citimed, en el Hospital Metropolitano y en el Hospital Vozandes, en Quito.") + f"""
 <section class="seccion"><div class="contenedor dos" style="align-items:flex-start">
 <div class="texto prosa">
-<h2 style="margin-top:0">Conózcame</h2>
-<p><span class="pendiente">[BIOGRAFÍA BREVE EN PRIMERA PERSONA, DE 120 A 180 PALABRAS, REDACTADA CON EL DOCTOR EN LA REUNIÓN DE VALIDACIÓN: POR QUÉ ELIGIÓ LA ORTOPEDIA ONCOLÓGICA, QUÉ LE IMPORTA EN LA RELACIÓN CON SUS PACIENTES]</span></p>
-<h2>Cómo trabajo</h2>
-<ul><li><span class="pendiente">[PRINCIPIO 1, EN SUS PALABRAS. Ejemplo de tono: «Antes de cualquier biopsia, veo las imágenes.»]</span></li><li><span class="pendiente">[PRINCIPIO 2]</span></li><li><span class="pendiente">[PRINCIPIO 3]</span></li></ul>
-<h2>Lo que trato</h2>
-<ul><li><a href="{rel(r,'especialidades/tumores-oseos/')}">Tumores óseos benignos y malignos</a></li><li><a href="{rel(r,'especialidades/sarcoma-de-partes-blandas/')}">Sarcomas de partes blandas</a></li><li><a href="{rel(r,'especialidades/metastasis-oseas/')}">Metástasis óseas en extremidades</a></li><li><a href="{rel(r,'especialidades/fractura-patologica/')}">Fracturas patológicas</a></li><li><a href="{rel(r,'especialidades/traumatologia/')}">Traumatología y ortopedia</a></li></ul>
-<h2>Procedimientos</h2>
-<ul><li><a href="{rel(r,'especialidades/salvamento-de-extremidad/')}">Cirugía de salvamento de extremidad</a> y reconstrucción osteoarticular</li><li>Reconstrucción con peroné vascularizado</li><li>Resección de tumores de hombro, incluida la técnica de Tikhoff-Linberg modificada</li><li><a href="{rel(r,'biopsia/')}">Biopsia percutánea planificada</a></li><li>Estabilización de huesos con metástasis</li><li>Prótesis de cadera y rodilla</li></ul>
+<h2 style="margin-top:0">A qué se dedica</h2>
+<p>El doctor Criollo es cirujano ortopedista oncólogo. Su práctica se concentra en el diagnóstico y el tratamiento de los tumores musculoesqueléticos y en las reconstrucciones de extremidades de alta complejidad, además de la traumatología y la ortopedia general.</p>
+<ul><li>Tumores óseos y sarcomas, primarios y secundarios</li><li>Metástasis óseas en las extremidades</li><li>Cirugía de salvamento de extremidad</li><li>Reconstrucciones con prótesis tumorales, aloinjertos y osteosíntesis</li><li>Lesiones pseudotumorales, como los quistes óseos</li><li>Planificación de cirugías complejas con impresión 3D</li><li>Traumatología y ortopedia</li></ul>
 <h2>Formación</h2>
 <table><tbody>
-<tr><th>Subespecialidad</th><td>Ortopedia oncológica, Universidad Militar Nueva Granada, Bogotá, Colombia. <span class="pendiente">[AÑOS]</span></td></tr>
-<tr><th>Especialidad</th><td><span class="pendiente">[ORTOPEDIA Y TRAUMATOLOGÍA: UNIVERSIDAD Y AÑOS]</span></td></tr>
-<tr><th>Medicina</th><td><span class="pendiente">[UNIVERSIDAD Y AÑO]</span></td></tr>
-<tr><th>Registro profesional</th><td><span class="pendiente">[REGISTRO EN EL ACESS O LA SENESCYT]</span></td></tr>
+<tr><th>Subespecialidad</th><td>Fellowship en Ortopedia Oncológica. Universidad Militar Nueva Granada e Instituto Nacional de Cancerología, Bogotá, Colombia.</td></tr>
+<tr><th>Especialidad</th><td>Ortopedia y Traumatología. Universidad Central del Ecuador.</td></tr>
+<tr><th>Medicina</th><td>Médico. Universidad Central del Ecuador. Fue ayudante de cátedra de Bioquímica y de Anatomía Patológica.</td></tr>
+<tr><th>Otros estudios</th><td>Diplomado en Medicina Transfusional. Universidad Central del Ecuador.</td></tr>
 </tbody></table>
-<h2>Cargos</h2>
-<ul><li>Directivo en SOLCA Quito: ex jefe del Servicio de Ortopedia Oncológica. <span class="pendiente">[AÑOS]</span></li><li>Docente del posgrado de Ortopedia, módulo de Ortopedia Oncológica, Universidad Central del Ecuador; docente invitado en la Universidad San Francisco de Quito.</li><li>Médico del Hospital Metropolitano, Quito.</li></ul>
-<h2>Publicaciones</h2>
-<ul><li>«Biopsia percutánea en ortopedia oncológica. Serie de casos». Revista Colombiana de Ortopedia y Traumatología, 2015. Serie de 152 pacientes. <span class="pendiente">[ENLACE DOI]</span></li><li>«Sobre las fracturas patológicas». Artículo de divulgación. <span class="pendiente">[ENLACE]</span></li></ul>
-<p>Lista completa: {D['google_scholar']}</p>
+<h2>Dónde ejerce</h2>
+<ul><li><strong>Hospital Metropolitano, Quito.</strong> Cirujano ortopedista oncólogo y coordinador de Tumores Musculoesqueléticos.</li><li><strong>Hospital Vozandes Quito.</strong> Traumatólogo oncólogo.</li><li><strong>Consulta privada</strong> en el Centro Médico Citimed, Quito.</li></ul>
+<h2>Trayectoria</h2>
+<ul><li><strong>SOLCA Quito.</strong> Ortopedista oncólogo durante más de diez años, a cargo de la coordinación del servicio: sarcomas, lesiones metastásicas y lesiones pseudotumorales.</li><li><strong>Instituto Ecuatoriano de Seguridad Social, Latacunga.</strong> Traumatólogo y ortopedista.</li></ul>
+<h2>Docencia</h2>
+<p>Desde 2013 es docente del Instituto Superior de Posgrado de la Universidad Central del Ecuador, donde enseña ortopedia oncológica y manejo de sarcomas en los posgrados de Ortopedia y Traumatología, Oncología Clínica y Cirugía Oncológica. Ha sido profesor ocasional del posgrado de Traumatología y Ortopedia de la Universidad San Francisco de Quito.</p>
 <h2>Sociedades científicas</h2>
 <ul><li>ISOLS, International Society of Limb Salvage</li><li>SLATME, Sociedad Latinoamericana de Tumores Musculoesqueléticos</li><li>Sociedad Ecuatoriana de Oncología</li></ul>
-<h2>El equipo con el que trabajo</h2>
-<p>La ortopedia oncológica se hace en equipo. Cada caso se coordina con especialistas de radiología e intervencionismo, patología, oncología clínica, radioterapia, cirugía plástica y reconstructiva, y rehabilitación física. Las decisiones importantes se discuten en conjunto, y el paciente participa en ellas.</p>
-<h2>Relaciones con la industria</h2>
-<p><span class="pendiente">[DECLARACIÓN EN UNA LÍNEA. Por ejemplo: «No recibo pagos de fabricantes de implantes ni de la industria farmacéutica.» o la relación que corresponda]</span></p>
-<div class="botones" style="margin-top:24px">{cv}<a class="btn btn-neutro" href="{rel(r,'para-colegas/')}">Para colegas que refieren</a></div>
+<h2>Trabajo en equipo</h2>
+<p>La ortopedia oncológica se hace en equipo. Cada caso se coordina con especialistas de radiología, patología, oncología clínica, radioterapia, cirugía plástica y reconstructiva, y rehabilitación física.</p>
+<p>El doctor comparte casos clínicos con otros especialistas en <a href="https://www.linkedin.com/in/felipecriollo/" rel="noopener">su perfil de LinkedIn</a>.</p>
 </div>
 <div class="media" style="position:sticky;top:100px">{img(r,'felipe-retrato','Retrato del Dr. Felipe Criollo Palacios')}
 <div class="botones" style="margin-top:16px">{cta(r)}</div></div>
@@ -420,8 +414,8 @@ mapa = lambda q, titulo: (f'<div class="mapa mapa-sustituto" data-mapa="{q}" dat
                           f'<button class="btn btn-linea" type="button" style="margin-top:12px">Mostrar el mapa</button><br><a href="https://www.google.com/maps/search/?api=1&query={q}" rel="noopener">Abrir en Google Maps</a></p></div>')
 pagina(ruta=r, prioridad="0.8", titulo="Dónde atiendo: CITIMED y Hospital Metropolitano, Quito",
        descripcion="Consulta privada en el Centro Médico CITIMED, piso 6, consultorio 628, y atención en el Hospital Metropolitano de Quito. Horarios, teléfono y cómo llegar.",
-       jsonld=[MEDICO_LD, migas_ld(r, [("", "Inicio")], "Dónde atiendo")], scripts=("assets/mapa.js",),
-       cuerpo=cabeza(r, [("", "Inicio")], "", "Dónde atiendo") + f"""
+       jsonld=[MEDICO_LD, migas_ld(r, [("", "Inicio")], "Dónde atiende")], scripts=("assets/mapa.js",),
+       cuerpo=cabeza(r, [("", "Inicio")], "", "Dónde atiende") + f"""
 <section class="seccion"><div class="contenedor">
 <div class="rejilla">
 <article class="tarjeta destacada"><p class="eti">Consulta privada</p><h3>Centro Médico CITIMED</h3>
