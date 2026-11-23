@@ -73,6 +73,37 @@ footer{padding:30px 0;font-size:13.5px;color:var(--s)}footer .w{display:flex;jus
 .m.r{max-width:100%;align-self:stretch;background:linear-gradient(100deg,#1F6FEB,#7A5CF5);color:#ffffffe6;margin-top:6px}.m.r b{display:block;color:#fff;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
 @media(max-width:900px){.as{grid-template-columns:1fr;gap:32px}.fl{width:auto}.dm{min-height:0}header .b{white-space:nowrap}}
 @media(prefers-reduced-motion:reduce){.m{animation:none;opacity:1;transform:none}.fl,.pu{animation:none}}
+
+.sp{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#1F6FEB,#7A5CF5);color:#fff;display:grid;place-items:center;font-size:13px;flex:none}
+a.fl{display:block;width:350px;padding:20px;border:1px solid #fff;background:#ffffffe6;backdrop-filter:blur(14px)}
+.fh small{margin-left:auto;background:#EEF4FF;color:var(--a);font-weight:800;border-radius:6px;padding:2px 7px;font-size:11px}
+.inp{display:block;margin:14px 0 12px;border-radius:14px;padding:14px 16px;background:#fff;box-shadow:inset 0 0 0 1.5px #C9DBF8,0 0 0 5px #1f6feb14;font-size:14.5px;color:var(--n);font-weight:600}
+.ty{display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:bottom;border-right:2px solid var(--a);width:0;max-width:100%;animation:ty 7s steps(48) infinite}
+@keyframes ty{0%{width:0}55%,90%{width:100%}100%{width:0}}
+.pr,.pg{display:block;height:6px;border-radius:9px;background:#E3EAF4;overflow:hidden}.pr i,.pg i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#1F6FEB,#7A5CF5);width:0;animation:gr 7s ease-out infinite}
+@keyframes gr{55%,90%{width:78%}100%{width:0}}
+a.fl .n{display:block;font-size:12.5px;margin-top:11px;color:var(--s);line-height:1.45}a.fl .n b{display:inline;font-size:12.5px;color:var(--n)}
+.demo{background:#fff;border:1px solid var(--l);border-radius:28px;padding:28px;box-shadow:0 30px 80px #12284c24;position:relative}
+.demo:before{content:"";position:absolute;inset:-18px -18px auto auto;width:200px;height:200px;border-radius:50%;background:radial-gradient(#7A5CF533,transparent 70%);z-index:-1}
+.dt{display:flex;align-items:center;gap:10px;font-size:15px;margin-bottom:16px}.dt b{font-weight:800;letter-spacing:-.01em}
+.ok{margin-left:auto;font-size:12px;font-weight:700;color:#12845A;background:#E3F7EE;border-radius:99px;padding:5px 11px;opacity:0;animation:in .5s 5.6s forwards}
+.pg{margin-bottom:20px}.pg i{animation:gp 6s ease-out forwards}@keyframes gp{to{width:100%}}
+.fc{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}.fc div,.es,.rs{opacity:0;transform:translateY(8px);animation:in .5s var(--d) forwards}
+.fc div{background:var(--f);border-radius:14px;padding:13px 15px}.fc dt{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--s)}.fc dd{margin:3px 0 0;font-weight:700;font-size:14.5px}
+.es{margin-top:14px}.es p{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--s);margin-bottom:8px}
+.es ul{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.es li{font-size:12.5px;font-weight:600;color:var(--s);text-align:center}
+.rx{display:block;height:74px;border-radius:12px;margin-bottom:6px;background:#0F1B2E}
+.r1{background:radial-gradient(ellipse 14% 46% at 50% 28%,#dfe8f5cc,transparent 70%),radial-gradient(ellipse 16% 44% at 50% 80%,#dfe8f5b3,transparent 70%),radial-gradient(circle at 50% 54%,#9fb3cf55 0 12%,transparent 13%),#0F1B2E}
+.r2{background:radial-gradient(circle at 50% 50%,#0F1B2E 0 18%,#8fa6c9aa 19% 30%,#33486c 31% 44%,transparent 45%),radial-gradient(circle at 50% 50%,#55698d55,transparent 60%),#0F1B2E}
+.r3{background:linear-gradient(#C9DBF8 0 0) 16px 16px/60% 5px no-repeat,linear-gradient(#DDE7F5 0 0) 16px 30px/72% 5px no-repeat,linear-gradient(#DDE7F5 0 0) 16px 44px/50% 5px no-repeat,linear-gradient(#DDE7F5 0 0) 16px 58px/64% 5px no-repeat,#F4F8FD;box-shadow:inset 0 0 0 1px var(--l)}
+.rs{margin-top:16px;border-radius:16px;padding:16px 18px;background:linear-gradient(100deg,#1F6FEB,#7A5CF5);color:#ffffffe6;font-size:14px;line-height:1.5}.rs b{display:block;color:#fff;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.ej{font-size:11.5px;color:var(--s);text-align:right;margin-top:10px}
+.on{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--l);border-left:1px solid var(--l);border-radius:22px;overflow:hidden}
+.on li{padding:28px;border-right:1px solid var(--l);border-bottom:1px solid var(--l);font-size:14.5px;color:var(--s);line-height:1.5;transition:background .2s}.on li:hover{background:var(--f)}
+.on b{display:block;color:var(--n);font-size:18px;letter-spacing:-.015em;margin-bottom:6px}.on b:before{content:"";display:block;width:28px;height:4px;border-radius:4px;background:linear-gradient(90deg,#1F6FEB,#7A5CF5);margin-bottom:14px}
+nav{gap:24px}
+@media(max-width:900px){.on{grid-template-columns:1fr}a.fl{width:auto}.fc{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.fc div,.es,.rs,.ok{animation:none;opacity:1;transform:none}.ty{animation:none;width:100%;border:0}.pr i,.pg i{animation:none;width:100%}}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute"><defs>
 <g id="i-hueso" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.6 10.4a2.6 2.6 0 1 1-3-3 2.6 2.6 0 1 1 4.8-.8l6 6a2.6 2.6 0 1 1 3 3 2.6 2.6 0 1 1-4.8.8z"/></g>
@@ -93,20 +124,19 @@ footer{padding:30px 0;font-size:13.5px;color:var(--s)}footer .w{display:flex;jus
 </defs></svg>
 <div class="av"><span class="ch">✦</span> Este sitio tiene un asistente con inteligencia artificial que prepara su caso antes de la cita<a href="#asistente">Ver cómo →</a></div>
 <header><div class="w"><a class="logo" href="#"><span>Dr. Felipe Criollo<small>Traumatología y ortopedia oncológica</small></span></a>
-<nav><a href="#asistente">Asistente inteligente</a><a href="#servicios">Servicios</a><a href="#segunda">Segunda opinión</a><a href="#doctor">El doctor</a><a href="#contacto">Contacto</a></nav>
+<nav><a href="#asistente">Asistente inteligente</a><a href="#oncologia">Ortopedia oncológica</a><a href="#servicios">Servicios</a><a href="#segunda">Segunda opinión</a><a href="#doctor">El doctor</a><a href="#contacto">Contacto</a></nav>
 <a class="b c" href="https://wa.me/593991827823">Agendar cita →</a></div></header>
 <div class="hero"><div class="ph" role="img" aria-label="El doctor Criollo en su consultorio de Citimed"></div><div class="w">
 <p class="ia"><span>✦ Asistente con IA</span>Traumatología y ortopedia oncológica · Quito</p>
 <h1>Una <em>segunda opinión</em> antes de una decisión que no tiene vuelta atrás.</h1>
 <p class="l">Un asistente inteligente le hace las preguntas correctas y ordena sus estudios. Así el Dr. Felipe Criollo Palacios llega a su cita con el caso completo.</p>
 <div class="ac"><a class="b" href="../../consulta-express/"><span class="ch">✦</span> Contar mi caso al asistente</a><a class="b o" href="https://wa.me/593991827823">Agendar cita</a></div>
-<ul class="tr"><li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-escudo"/></svg></span><span><b>SOLCA Quito</b>Ex coordinador de Ortopedia</span></li>
+<ul class="tr"><li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-escudo"/></svg></span><span><b>Hospital Metropolitano</b>Tumores musculoesqueléticos</span></li>
 <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-mundo"/></svg></span><span><b>ISOLS · SLATME</b>Sociedades científicas</span></li>
-<li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-birrete"/></svg></span><span><b>Docente de posgrado</b>Universidad Central</span></li></ul>
-<div class="fl"><div class="fh"><span class="pu"></span><b>Asistente del consultorio</b><small>Con inteligencia artificial</small></div>
-<p class="q">¿Qué le trae hoy?</p>
-<div class="chs"><a href="../../consulta-express/">Un dolor que no cede</a><a href="../../consulta-express/">Un bulto o tumor</a><a href="../../consulta-express/">Una fractura</a><a href="../../consulta-express/">Quiero una segunda opinión</a></div>
-<p class="n">El diagnóstico siempre lo hace el doctor.</p></div>
+<li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-birrete"/></svg></span><span><b>Docente de posgrado</b>Universidad Central del Ecuador</span></li></ul>
+<a class="fl" href="../../consulta-express/"><span class="fh"><span class="sp">✦</span><b>Asistente inteligente</b><small>IA</small></span>
+<span class="inp"><span class="ty">Tengo un dolor en la rodilla desde hace dos meses</span></span>
+<span class="pr"><i></i></span><span class="n"><b>Su caso se arma mientras usted responde.</b> El doctor lo recibe completo.</span></a>
 </div></div>
 <section id="asistente"><div class="w as"><div>
 <p class="ia"><span>✦ Sitio inteligente</span></p>
@@ -119,17 +149,29 @@ footer{padding:30px 0;font-size:13.5px;color:var(--s)}footer .w{display:flex;jus
 </ul>
 <a class="b" href="../../consulta-express/"><span class="ch">✦</span> Probar el asistente</a>
 <p class="nt">El asistente no diagnostica ni receta. Reúne la información; el criterio médico es del doctor.</p></div>
-<div class="demo" aria-hidden="true"><div class="dh"><span class="pu"></span><b>Asistente del consultorio</b><small>Preparando su consulta</small></div>
-<div class="dm">
-<p class="m a" style="--d:.3s">Buenos días. Cuénteme, ¿qué le ocurre?</p>
-<p class="m u" style="--d:1.6s">Tengo un bulto en la rodilla que ha crecido en dos meses.</p>
-<p class="m a" style="--d:3s">Entiendo. ¿Le duele de noche o al estar en reposo?</p>
-<p class="m u" style="--d:4.4s">Sí, me despierta en la madrugada.</p>
-<p class="m a" style="--d:5.8s">¿Ya le hicieron una radiografía o una resonancia? Puede subirlas aquí.</p>
-<p class="m f" style="--d:7.2s"><svg width="18" height="18" viewBox="0 0 24 24"><use href="#i-doc"/></svg>resonancia-rodilla.pdf</p>
-<p class="m r" style="--d:8.8s"><b>Resumen para el doctor</b>Masa en rodilla, 2 meses de evolución, dolor nocturno. Resonancia adjunta.</p>
+<div class="demo" aria-hidden="true">
+<div class="dt"><span class="sp">✦</span><b>Caso preparado por el asistente</b><span class="ok">Listo para el doctor</span></div>
+<div class="pg"><i></i></div>
+<dl class="fc">
+<div style="--d:.4s"><dt>Motivo</dt><dd>Masa en la rodilla derecha</dd></div>
+<div style="--d:1.3s"><dt>Evolución</dt><dd>2 meses, en aumento</dd></div>
+<div style="--d:2.2s"><dt>Dolor</dt><dd>Nocturno, lo despierta</dd></div>
+<div style="--d:3.1s"><dt>Antecedentes</dt><dd>Sin cirugías previas</dd></div>
+</dl>
+<div class="es" style="--d:4s"><p>Estudios recibidos</p><ul><li><span class="rx r1"></span>Radiografía</li><li><span class="rx r2"></span>Resonancia</li><li><span class="rx r3"></span>Informe</li></ul></div>
+<div class="rs" style="--d:5s"><b>Resumen para el Dr. Criollo</b>Masa en rodilla derecha de 2 meses de evolución, con dolor nocturno. Radiografía, resonancia e informe adjuntos.</div>
+<p class="ej">Ejemplo ilustrativo</p>
 </div></div></div></section>
-<section id="servicios" style="padding-top:0"><div class="w"><div class="sh"><div><h2>Servicios</h2><p>Todas sus necesidades de traumatología en un solo lugar.</p></div><a class="mas" href="https://wa.me/593991827823">Consultar por WhatsApp →</a></div>
+<section id="oncologia" style="padding-top:0"><div class="w"><div class="sh"><div><h2>Ortopedia <em>oncológica</em></h2><p>El área a la que el doctor Criollo dedica su práctica.</p></div></div>
+<ul class="on">
+<li><b>Tumores óseos y sarcomas</b>Diagnóstico y tratamiento de tumores primarios del hueso y de las partes blandas.</li>
+<li><b>Metástasis óseas</b>Protección y estabilización del hueso afectado por un cáncer de otro origen.</li>
+<li><b>Cirugía de salvamento de extremidad</b>Retirar el tumor conservando el brazo o la pierna, cuando el caso lo permite.</li>
+<li><b>Reconstrucciones de alta complejidad</b>Prótesis tumorales, aloinjertos y osteosíntesis tras la resección.</li>
+<li><b>Lesiones pseudotumorales</b>Quistes óseos y otras lesiones que se parecen a un tumor y requieren el mismo cuidado.</li>
+<li><b>Planificación con impresión 3D</b>Modelos a medida del paciente para preparar cirugías complejas.</li>
+</ul></div></section>
+<section id="servicios" style="padding-top:0"><div class="w"><div class="sh"><div><h2>Traumatología y ortopedia</h2><p>Todas sus necesidades de traumatología en un solo lugar.</p></div><a class="mas" href="https://wa.me/593991827823">Consultar por WhatsApp →</a></div>
 <ul class="dep">
 <li style="--c:#FDEEEE;--k:#D9534F"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#i-lupa"/></svg></span><div><h3>Diagnóstico de lesiones musculoesqueléticas</h3><p>Evaluación clínica con radiografía, resonancia magnética o ecografía.</p></div></li>
 <li style="--c:#EAF2FF;--k:#1F6FEB"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#i-bisturi"/></svg></span><div><h3>Cirugía ortopédica</h3><p>Reparación de fracturas, corrección de deformidades y reemplazo articular.</p></div></li>
@@ -146,8 +188,13 @@ footer{padding:30px 0;font-size:13.5px;color:var(--s)}footer .w{display:flex;jus
 <div class="pz"><div><b>USD $ 50</b>Consulta en línea</div><div><b>USD $ 250</b>Segunda opinión</div></div></div>
 <ol class="st"><li><i>1</i><div>Cuenta qué le ocurre<span>Unas pocas preguntas guiadas.</span></div></li><li><i>2</i><div>Sube sus estudios<span>Radiografías, resonancias, informes de patología.</span></div></li><li><i>3</i><div>El doctor revisa su caso<span>Personalmente, con todos sus estudios.</span></div></li><li><i>4</i><div>Recibe su respuesta<span>Por escrito, con los pasos a seguir.</span></div></li></ol></div></div></section>
 <section id="doctor" style="padding-top:0"><div class="w dr"><div class="im"><img src="../../assets/img/felipe-retrato-900.webp" alt="Dr. Felipe Criollo Palacios"></div>
-<div><p class="ey">El doctor</p><h2 style="margin-top:12px">Dr. Felipe Criollo <em>Palacios</em></h2><p class="t">Especialista en traumatología y ortopedia oncológica. Atiende en consultorio y en quirófano, en Quito.</p>
-<ul class="cv"><li><b>Formación</b>Oncólogo ortopedista formado en la Universidad Militar Nueva Granada, Bogotá.</li><li><b>Trayectoria</b>Ex coordinador de la Clínica de Ortopedia de SOLCA, núcleo de Quito.</li><li><b>Docencia</b>Posgrado de Ortopedia Oncológica, Universidad Central del Ecuador. Docente invitado, USFQ.</li><li><b>Sociedades</b>ISOLS, SLATME y Sociedad Ecuatoriana de Oncología.</li></ul></div></div></section>
+<div><p class="ey">El doctor</p><h2 style="margin-top:12px">Dr. Felipe Criollo <em>Palacios</em></h2><p class="t">Cirujano ortopedista oncólogo. Se dedica al diagnóstico y tratamiento de tumores musculoesqueléticos y a las reconstrucciones de extremidades de alta complejidad.</p>
+<ul class="cv"><li><b>Formación</b>Médico y especialista en Ortopedia y Traumatología, Universidad Central del Ecuador. Fellowship en Ortopedia Oncológica, Universidad Militar Nueva Granada e Instituto Nacional de Cancerología, Bogotá.</li>
+<li><b>Hospitales</b>Coordinador de Tumores Musculoesqueléticos del Hospital Metropolitano. Traumatólogo oncólogo en el Hospital Vozandes Quito.</li>
+<li><b>Trayectoria</b>Más de diez años en SOLCA Quito, donde coordinó el servicio de Ortopedia Oncológica.</li>
+<li><b>Docencia</b>Profesor de Ortopedia Oncológica en los posgrados de la Universidad Central del Ecuador desde 2013. Profesor ocasional del posgrado de la USFQ.</li>
+<li><b>Sociedades</b>International Society of Limb Salvage (ISOLS), SLATME y Sociedad Ecuatoriana de Oncología.</li>
+<li><b>Dónde atiende</b>Consultorio en Citimed, Hospital Metropolitano y Hospital Vozandes.</li></ul></div></div></section>
 <section id="contacto" class="ci"><div class="w"><div class="sh"><div><h2>Agende su cita</h2><p>Llámenos o escríbanos por WhatsApp.</p></div></div>
 <ul class="cg"><li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-tel"/></svg></span><b><a href="tel:+593991827823">099 182 7823</a></b><span>Llamadas</span></li>
 <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-chat"/></svg></span><b><a href="https://wa.me/593991827823">WhatsApp</a></b><span>Escríbanos para agendar</span></li>
