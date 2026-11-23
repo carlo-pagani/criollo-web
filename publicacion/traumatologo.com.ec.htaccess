@@ -1,0 +1,24 @@
+# .htaccess para la carpeta de traumatologo.com.ec en Bluehost.
+# Redirige de forma permanente (301) cada página antigua a su equivalente en doctorfelipecriollo.com.
+# No toca el correo: los registros MX del dominio no cambian.
+RewriteEngine On
+
+# La validación de certificados y el correo web siguen funcionando
+RewriteRule ^\.well-known/ - [L]
+
+RewriteRule ^(index\.html)?$ https://doctorfelipecriollo.com/ [R=301,L]
+RewriteRule ^traumatologo-oncologo-quito\.html$ https://doctorfelipecriollo.com/perfil/ [R=301,L]
+RewriteRule ^traumatologia-oncologia-quito\.html$ https://doctorfelipecriollo.com/especialidades/ [R=301,L]
+RewriteRule ^traumatologia-ortopedia-quito\.html$ https://doctorfelipecriollo.com/especialidades/traumatologia/ [R=301,L]
+RewriteRule ^contact\.html$ https://doctorfelipecriollo.com/donde-atiendo/ [R=301,L]
+# El nombre de este archivo lleva un espacio (llega como %20 y Apache lo compara ya decodificado)
+RewriteRule ^tumores-oseos-quito-tumores-partes\ blandas-quito\.html$ https://doctorfelipecriollo.com/especialidades/sarcoma-de-partes-blandas/ [R=301,L]
+RewriteRule ^tumores-oseos(-ninos-pediatria|-adultos)?-quito\.html$ https://doctorfelipecriollo.com/especialidades/tumores-oseos/ [R=301,L]
+# Prótesis, fracturas y mano: traumatología general
+RewriteRule ^cirugia-protesis-(cadera|rodilla|hombro|codo)-quito\.html$ https://doctorfelipecriollo.com/especialidades/traumatologia/ [R=301,L]
+RewriteRule ^clinica-de-fracturas-quito\.html$ https://doctorfelipecriollo.com/especialidades/traumatologia/ [R=301,L]
+RewriteRule ^cirugia-de-mano-quito\.html$ https://doctorfelipecriollo.com/especialidades/traumatologia/ [R=301,L]
+RewriteRule ^reconstrucciones-alta-complejidad-quito\.html$ https://doctorfelipecriollo.com/especialidades/salvamento-de-extremidad/ [R=301,L]
+
+# Cualquier otra dirección: al inicio
+RewriteRule ^ https://doctorfelipecriollo.com/ [R=301,L]

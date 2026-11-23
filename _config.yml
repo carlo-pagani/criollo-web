@@ -3,3 +3,4 @@ exclude:
   - worker
   - _build
   - README.md
+  - publicacion
