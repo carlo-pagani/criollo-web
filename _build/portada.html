@@ -140,7 +140,7 @@ nav{gap:24px}
 .sm{background:#ffffff1a;border:1px solid #ffffff33;border-radius:16px;padding:16px 18px;font-size:15px;line-height:1.5}.sm small{display:block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8DBBFF;margin-bottom:6px}
 .sg{position:absolute;left:28px;right:28px;bottom:22px;display:flex;gap:6px}.sg i{flex:1;height:3px;border-radius:3px;background:#ffffff33;overflow:hidden;position:relative}
 .sg i:after{content:"";position:absolute;inset:0;background:#7CC0FF;transform:scaleX(0);transform-origin:left}.sg i.ok:after{transform:scaleX(1)}.sg i.go:after{animation:sg var(--t,4s) linear forwards}@keyframes sg{to{transform:scaleX(1)}}
-@media(max-width:1100px){.hp{position:relative;right:auto;bottom:auto;margin:34px 0 0;width:100%;max-width:420px}.hero .w{min-height:0}}
+
 @media(prefers-reduced-motion:reduce){.rw,.br,.sm{opacity:1;transform:none}}
 
 .qa{display:grid;grid-template-columns:1fr 1.6fr;gap:0;border-top:1px solid var(--l);border-bottom:1px solid var(--l)}
@@ -150,6 +150,14 @@ nav{gap:24px}
 .qa li:before{content:"";position:absolute;left:0;top:16px;width:8px;height:8px;border-radius:50%;background:var(--a)}
 .qa .c2{columns:2;column-gap:36px}
 @media(max-width:900px){.qa{grid-template-columns:1fr}.qa>div{padding:24px 0}.qa>div+div{padding-left:0;border-left:0;border-top:1px solid var(--l)}.qa .c2{columns:1}}
+
+.hg{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;align-items:end}
+.hp{position:relative;right:auto;bottom:auto;width:100%;margin:0}
+.hero .w.hg{min-height:680px;padding-bottom:56px}
+.pc{position:relative;z-index:1;display:grid;gap:14px}.pc>div{background:#fff;color:var(--n);border-radius:22px;padding:24px 26px}
+.pc small{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--a)}.pc b{display:block;font-size:34px;font-weight:800;letter-spacing:-.03em;margin:4px 0 6px}.pc p{color:var(--s)!important;margin:0!important;font-size:14.5px}
+@media(max-width:1000px){.hg{grid-template-columns:1fr;gap:30px}.hp{max-width:420px}.hero .w.hg{min-height:0}}
+@media(min-width:901px) and (max-width:1000px){.hero .ph{width:46%;opacity:.9}}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute"><defs>
 <g id="i-hueso" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.6 10.4a2.6 2.6 0 1 1-3-3 2.6 2.6 0 1 1 4.8-.8l6 6a2.6 2.6 0 1 1 3 3 2.6 2.6 0 1 1-4.8.8z"/></g>
@@ -172,14 +180,14 @@ nav{gap:24px}
 <header><div class="w"><a class="logo" href="#"><span>Dr. Felipe Criollo<small>Traumatología y ortopedia oncológica</small></span></a>
 <nav><a href="#asistente">Guía inteligente</a><a href="#oncologia">Qué atiende</a><a href="segunda-opinion/">Segunda opinión</a><a href="perfil/">El doctor</a><a href="donde-atiendo/">Dónde atiende</a></nav>
 <a class="b c" href="https://wa.me/593991827823">Agendar cita →</a></div></header>
-<div class="hero"><div class="ph" role="img" aria-label="El doctor Criollo en su consultorio de Citimed"></div><div class="w">
+<div class="hero"><div class="ph" role="img" aria-label="El doctor Criollo en su consultorio de Citimed"></div><div class="w hg"><div class="ht">
 <p class="ia"><span>✦ Guía inteligente con IA</span>Traumatología y ortopedia oncológica · Quito</p>
 <h1>Una <em>segunda opinión</em> antes de una decisión que no tiene vuelta atrás.</h1>
 <p class="l">Una guía inteligente le hace las preguntas correctas y ordena sus estudios. Así el doctor y su equipo de consulta preparan la información completa de su caso.</p>
 <div class="ac"><a class="b" href="consulta-express/"><span class="ch">✦</span> Contar mi caso</a><a class="b o" href="https://wa.me/593991827823">Agendar cita</a></div>
 
 
-<div class="hp" id="hp" role="group" aria-label="Demostración de la guía inteligente">
+</div><div class="hp" id="hp" role="group" aria-label="Demostración de la guía inteligente">
 <div class="hs act"><span class="tg">Guía inteligente</span><h3>Su consulta empieza <em>antes de llegar.</em></h3><p>Vea cómo funciona, en veinte segundos.</p></div>
 <div class="hs"><span class="tg">Usted responde</span><h3>Preguntas como las <em>haría el doctor.</em></h3>
 <div class="rw" style="--d:.5s"><span>¿Qué le ocurre?</span><b>Bulto en la rodilla</b></div><div class="rw" style="--d:1.4s"><span>¿Desde cuándo?</span><b>2 meses</b></div><div class="rw" style="--d:2.3s"><span>¿Le duele de noche?</span><b>Sí</b></div></div>
@@ -201,10 +209,10 @@ nav{gap:24px}
 <div class="flow">
 <svg class="ln" viewBox="0 0 520 620" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6FB6FF"/><stop offset="1" stop-color="#4C9BFF"/></linearGradient></defs>
 <path d="M60 96 V140 Q60 160 80 160 H300 Q320 160 320 180 V244 M460 296 H470 Q490 296 490 316 V344 Q490 364 470 364 H110 Q90 364 90 384 V404 M150 484 V510 Q150 530 170 530 H185"/></svg>
-<div class="nd n1"><span class="ni"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#i-chat"/></svg></span><div><b>Usted cuenta su caso</b>Con sus palabras, desde su celular o su computadora</div><i>1</i></div>
-<div class="nd n2 hi"><span class="ni">✦</span><div><b>Guía inteligente</b>Pregunta como lo haría el doctor y se adapta a sus respuestas</div><i>2</i></div>
-<div class="nd n3"><span class="ni"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#i-doc"/></svg></span><div><b>Sus estudios, ordenados</b>Radiografías, resonancias e informes</div><i>3</i></div>
-<div class="nd n4 fin"><span class="ni"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#i-escudo"/></svg></span><div><b>Informe listo para la consulta</b>Revisado por el equipo que lidera el doctor</div><i>4</i></div>
+<div class="nd n1 hi"><span class="ni">✦</span><div><b>Cuéntenos sus síntomas</b>Preguntas guiadas, diseñadas como el doctor conduce sus consultas</div><i>1</i></div>
+<div class="nd n2"><span class="ni"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#i-doc"/></svg></span><div><b>Adjunte sus estudios</b>Imágenes, exámenes de laboratorio e informes</div><i>2</i></div>
+<div class="nd n3"><span class="ni"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#i-lupa"/></svg></span><div><b>El equipo analiza su caso</b>El equipo de consulta, liderado por el doctor</div><i>3</i></div>
+<div class="nd n4 fin"><span class="ni"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#i-escudo"/></svg></span><div><b>Pasa a la consulta</b>Presencial o virtual, con un informe ya revisado</div><i>4</i></div>
 <div class="sd"><b>Programada con el criterio del Dr. Criollo</b><span>Ortopedia oncológica</span><span>Traumatología</span><span>Segunda opinión</span></div>
 </div></div></div></section>
 <section id="oncologia" style="padding-top:0"><div class="w"><div class="sh"><div><h2>Qué <em>atiende</em></h2><p>Ortopedia oncológica, el área a la que el doctor dedica su práctica, y traumatología general.</p></div></div>
@@ -215,8 +223,8 @@ nav{gap:24px}
 </div></section>
 <section id="segunda" style="padding-top:0"><div class="w"><div class="so"><div style="position:relative;z-index:1"><h2>Segunda opinión y consulta en línea, <em>sin viajar a Quito.</em></h2>
 <p>Cuéntenos su caso y adjunte toda la información médica y de laboratorio que considere relevante. Así llegamos a la consulta, presencial o virtual, con una idea mucho más clara de lo que usted necesita.</p><a class="b" href="segunda-opinion/">Cómo funciona →</a>
-<div class="pz"><div><b>USD $ 50</b>Consulta en línea</div><div><b>USD $ 250</b>Segunda opinión</div></div></div>
-<ol class="st"><li><i>1</i><div>Cuéntenos sus síntomas en detalle<span>Unas pocas preguntas guiadas, diseñadas como el doctor conduce sus consultas.</span></div></li><li><i>2</i><div>Adjunte sus estudios<span>Radiografías, resonancias, exámenes de laboratorio e informes de patología.</span></div></li><li><i>3</i><div>El equipo analiza su caso<span>Con toda la información relevante, el equipo de consulta, liderado por el doctor, estudia su caso.</span></div></li><li><i>4</i><div>Pasa a la consulta<span>Presencial o virtual, con un informe ya revisado.</span></div></li></ol></div></div></section>
+</div>
+<div class="pc"><div><small>Consulta en línea</small><b>USD $ 50</b><p>Un primer criterio del doctor sobre su caso, sin salir de casa.</p></div><div><small>Segunda opinión</small><b>USD $ 250</b><p>Informe escrito y videollamada con el doctor para explicárselo.</p></div></div></div></div></section>
 <section id="doctor" style="padding-top:0"><div class="w dr"><div class="im"><img src="assets/img/felipe-retrato-900.webp" alt="Dr. Felipe Criollo Palacios"></div>
 <div><p class="ey">El doctor</p><h2 style="margin-top:12px">Dr. Felipe Criollo <em>Palacios</em></h2><p class="t">Cirujano ortopedista oncólogo. Se dedica al diagnóstico y tratamiento de tumores musculoesqueléticos y a las reconstrucciones de extremidades de alta complejidad.</p>
 <ul class="cv"><li><b>Formación</b>Médico y especialista en Ortopedia y Traumatología, Universidad Central del Ecuador. Fellowship en Ortopedia Oncológica, Universidad Militar Nueva Granada e Instituto Nacional de Cancerología, Bogotá.</li>
