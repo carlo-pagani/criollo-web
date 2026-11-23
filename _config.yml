@@ -1,0 +1,5 @@
+# GitHub Pages: no publica el código del asistente, los scripts de construcción ni el README.
+exclude:
+  - worker
+  - _build
+  - README.md

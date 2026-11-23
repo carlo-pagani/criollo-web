@@ -1,0 +1,34 @@
+# Asistente con IA y cobro de la consulta express. Lo despliega la acción .github/workflows/asistente.yml
+name = "consulta-express-criollo"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+[vars]
+# Tope de gasto del asistente con IA (clase Cupo en src/index.js). Al llegar a un tope, la consulta sigue con preguntas fijas.
+TOPE_DIARIO_USD = "3"       # dólares por día entre todos los visitantes
+TOPE_VISITANTE_USD = "1"    # dólares por día de un mismo visitante
+LLAMADAS_POR_HORA = "60"    # llamadas por hora de un mismo visitante
+
+# Precios en dólares (servicios de salud: IVA 0 %). Vacío = ese servicio todavía no se cobra en línea.
+PRECIO_CONSULTA_USD = ""
+PRECIO_SEGUNDA_USD = ""
+
+# Sitios de vista previa autorizados, separados por comas (el dominio del doctor ya está en el código)
+ORIGENES_EXTRA = "https://carlo-pagani.github.io"
+
+# Identificador público de la app de PayPal del doctor. La clave secreta va como secreto: PAYPAL_SECRET.
+PAYPAL_CLIENT_ID = ""
+
+[[durable_objects.bindings]]
+name = "CUPO"
+class_name = "Cupo"
+
+[[durable_objects.bindings]]
+name = "SELLO"
+class_name = "Sello"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Cupo", "Sello"]

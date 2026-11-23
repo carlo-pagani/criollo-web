@@ -1,0 +1,119 @@
+name: Desplegar asistente con IA y cobro
+
+# Publica worker/ en Cloudflare y deja sus direcciones en data/servicios.json, que la web lee al abrir el consulta express.
+# Necesita los secretos CLOUDFLARE_API_TOKEN y CLOUDFLARE_ACCOUNT_ID, y además los de cada servicio que se active:
+#   asistente con IA: ANTHROPIC_API_KEY
+#   cobro con tarjeta (Payphone): PAYPHONE_TOKEN y PAYPHONE_STORE_ID
+#   cobro con PayPal verificado por el Worker: PAYPAL_SECRET (la clave secreta de la app del doctor)
+# Después de desplegar guarda en data/sellos.json la clave pública con la que el Worker sella los pagos verificados.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "worker/**"
+      - ".github/workflows/asistente.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: asistente
+  cancel-in-progress: false
+
+jobs:
+  desplegar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Revisar que estén las claves
+        id: claves
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_CUENTA: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ANTHROPIC: ${{ secrets.ANTHROPIC_API_KEY }}
+          PP_TOKEN: ${{ secrets.PAYPHONE_TOKEN }}
+          PP_TIENDA: ${{ secrets.PAYPHONE_STORE_ID }}
+          PAYPAL: ${{ secrets.PAYPAL_SECRET }}
+        run: |
+          IA=no; PAGO=no; PAYPAL_OK=no
+          [ -n "$ANTHROPIC" ] && IA=si
+          [ -n "$PP_TOKEN" ] && [ -n "$PP_TIENDA" ] && PAGO=si
+          [ -n "$PAYPAL" ] && PAYPAL_OK=si
+          echo "ia=$IA" >> "$GITHUB_OUTPUT"
+          echo "pago=$PAGO" >> "$GITHUB_OUTPUT"
+          echo "paypal=$PAYPAL_OK" >> "$GITHUB_OUTPUT"
+          if [ -n "$CF_TOKEN" ] && [ -n "$CF_CUENTA" ] && { [ "$IA" = si ] || [ "$PAGO" = si ] || [ "$PAYPAL_OK" = si ]; }; then
+            echo "listas=si" >> "$GITHUB_OUTPUT"
+            echo "Asistente con IA: $IA · Cobro con Payphone: $PAGO · PayPal verificado: $PAYPAL_OK"
+          else
+            echo "listas=no" >> "$GITHUB_OUTPUT"
+            echo "Faltan secretos del repositorio; no se despliega todavía."
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.claves.outputs.listas == 'si'
+        with:
+          node-version: "22"
+
+      - name: Instalar dependencias
+        if: steps.claves.outputs.listas == 'si'
+        working-directory: worker
+        run: npm ci --no-audit --no-fund
+
+      - name: Desplegar en Cloudflare
+        if: steps.claves.outputs.listas == 'si'
+        working-directory: worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PAYPHONE_TOKEN: ${{ secrets.PAYPHONE_TOKEN }}
+          PAYPHONE_STORE_ID: ${{ secrets.PAYPHONE_STORE_ID }}
+          PAYPAL_SECRET: ${{ secrets.PAYPAL_SECRET }}
+        run: |
+          npx wrangler deploy | tee despliegue.txt
+          # Si el secreto se pegó con texto alrededor (saltos de línea, comandos de ejemplo), se guarda solo la clave sk-ant-…
+          CLAVE=$(printf '%s' "$ANTHROPIC_API_KEY" | grep -o 'sk-ant-[A-Za-z0-9_-]*' | head -1 || true)
+          if [ -n "$CLAVE" ]; then printf '%s' "$CLAVE" | npx wrangler secret put ANTHROPIC_API_KEY; fi
+          if [ -n "$PAYPHONE_TOKEN" ]; then printf '%s' "$PAYPHONE_TOKEN" | npx wrangler secret put PAYPHONE_TOKEN; fi
+          if [ -n "$PAYPHONE_STORE_ID" ]; then printf '%s' "$PAYPHONE_STORE_ID" | npx wrangler secret put PAYPHONE_STORE_ID; fi
+          # La clave de PayPal se pega a veces con espacios o saltos de línea alrededor
+          SECRETO=$(printf '%s' "$PAYPAL_SECRET" | tr -d '[:space:]')
+          if [ -n "$SECRETO" ]; then printf '%s' "$SECRETO" | npx wrangler secret put PAYPAL_SECRET; fi
+
+      - name: Guardar las direcciones para la web
+        if: steps.claves.outputs.listas == 'si'
+        env:
+          IA: ${{ steps.claves.outputs.ia }}
+          PAGO: ${{ steps.claves.outputs.pago }}
+          PAYPAL: ${{ steps.claves.outputs.paypal }}
+        run: |
+          DIRECCION=$(grep -o 'https://[A-Za-z0-9.-]*\.workers\.dev' worker/despliegue.txt | head -1)
+          if [ -z "$DIRECCION" ]; then echo "Cloudflare no devolvió la dirección del servicio"; exit 1; fi
+          GUIA=""; COBRO=""; COBRO_PAYPAL=""
+          [ "$IA" = si ] && GUIA="$DIRECCION/guia"
+          [ "$PAGO" = si ] && COBRO="$DIRECCION/pago"
+          [ "$PAYPAL" = si ] && COBRO_PAYPAL="$DIRECCION/pago/paypal"
+          jq --arg g "$GUIA" --arg a "$DIRECCION" '.guia=$g | .api=$a' data/servicios.json > s.tmp && mv s.tmp data/servicios.json
+          cat data/servicios.json
+          # Clave pública de los sellos: se añade a data/sellos.json si es nueva (las anteriores se conservan para los sellos viejos)
+          CLAVE=""
+          for i in 1 2 3 4 5 6; do
+            CLAVE=$(curl -fsS -H "Origin: https://doctorfelipecriollo.com" "$DIRECCION/pago/clave" || true)
+            echo "$CLAVE" | jq -e '.kid and .x and .y' >/dev/null 2>&1 && break
+            CLAVE=""; sleep 10
+          done
+          if [ -z "$CLAVE" ]; then echo "El Worker no entregó la clave de los sellos"; exit 1; fi
+          jq --argjson c "$CLAVE" 'if any(.[]; .kid == $c.kid) then . else . + [$c] end' data/sellos.json > sellos.tmp && mv sellos.tmp data/sellos.json
+          cat data/sellos.json
+          if [ -n "$(git status --porcelain data/servicios.json data/sellos.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/servicios.json data/sellos.json
+            git commit -m "Activa los servicios del consulta express"
+            git pull --rebase origin main
+            git push
+          fi

@@ -1,0 +1,7 @@
+{
+ "guia": "",
+ "api": "",
+ "envio": { "url": "", "opaco": true, "campos": {} },
+ "maxMB": 15,
+ "maxArchivos": 12
+}

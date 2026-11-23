@@ -1,0 +1,51 @@
+/* Consulta express. Usa las variables de color de sitio.css. */
+.ce{max-width:760px}
+.ce-pasos{list-style:none;display:flex;gap:6px;margin:0 0 20px;padding:0;font-size:13px;color:var(--gris)}
+.ce-pasos li{flex:1;border-top:4px solid var(--linea);padding-top:8px}
+.ce-pasos li.hecho{border-color:var(--vino)}
+.ce-pasos li.actual{border-color:var(--vino);color:var(--tinta);font-weight:600}
+@media (max-width:520px){.ce-pasos li:not(.actual){font-size:0}}
+.ce-caja{background:var(--blanco);border:1px solid var(--linea);border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:16px}
+@media (max-width:520px){.ce-caja{padding:20px 16px}}
+.ce-caja h2{font-size:24px;line-height:1.3}
+.ce-caja h2:focus{outline:none}
+.ce-sub{color:var(--suave);font-size:16px}
+.ce-nota{font-size:14px;color:var(--gris)}
+.ce-error{font-size:15px;color:var(--alerta-texto);font-weight:600;min-height:0}
+.ce-error:empty{display:none}
+.ce-demo{font-size:14px;background:var(--pendiente);border-radius:6px;padding:8px 12px}
+.ce-link{font:inherit;font-size:15px;background:none;border:0;color:var(--vino);text-decoration:underline;cursor:pointer;min-height:44px;padding:0 4px;align-self:flex-start}
+.ce-opciones{border:0;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px}
+.ce-opciones legend{font-weight:600;margin-bottom:8px;padding:0}
+.ce-opciones label{display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer}
+.ce-opciones input,.ce-casilla input{width:20px;height:20px;accent-color:var(--vino);flex:none}
+.ce-motivos{display:flex;flex-direction:column;gap:10px}
+.ce-motivo{text-align:left;font:inherit;cursor:pointer;background:var(--blanco);border:1px solid var(--linea2);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:2px;min-height:44px;color:var(--tinta)}
+.ce-motivo:hover,.ce-motivo.elegido{border-color:var(--vino);box-shadow:inset 0 0 0 1px var(--vino)}
+.ce-motivo strong{font-size:17px}.ce-motivo span{font-size:14px;color:var(--gris)}
+.ce-lista{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;color:var(--texto)}
+.ce textarea,.ce-campo input{font:inherit;font-size:16px;color:var(--tinta);background:var(--blanco);border:1px solid var(--borde-fuerte);border-radius:8px;padding:11px 12px;width:100%;min-height:44px}
+.ce textarea{resize:vertical}
+.ce-hilo{display:flex;flex-direction:column;gap:12px;max-height:52vh;overflow-y:auto;padding:4px 2px}
+.ce-bur{max-width:88%;border-radius:12px;padding:10px 14px;font-size:16px;white-space:pre-line;overflow-wrap:anywhere}
+.ce-bur.ia{align-self:flex-start;background:var(--fondo);border:1px solid var(--linea);border-radius:12px 12px 12px 4px}
+.ce-bur.ia b{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--vino);margin-bottom:4px}
+.ce-bur.pac{align-self:flex-end;background:var(--vino);color:#fff;border-radius:12px 12px 4px 12px}
+.ce-bur.pensando{color:var(--gris);font-style:italic}
+.ce-pie{display:flex;flex-direction:column;gap:10px}
+.ce .botones{align-items:center}
+.ce-archivos{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.ce-archivos:empty{display:none}
+.ce-archivos li{display:flex;align-items:center;gap:12px;border:1px solid var(--linea2);border-radius:8px;padding:4px 14px;font-size:15px}
+.ce-archivos li span:first-child{flex:1;min-width:0;overflow-wrap:anywhere}
+.ce-peso{font-size:13px;color:var(--gris);white-space:nowrap}
+.ce-agregar{display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--arena);border:1px dashed var(--borde-fuerte);border-radius:8px;padding:18px;min-height:44px;color:var(--texto);font-weight:600}
+.ce-agregar:focus-within{outline:3px solid var(--foco);outline-offset:2px}
+.ce-form{display:flex;flex-direction:column;gap:14px}
+.ce-grupo{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--vino);font-weight:600;margin-top:8px}
+.ce-campo{display:flex;flex-direction:column;gap:4px;font-size:15px;color:var(--texto)}
+.ce-casilla{display:flex;gap:10px;align-items:flex-start;font-size:15px;cursor:pointer}
+.ce-casilla input{margin-top:2px}
+.ce-resumen{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:15px}
+.ce-resumen dt{color:var(--gris)}.ce-resumen dd{margin:0;overflow-wrap:anywhere}
+.ce-ficha{white-space:pre-wrap;overflow-wrap:anywhere;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:var(--fondo);border:1px solid var(--linea);border-radius:8px;padding:14px;margin:0;max-height:60vh;overflow:auto}
