@@ -8,3 +8,11 @@ Producción: el Bluehost del doctor. GitHub es solo código fuente y vista previ
 4. No tocar correo ni DNS.
 
 Requisitos previos: textos legales aprobados, datos del doctor completos y validación clínica de la consulta express.
+
+## Alternativa: publicar con GitHub Pages (vía elegida el 2026-11-23)
+
+1. Añadir en la raíz un archivo `CNAME` con `doctorfelipecriollo.com` **solo el día del lanzamiento** (si se añade antes, la vista previa deja de funcionar).
+2. En el DNS: registros A del dominio raíz a 185.199.108.153, 185.199.109.153, 185.199.110.153 y 185.199.111.153; `www` como CNAME a `carlo-pagani.github.io`. No tocar MX, SPF ni DKIM.
+3. En GitHub: Settings → Pages → Custom domain y activar «Enforce HTTPS».
+4. `_config.yml` ya excluye `worker/`, `_build/`, `publicacion/` y los documentos internos. Las direcciones del WordPress anterior (`/about/`, `/services/`, `/contact/`, `/hello-world/`) ya tienen su página de salto.
+5. traumatologo.com.ec sigue en Bluehost solo con su `.htaccess` de redirecciones.

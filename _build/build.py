@@ -163,6 +163,16 @@ def main():
         open(destino, "w", encoding="utf-8").write(doc)
         if not p.get("sin_indice"):
             urls.append((ruta, p.get("prioridad", "0.6")))
+    # Direcciones del WordPress anterior. GitHub Pages no admite redirecciones 301: cada una es una página mínima
+    # con enlace canónico y salto inmediato a la página nueva.
+    for vieja, nueva in [("about", "perfil/"), ("services", "especialidades/"), ("contact", "donde-atiendo/"), ("hello-world", "")]:
+        destino_url = D["dominio"] + "/" + nueva
+        os.makedirs(os.path.join(RAIZ, vieja), exist_ok=True)
+        open(os.path.join(RAIZ, vieja, "index.html"), "w", encoding="utf-8").write(
+            f'<!doctype html>\n<html lang="es-EC"><head><meta charset="utf-8"><title>{D["nombre"]}</title>'
+            f'<link rel="canonical" href="{destino_url}"><meta name="robots" content="noindex, follow">'
+            f'<meta http-equiv="refresh" content="0; url=../{nueva}"></head>'
+            f'<body><p>Esta página cambió de dirección: <a href="../{nueva}">continuar</a>.</p></body></html>\n')
     mapa = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for ruta, pr in urls:
         mapa.append(f"<url><loc>{D['dominio']}/{ruta}</loc><lastmod>{HOY}</lastmod><priority>{pr}</priority></url>")
