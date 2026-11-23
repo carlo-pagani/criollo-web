@@ -104,6 +104,28 @@ a.fl .n{display:block;font-size:12.5px;margin-top:11px;color:var(--s);line-heigh
 nav{gap:24px}
 @media(max-width:900px){.on{grid-template-columns:1fr}a.fl{width:auto}.fc{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.fc div,.es,.rs,.ok{animation:none;opacity:1;transform:none}.ty{animation:none;width:100%;border:0}.pr i,.pg i{animation:none;width:100%}}
+
+.fx{background:radial-gradient(900px 500px at 78% 40%,#2B3FA8 0%,#16245A 38%,#0B1430 75%);border-radius:36px;padding:64px 56px;display:grid;grid-template-columns:.95fr 1.05fr;gap:40px;align-items:center;color:#fff;overflow:hidden;position:relative}
+.fx:before{content:"";position:absolute;inset:0;background:linear-gradient(#ffffff08 1px,transparent 1px) 0 0/100% 44px,linear-gradient(90deg,#ffffff08 1px,transparent 1px) 0 0/44px 100%;pointer-events:none}
+.fxt{position:relative}.fx h2{color:#fff;margin:18px 0}.fx h2 em{background:linear-gradient(90deg,#6FD3FF,#A68BFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fx .t{color:#ffffffc2;font-size:17px;margin-bottom:14px}.fx .b{background:#fff;color:var(--n);margin-top:14px}.fx .b .ch{color:var(--a)}.fx .nt{color:#ffffff80}
+.flow{position:relative;height:620px;max-width:520px;width:100%;margin-left:auto}
+.ln{position:absolute;inset:0;width:100%;height:100%}.ln path{fill:none;stroke:url(#lg);stroke-width:2.5;stroke-linecap:round;filter:drop-shadow(0 0 6px #5ad1ff);stroke-dasharray:8 10;animation:ds 1.6s linear infinite}
+@keyframes ds{to{stroke-dashoffset:-36}}
+.nd{position:absolute;display:flex;gap:16px;align-items:center;width:340px;padding:18px 20px;border-radius:22px;background:linear-gradient(135deg,#ffffff24,#ffffff0a);border:1px solid #ffffff3d;backdrop-filter:blur(10px);box-shadow:0 20px 50px #050a2080,inset 0 1px 0 #ffffff40;font-size:13.5px;line-height:1.4;color:#ffffffbf;opacity:0;animation:nd .7s forwards}
+.nd b{display:block;color:#fff;font-size:17px;letter-spacing:-.01em;margin-bottom:2px}
+.nd>i{position:absolute;right:-10px;top:-10px;width:30px;height:30px;border-radius:50%;background:#0B1430;border:1px solid #6FD3FF;color:#6FD3FF;font-style:normal;font-weight:800;font-size:13px;display:grid;place-items:center;box-shadow:0 0 14px #5ad1ff80}
+.ni{flex:none;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;color:#fff;font-size:22px;background:linear-gradient(135deg,#3D7BFF,#7A5CF5);box-shadow:0 8px 22px #3d7bff66}
+.n1{left:0;top:10px;animation-delay:.1s}.n2{left:120px;top:244px;animation-delay:.5s}.n3{left:0;top:404px;animation-delay:.9s}.n4{left:180px;top:512px;animation-delay:1.3s}
+.nd.hi{background:linear-gradient(135deg,#5A7BFF59,#8E6BFF33);border-color:#9DB4FF;box-shadow:0 0 0 6px #6f8cff1f,0 24px 60px #2a3fb080,inset 0 1px 0 #ffffff59}
+.nd.fin .ni{background:linear-gradient(135deg,#22C58B,#3DD6C6);box-shadow:0 8px 22px #22c58b66}
+@keyframes nd{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.sd{position:absolute;right:0;top:0;width:150px;padding:16px;border-radius:18px;background:#ffffff14;border:1px solid #ffffff2e;font-size:12px;display:none}
+.sd b{display:block;font-size:12.5px;line-height:1.35;margin-bottom:10px}.sd span{display:block;background:#ffffff1a;border-radius:8px;padding:5px 8px;margin-top:5px;color:#ffffffd0}
+@media(min-width:1100px){.sd{display:block}.n1{width:320px}}
+@media(max-width:900px){.fx{grid-template-columns:1fr;padding:36px 22px;border-radius:26px}.flow{height:auto;display:grid;gap:26px;margin:0}.ln{display:none}.nd{position:relative;left:auto;top:auto;width:auto}.nd:not(:last-of-type):after{content:"";position:absolute;left:44px;bottom:-27px;width:2px;height:26px;background:linear-gradient(#5AD1FF,#8E6BFF)}}
+.nd.fin:after{display:none!important}
+@media(prefers-reduced-motion:reduce){.nd{animation:none;opacity:1}.ln path{animation:none}}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute"><defs>
 <g id="i-hueso" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.6 10.4a2.6 2.6 0 1 1-3-3 2.6 2.6 0 1 1 4.8-.8l6 6a2.6 2.6 0 1 1 3 3 2.6 2.6 0 1 1-4.8.8z"/></g>
@@ -138,29 +160,21 @@ nav{gap:24px}
 <span class="inp"><span class="ty">Tengo un dolor en la rodilla desde hace dos meses</span></span>
 <span class="pr"><i></i></span><span class="n"><b>Su caso se arma mientras usted responde.</b> El doctor lo recibe completo.</span></a>
 </div></div>
-<section id="asistente"><div class="w as"><div>
-<p class="ia"><span>✦ Sitio inteligente</span></p>
+<section id="asistente"><div class="w"><div class="fx">
+<div class="fxt"><p class="ia"><span>✦ Sitio inteligente</span></p>
 <h2>No es un sitio web cualquiera. <em>Es el primer paso de su consulta.</em></h2>
-<p class="t">Antes de la cita, un asistente con inteligencia artificial conversa con usted como lo haría el consultorio: pregunta lo que el doctor necesita saber y recibe sus estudios. El doctor no empieza de cero: empieza por su caso.</p>
-<ul class="pt">
-<li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-chat"/></svg></span><div><b>Le hace las preguntas correctas</b>Dónde duele, desde cuándo, qué le han dicho. Se adapta a lo que usted responde.</div></li>
-<li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-doc"/></svg></span><div><b>Ordena sus estudios</b>Radiografías, resonancias e informes llegan juntos y con su historia resumida.</div></li>
-<li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-escudo"/></svg></span><div><b>Una cita más efectiva</b>El doctor revisa todo antes de verlo, y el tiempo de la consulta se dedica a decidir.</div></li>
-</ul>
-<a class="b" href="../../consulta-express/"><span class="ch">✦</span> Probar el asistente</a>
-<p class="nt">El asistente no diagnostica ni receta. Reúne la información; el criterio médico es del doctor.</p></div>
-<div class="demo" aria-hidden="true">
-<div class="dt"><span class="sp">✦</span><b>Caso preparado por el asistente</b><span class="ok">Listo para el doctor</span></div>
-<div class="pg"><i></i></div>
-<dl class="fc">
-<div style="--d:.4s"><dt>Motivo</dt><dd>Masa en la rodilla derecha</dd></div>
-<div style="--d:1.3s"><dt>Evolución</dt><dd>2 meses, en aumento</dd></div>
-<div style="--d:2.2s"><dt>Dolor</dt><dd>Nocturno, lo despierta</dd></div>
-<div style="--d:3.1s"><dt>Antecedentes</dt><dd>Sin cirugías previas</dd></div>
-</dl>
-<div class="es" style="--d:4s"><p>Estudios recibidos</p><ul><li><span class="rx r1"></span>Radiografía</li><li><span class="rx r2"></span>Resonancia</li><li><span class="rx r3"></span>Informe</li></ul></div>
-<div class="rs" style="--d:5s"><b>Resumen para el Dr. Criollo</b>Masa en rodilla derecha de 2 meses de evolución, con dolor nocturno. Radiografía, resonancia e informe adjuntos.</div>
-<p class="ej">Ejemplo ilustrativo</p>
+<p class="t">Desde el primer clic lo acompaña una guía inteligente, programada para conducir la conversación como el propio doctor Criollo dirige sus consultas: qué preguntar, en qué orden y qué estudios pedir.</p>
+<p class="t">Así la información llega completa, y la cita y el diagnóstico son más efectivos.</p>
+<a class="b" href="../../consulta-express/"><span class="ch">✦</span> Probar la guía inteligente</a>
+<p class="nt">La guía no diagnostica ni receta. Reúne la información; el diagnóstico es del doctor.</p></div>
+<div class="flow">
+<svg class="ln" viewBox="0 0 520 620" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5AD1FF"/><stop offset="1" stop-color="#8E6BFF"/></linearGradient></defs>
+<path d="M60 96 V140 Q60 160 80 160 H300 Q320 160 320 180 V244 M460 296 H470 Q490 296 490 316 V344 Q490 364 470 364 H110 Q90 364 90 384 V404 M150 484 V510 Q150 530 170 530 H185"/></svg>
+<div class="nd n1"><span class="ni"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#i-chat"/></svg></span><div><b>Usted cuenta su caso</b>Con sus palabras, desde el celular</div><i>1</i></div>
+<div class="nd n2 hi"><span class="ni">✦</span><div><b>Guía inteligente</b>Pregunta como lo haría el doctor y se adapta a sus respuestas</div><i>2</i></div>
+<div class="nd n3"><span class="ni"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#i-doc"/></svg></span><div><b>Sus estudios, ordenados</b>Radiografías, resonancias e informes</div><i>3</i></div>
+<div class="nd n4 fin"><span class="ni"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#i-escudo"/></svg></span><div><b>Caso listo para el doctor</b>Resumen completo antes de la cita</div><i>4</i></div>
+<div class="sd"><b>Programada con el criterio del Dr. Criollo</b><span>Ortopedia oncológica</span><span>Traumatología</span><span>Segunda opinión</span></div>
 </div></div></div></section>
 <section id="oncologia" style="padding-top:0"><div class="w"><div class="sh"><div><h2>Ortopedia <em>oncológica</em></h2><p>El área a la que el doctor Criollo dedica su práctica.</p></div></div>
 <ul class="on">
