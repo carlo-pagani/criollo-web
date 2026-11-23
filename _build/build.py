@@ -95,7 +95,7 @@ def pie(ruta):
     r = lambda d: rel(ruta, d)
     tel = D["telefono"]
     tel_html = f'<a href="tel:{D["telefono_enlace"]}">{tel}</a>' if D["telefono_enlace"] else pend(tel)
-    ESPECIALIDAD = f"""<div><h2>Especialidad</h2><ul><li><a href="{r('especialidades/tumores-oseos/')}">Tumores óseos</a></li><li><a href="{r('especialidades/sarcoma-de-partes-blandas/')}">Sarcoma de partes blandas</a></li><li><a href="{r('especialidades/metastasis-oseas/')}">Metástasis óseas</a></li><li><a href="{r('biopsia/')}">La biopsia en un tumor óseo</a></li><li><a href="{r('casos-y-publicaciones/')}">Casos y publicaciones</a></li></ul></div>""" if D.get("contenido_clinico") else f"""<div><h2>En línea</h2><ul><li><a href="{r('')}#asistente">Guía inteligente</a></li><li><a href="{r('')}#oncologia">Ortopedia oncológica</a></li><li><a href="{r('')}#servicios">Servicios</a></li></ul></div>"""
+    ESPECIALIDAD = f"""<div><h2>Especialidad</h2><ul><li><a href="{r('especialidades/tumores-oseos/')}">Tumores óseos</a></li><li><a href="{r('especialidades/sarcoma-de-partes-blandas/')}">Sarcoma de partes blandas</a></li><li><a href="{r('especialidades/metastasis-oseas/')}">Metástasis óseas</a></li><li><a href="{r('biopsia/')}">La biopsia en un tumor óseo</a></li><li><a href="{r('casos-y-publicaciones/')}">Casos y publicaciones</a></li></ul></div>""" if D.get("contenido_clinico") else f"""<div><h2>En línea</h2><ul><li><a href="{r('')}#asistente">Guía inteligente</a></li><li><a href="{r('')}#oncologia">Qué atiende</a></li></ul></div>"""
     return f"""<footer class="pie">
 <div class="contenedor">
 <div class="columnas">

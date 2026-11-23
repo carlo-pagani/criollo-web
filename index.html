@@ -134,6 +134,31 @@ nav{gap:24px}
 @media(max-width:900px){.fx{grid-template-columns:1fr;padding:36px 22px;border-radius:26px}.flow{height:auto;display:grid;gap:26px;margin:0}.ln{display:none}.nd{position:relative;left:auto;top:auto;width:auto}.nd:not(:last-of-type):after{content:"";position:absolute;left:44px;bottom:-27px;width:2px;height:26px;background:linear-gradient(#6FB6FF,#4C9BFF)}}
 .nd.fin:after{display:none!important}
 @media(prefers-reduced-motion:reduce){.nd{animation:none;opacity:1}.ln path{animation:none}}
+
+.hero .w{min-height:720px}
+.hp{position:absolute;right:28px;bottom:40px;width:380px;height:440px;border-radius:28px;padding:30px 28px;color:#fff;overflow:hidden;cursor:pointer;background:radial-gradient(420px 320px at 85% 0%,#1F4E96,#16335F 55%,#12284C);box-shadow:0 30px 70px #0e1f3d66;border:1px solid #ffffff2e}
+.hs{position:absolute;inset:30px 28px 46px;opacity:0;visibility:hidden;transition:opacity .5s}.hs.act{opacity:1;visibility:visible}
+.tg{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8DBBFF;border:1px solid #8DBBFF80;border-radius:99px;padding:5px 11px}
+.hs h3{font-weight:800;font-size:30px;line-height:1.08;letter-spacing:-.03em;margin:16px 0 14px;color:#fff}.hs h3 em{font-style:normal;color:#7CC0FF}.hs h3.gr{font-size:44px;margin-top:70px}
+.hs p{color:#ffffffc7;font-size:15.5px;line-height:1.5}.hs .b{background:#fff;color:var(--n);margin-top:22px}
+.rw,.br,.sm{opacity:0;transform:translateY(10px)}.hs.act .rw,.hs.act .br,.hs.act .sm{animation:in .5s var(--d) forwards}
+.rw{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff;color:var(--s);border-radius:14px;padding:13px 16px;margin-top:10px;font-size:13.5px}.rw b{color:var(--n);font-size:15.5px;font-weight:800;text-align:right}
+.br{margin-top:14px;font-size:13.5px;color:#ffffffd9}.br i{display:block;height:22px;border-radius:7px;margin-top:6px;background:#ffffff1f;position:relative;overflow:hidden}
+.br i:after{content:"✓";position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,#C9DDFB,#4C9BFF);color:#12284C;font-style:normal;font-weight:800;font-size:13px;text-align:right;padding-right:8px;line-height:22px;overflow:hidden}
+.hs.act .br i:after{animation:bw 1s calc(var(--d) + .2s) forwards}@keyframes bw{to{width:var(--w)}}
+.sm{background:#ffffff1a;border:1px solid #ffffff33;border-radius:16px;padding:16px 18px;font-size:15px;line-height:1.5}.sm small{display:block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8DBBFF;margin-bottom:6px}
+.sg{position:absolute;left:28px;right:28px;bottom:22px;display:flex;gap:6px}.sg i{flex:1;height:3px;border-radius:3px;background:#ffffff33;overflow:hidden;position:relative}
+.sg i:after{content:"";position:absolute;inset:0;background:#7CC0FF;transform:scaleX(0);transform-origin:left}.sg i.ok:after{transform:scaleX(1)}.sg i.go:after{animation:sg var(--t,4s) linear forwards}@keyframes sg{to{transform:scaleX(1)}}
+@media(max-width:1100px){.hp{position:relative;right:auto;bottom:auto;margin:34px 0 0;width:100%;max-width:420px}.hero .w{min-height:0}}
+@media(prefers-reduced-motion:reduce){.rw,.br,.sm{opacity:1;transform:none}}
+
+.qa{display:grid;grid-template-columns:1fr 1.6fr;gap:0;border-top:1px solid var(--l);border-bottom:1px solid var(--l)}
+.qa>div{padding:30px 40px 32px 0}.qa>div+div{padding-left:40px;border-left:1px solid var(--l)}
+.qa h3{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--a);margin-bottom:14px}
+.qa li{position:relative;padding:7px 0 7px 22px;font-size:16px;font-weight:600;color:var(--n);break-inside:avoid}
+.qa li:before{content:"";position:absolute;left:0;top:16px;width:8px;height:8px;border-radius:50%;background:var(--a)}
+.qa .c2{columns:2;column-gap:36px}
+@media(max-width:900px){.qa{grid-template-columns:1fr}.qa>div{padding:24px 0}.qa>div+div{padding-left:0;border-left:0;border-top:1px solid var(--l)}.qa .c2{columns:1}}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute"><defs>
 <g id="i-hueso" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.6 10.4a2.6 2.6 0 1 1-3-3 2.6 2.6 0 1 1 4.8-.8l6 6a2.6 2.6 0 1 1 3 3 2.6 2.6 0 1 1-4.8.8z"/></g>
@@ -154,7 +179,7 @@ nav{gap:24px}
 </defs></svg>
 <div class="av"><span class="ch">✦</span> Este sitio tiene un asistente con inteligencia artificial que prepara su caso antes de la cita<a href="#asistente">Ver cómo →</a></div>
 <header><div class="w"><a class="logo" href="#"><span>Dr. Felipe Criollo<small>Traumatología y ortopedia oncológica</small></span></a>
-<nav><a href="#asistente">Guía inteligente</a><a href="#oncologia">Ortopedia oncológica</a><a href="#servicios">Servicios</a><a href="segunda-opinion/">Segunda opinión</a><a href="perfil/">El doctor</a><a href="donde-atiendo/">Dónde atiende</a></nav>
+<nav><a href="#asistente">Guía inteligente</a><a href="#oncologia">Qué atiende</a><a href="segunda-opinion/">Segunda opinión</a><a href="perfil/">El doctor</a><a href="donde-atiendo/">Dónde atiende</a></nav>
 <a class="b c" href="https://wa.me/593991827823">Agendar cita →</a></div></header>
 <div class="hero"><div class="ph" role="img" aria-label="El doctor Criollo en su consultorio de Citimed"></div><div class="w">
 <p class="ia"><span>✦ Asistente con IA</span>Traumatología y ortopedia oncológica · Quito</p>
@@ -163,6 +188,17 @@ nav{gap:24px}
 <div class="ac"><a class="b" href="consulta-express/"><span class="ch">✦</span> Contar mi caso al asistente</a><a class="b o" href="https://wa.me/593991827823">Agendar cita</a></div>
 
 
+<div class="hp" id="hp" role="group" aria-label="Demostración de la guía inteligente">
+<div class="hs act"><span class="tg">Guía inteligente</span><h3>Su cita empieza <em>antes de llegar.</em></h3><p>Vea cómo funciona, en veinte segundos.</p></div>
+<div class="hs"><span class="tg">Usted responde</span><h3>Preguntas como las <em>haría el doctor.</em></h3>
+<div class="rw" style="--d:.5s"><span>¿Qué le ocurre?</span><b>Bulto en la rodilla</b></div><div class="rw" style="--d:1.4s"><span>¿Desde cuándo?</span><b>2 meses</b></div><div class="rw" style="--d:2.3s"><span>¿Le duele de noche?</span><b>Sí</b></div></div>
+<div class="hs"><span class="tg">Sus estudios</span><h3>Todo llega <em>junto y ordenado.</em></h3>
+<div class="br" style="--d:.4s;--w:100%"><span>Radiografía</span><i></i></div><div class="br" style="--d:1.3s;--w:100%"><span>Resonancia magnética</span><i></i></div><div class="br" style="--d:2.2s;--w:100%"><span>Informe de patología</span><i></i></div></div>
+<div class="hs"><span class="tg">El resultado</span><h3>El doctor recibe <em>su caso completo.</em></h3>
+<div class="sm" style="--d:.5s"><small>Resumen para el Dr. Criollo</small>Masa en rodilla, 2 meses, dolor nocturno. Tres estudios adjuntos.</div></div>
+<div class="hs"><h3 class="gr">¿Y <em>su caso?</em></h3><p>Cuéntelo ahora. La guía lo acompaña paso a paso.</p><a class="b" href="consulta-express/">Contar mi caso →</a></div>
+<div class="sg"><i></i><i></i><i></i><i></i><i></i></div>
+</div>
 </div></div>
 <section id="asistente"><div class="w"><div class="fx">
 <div class="fxt"><p class="ia"><span>✦ Sitio inteligente</span></p>
@@ -180,27 +216,12 @@ nav{gap:24px}
 <div class="nd n4 fin"><span class="ni"><svg width="24" height="24" viewBox="0 0 24 24"><use href="#i-escudo"/></svg></span><div><b>Caso listo para el doctor</b>Resumen completo antes de la cita</div><i>4</i></div>
 <div class="sd"><b>Programada con el criterio del Dr. Criollo</b><span>Ortopedia oncológica</span><span>Traumatología</span><span>Segunda opinión</span></div>
 </div></div></div></section>
-<section id="oncologia" style="padding-top:0"><div class="w"><div class="sh"><div><h2>Ortopedia <em>oncológica</em></h2><p>El área a la que el doctor Criollo dedica su práctica.</p></div></div>
-<ul class="on">
-<li><b>Tumores óseos y sarcomas</b>Diagnóstico y tratamiento de tumores primarios del hueso y de las partes blandas.</li>
-<li><b>Metástasis óseas</b>Protección y estabilización del hueso afectado por un cáncer de otro origen.</li>
-<li><b>Cirugía de salvamento de extremidad</b>Retirar el tumor conservando el brazo o la pierna, cuando el caso lo permite.</li>
-<li><b>Reconstrucciones de alta complejidad</b>Prótesis tumorales, aloinjertos y osteosíntesis tras la resección.</li>
-<li><b>Lesiones pseudotumorales</b>Quistes óseos y otras lesiones que se parecen a un tumor y requieren el mismo cuidado.</li>
-<li><b>Planificación con impresión 3D</b>Modelos a medida del paciente para preparar cirugías complejas.</li>
-</ul></div></section>
-<section id="servicios" style="padding-top:0"><div class="w"><div class="sh"><div><h2>Traumatología y ortopedia</h2><p>Todas sus necesidades de traumatología en un solo lugar.</p></div><a class="mas" href="https://wa.me/593991827823">Consultar por WhatsApp →</a></div>
-<ul class="dep">
-<li style="--c:#FDEEEE;--k:#D9534F"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#i-lupa"/></svg></span><div><h3>Diagnóstico de lesiones musculoesqueléticas</h3><p>Evaluación clínica con radiografía, resonancia magnética o ecografía.</p></div></li>
-<li style="--c:#EAF2FF;--k:#1F6FEB"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#i-bisturi"/></svg></span><div><h3>Cirugía ortopédica</h3><p>Reparación de fracturas, corrección de deformidades y reemplazo articular.</p></div></li>
-<li style="--c:#E9F7F1;--k:#1E9E6B"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#i-hueso"/></svg></span><div><h3>Fracturas y luxaciones</h3><p>Inmovilización, reducción y cirugía cuando el caso lo requiere.</p></div></li>
-<li style="--c:#FFF4E3;--k:#D98A1C"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#i-pulso"/></svg></span><div><h3>Lesiones deportivas</h3><p>Evaluación, fisioterapia y rehabilitación. Cirugía si hace falta.</p></div></li>
-<li style="--c:#F1EDFD;--k:#6B4FD8"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#i-micro"/></svg></span><div><h3>Infecciones óseas y articulares</h3><p>Diagnóstico temprano, antibióticos específicos y cirugía si es necesaria.</p></div></li>
-<li style="--c:#E6F6FA;--k:#1592B0"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#i-artic"/></svg></span><div><h3>Prótesis y ortopedia</h3><p>Indicación y ajuste de prótesis y aparatos ortopédicos.</p></div></li>
-<li style="--c:#EAF2FF;--k:#1F6FEB"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#i-escudo"/></svg></span><div><h3>Consultas preventivas</h3><p>Examen físico y valoración de riesgos para detectar problemas a tiempo.</p></div></li>
-<li style="--c:#FDEEF5;--k:#D2478C"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#i-nino"/></svg></span><div><h3>Enfermedades congénitas y deformidades</h3><p>Cirugía, terapia física y seguimiento a largo plazo.</p></div></li>
-<li style="--c:#FDEEEE;--k:#D9534F"><span class="ic"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#i-cruz"/></svg></span><div><h3>Emergencias traumatológicas</h3><p>Valoración, inmovilización e intervención quirúrgica si es necesaria.</p></div></li>
-</ul></div></section>
+<section id="oncologia" style="padding-top:0"><div class="w"><div class="sh"><div><h2>Qué <em>atiende</em></h2><p>Ortopedia oncológica, el área a la que el doctor dedica su práctica, y traumatología general.</p></div></div>
+<div class="qa"><div><h3>Ortopedia oncológica</h3><ul>
+<li>Tumores óseos y sarcomas</li><li>Metástasis óseas</li><li>Cirugía de salvamento de extremidad</li><li>Reconstrucciones de alta complejidad</li><li>Lesiones pseudotumorales, como los quistes óseos</li><li>Planificación de cirugías con impresión 3D</li></ul></div>
+<div id="servicios"><h3>Traumatología y ortopedia</h3><ul class="c2">
+<li>Diagnóstico de lesiones musculoesqueléticas</li><li>Cirugía ortopédica</li><li>Fracturas y luxaciones</li><li>Lesiones deportivas</li><li>Infecciones óseas y articulares</li><li>Prótesis y ortopedia</li><li>Consultas preventivas</li><li>Enfermedades congénitas y deformidades</li><li>Emergencias traumatológicas</li></ul></div></div>
+</div></section>
 <section id="segunda" style="padding-top:0"><div class="w"><div class="so"><div style="position:relative;z-index:1"><h2>Segunda opinión y consulta en línea, <em>sin viajar a Quito.</em></h2>
 <p>Cuente su caso, adjunte sus estudios y reciba la respuesta del doctor por escrito. Si hace falta verlo en persona, se lo decimos.</p><a class="b" href="segunda-opinion/">Cómo funciona →</a>
 <div class="pz"><div><b>USD $ 50</b>Consulta en línea</div><div><b>USD $ 250</b>Segunda opinión</div></div></div>
@@ -218,4 +239,7 @@ nav{gap:24px}
 <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-chat"/></svg></span><b><a href="https://wa.me/593991827823">WhatsApp</a></b><span>Escríbanos para agendar</span></li>
 <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#i-pin"/></svg></span><b>Edificio Citimed</b><span>6.º piso, consultorio 628. Av. Mariana de Jesús y Nuño de Valderrama, Quito.</span></li></ul></div></section>
 <footer><div class="w"><span>© 2026 Dr. Felipe Criollo Palacios</span><span><a href="privacidad/">Privacidad</a> · <a href="accesibilidad/">Accesibilidad</a></span></div></footer>
+<script>(function(){var h=document.getElementById('hp');if(!h)return;var s=h.querySelectorAll('.hs'),g=h.querySelectorAll('.sg i'),T=[3200,4600,4600,4200,5200],k=0,t;
+function ir(n){k=(n+s.length)%s.length;s.forEach(function(e,i){e.classList.toggle('act',i===k)});g.forEach(function(e,i){e.className=i<k?'ok':'';if(i===k){e.style.setProperty('--t',T[k]+'ms');void e.offsetWidth;e.className='go'}});clearTimeout(t);t=setTimeout(function(){ir(k+1)},T[k])}
+h.addEventListener('click',function(e){if(!e.target.closest('a'))ir(k+1)});ir(0)})();</script>
 </body></html>
