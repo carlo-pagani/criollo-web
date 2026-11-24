@@ -414,8 +414,8 @@ mapa = lambda q, titulo: (f'<div class="mapa mapa-sustituto" data-mapa="{q}" dat
                           f'<button class="btn btn-linea" type="button" style="margin-top:12px">Mostrar el mapa</button><br><a href="https://www.google.com/maps/search/?api=1&query={q}" rel="noopener">Abrir en Google Maps</a></p></div>')
 pagina(ruta=r, prioridad="0.8", titulo="Dónde atiendo: CITIMED y Hospital Metropolitano, Quito",
        descripcion="Consulta privada en el Centro Médico CITIMED, piso 6, consultorio 628, y atención en el Hospital Metropolitano de Quito. Cómo llegar.",
-       jsonld=[MEDICO_LD, migas_ld(r, [("", "Inicio")], "Dónde atiende")], scripts=("assets/mapa.js",),
-       cuerpo=cabeza(r, [("", "Inicio")], "", "Dónde atiende") + f"""
+       jsonld=[MEDICO_LD, migas_ld(r, [("", "Inicio")], "Consultorio")], scripts=("assets/mapa.js",),
+       cuerpo=cabeza(r, [("", "Inicio")], "", "Consultorio") + f"""
 <section class="seccion"><div class="contenedor">
 <div class="rejilla">
 <article class="tarjeta destacada"><p class="eti">Consulta privada</p><h3>Centro Médico CITIMED</h3>
