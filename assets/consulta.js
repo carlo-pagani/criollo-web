@@ -107,7 +107,7 @@
       } } }, [el('strong', { texto: m.t }), el('span', { texto: m.d })]);
     }));
     marco(0, [el('h2', { texto: '¿Por qué motivo quiere consultar?' }),
-      el('p', { class: 'ce-sub', texto: 'Las preguntas las hace un asistente con inteligencia artificial. La valoración la hace el doctor.' }), quien, lista]);
+      el('p', { class: 'ce-sub', texto: 'Las preguntas están programadas para orientarle y recoger su información de manera más eficaz. La valoración la hace el doctor.' }), quien, lista]);
   };
 
   P.alarma = function () {
@@ -136,7 +136,7 @@
     marco(1, [el('h2', { texto: medico ? 'Cuénteme el caso de su paciente' : 'Cuénteme su caso con sus palabras' }),
       el('label', { class: 'ce-sub', for: 'ce-relato', texto: medico ? 'Sin el nombre ni la identificación del paciente: esos datos se piden después.' : 'Qué notó, en qué parte del cuerpo y desde cuándo. No hace falta que sea ordenado: después le haré algunas preguntas.' }),
       ta,
-      el('p', { class: 'ce-nota', texto: 'Para formular las preguntas, lo que escriba aquí lo procesa un asistente con inteligencia artificial. No escriba todavía su nombre, su cédula ni su teléfono: se los pediremos al final, junto con su autorización.' }),
+      el('p', { class: 'ce-nota', texto: 'Para formular las preguntas, lo que escriba aquí lo procesa un sistema automatizado. No escriba todavía su nombre, su cédula ni su teléfono: se los pediremos al final, junto con su autorización.' }),
       aviso,
       el('div', { class: 'botones' }, [boton('Continuar', function () {
         if (E.relato.trim().length < 15) { aviso.textContent = 'Escriba al menos una o dos frases para poder continuar.'; ta.focus(); return; }
@@ -177,7 +177,7 @@
   P.entrevista = function () {
     if (!E.pregunta && !E.resumen && !E.pensando) return siguiente();
     var hilo = el('div', { class: 'ce-hilo', role: 'log', 'aria-label': 'Conversación' });
-    function burbuja(texto, mia) { hilo.appendChild(el('div', { class: 'ce-bur ' + (mia ? 'pac' : 'ia') }, [mia ? null : el('b', { texto: 'Asistente' }), texto])); }
+    function burbuja(texto, mia) { hilo.appendChild(el('div', { class: 'ce-bur ' + (mia ? 'pac' : 'ia') }, [mia ? null : el('b', { texto: 'Guía' }), texto])); }
     burbuja(E.relato, true);
     E.conv.forEach(function (c) { burbuja(c.pregunta, false); burbuja(c.respuesta, true); });
     var pie = el('div', { class: 'ce-pie' });
@@ -213,7 +213,7 @@
       setTimeout(function () { ta.focus({ preventScroll: true }); }, 0);
     }
     marco(1, [el('h2', { texto: 'Algunas preguntas sobre su caso' }), hilo, pie,
-      el('p', { class: 'ce-nota', texto: 'El asistente no diagnostica ni receta. Solo ordena su información para el doctor.' })]);
+      el('p', { class: 'ce-nota', texto: 'La guía no diagnostica ni receta. Solo ordena su información para el doctor.' })]);
     hilo.scrollTop = hilo.scrollHeight;
   };
 
@@ -273,7 +273,7 @@
         ? ['Declaro que cuento con la autorización del paciente para compartir sus datos de salud con el Dr. Felipe Criollo Palacios con el fin de valorar su caso, conforme al ', enlace('privacidad/', 'aviso de privacidad'), '.']
         : [(familiar ? 'Declaro que soy el representante legal del paciente o cuento con su autorización, y autorizo' : 'Autorizo') + ' al Dr. Felipe Criollo Palacios a tratar los datos personales y de salud de este formulario, incluidos los estudios adjuntos, para valorar el caso y contactarme, conforme al ',
           enlace('privacidad/', 'aviso de privacidad'), ' y al ', enlace('consentimiento/', 'texto completo del consentimiento'), '.'], true),
-      casilla('condiciones', ['Leí y acepto las ', enlace('condiciones/', 'condiciones del servicio'), '. Entiendo que la consulta express no es un servicio de urgencias y que el asistente no diagnostica.'], true),
+      casilla('condiciones', ['Leí y acepto las ', enlace('condiciones/', 'condiciones del servicio'), '. Entiendo que la consulta express no es un servicio de urgencias y que la guía inteligente no diagnostica.'], true),
       medico ? null : casilla('informar_medico', ['Si un médico me refirió, autorizo que el doctor le envíe el informe de mi caso. (Opcional)']),
       aviso,
       el('div', { class: 'botones' }, [el('button', { type: 'submit', class: 'btn', texto: 'Revisar y enviar' }), boton('Volver', function () { ir('estudios'); }, 'btn btn-neutro')])
@@ -291,11 +291,11 @@
   function textoCaso() {
     var m = (MOTIVOS.filter(function (x) { return x.id === E.motivo; })[0] || {}).t;
     return ['Referencia: ' + E.ref, 'Motivo: ' + m, 'Escribe: ' + E.quien,
-      'Prioridad orientativa del asistente (la confirma el doctor): ' + (E.prioridad || 'sin asignar'),
+      'Prioridad orientativa de la guía (la confirma el doctor): ' + (E.prioridad || 'sin asignar'),
       E.alarma ? 'ATENCIÓN: el paciente marcó o describió una señal de alarma; se le indicó acudir a emergencias.' : '',
       '', 'RESUMEN CONFIRMADO POR EL PACIENTE', E.resumen, '', 'RELATO INICIAL', E.relato, '', 'CONVERSACIÓN',
       E.conv.map(function (c) { return 'P: ' + c.pregunta + '\nR: ' + c.respuesta; }).join('\n\n'),
-      '', 'Asistente con IA: ' + (E.sinIA ? 'no disponible; se usaron las preguntas fijas' : 'sí')].filter(function (x) { return x !== ''; }).join('\n');
+      '', 'Guía automática: ' + (E.sinIA ? 'no disponible; se usaron las preguntas fijas' : 'sí')].filter(function (x) { return x !== ''; }).join('\n');
   }
 
   P.enviar = function () {

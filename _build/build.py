@@ -185,7 +185,7 @@ MEDICO_LD = {
     "description": "Cirujano ortopedista oncólogo en Quito: tumores óseos y de partes blandas, metástasis en extremidades, salvamento de extremidad y traumatología.",
     "medicalSpecialty": ["Oncologic", "Musculoskeletal"],
     "knowsAbout": ["Ortopedia oncológica", "Tumores óseos", "Sarcoma de partes blandas", "Metástasis óseas", "Fractura patológica", "Cirugía de salvamento de extremidad", "Traumatología"],
-    "address": {"@type": "PostalAddress", "streetAddress": "Av. Mariana de Jesús y Nuño de Valderrama, Centro Médico CITIMED, piso 6, consultorio 628", "addressLocality": "Quito", "addressRegion": "Pichincha", "addressCountry": "EC"},
+    "address": {"@type": "PostalAddress", "streetAddress": "Av. Mariana de Jesús y Nuño de Valderrama, Centro Médico Citimed, piso 6, consultorio 628", "addressLocality": "Quito", "addressRegion": "Pichincha", "addressCountry": "EC"},
     "hospitalAffiliation": {"@type": "Hospital", "name": "Hospital Metropolitano", "address": {"@type": "PostalAddress", "addressLocality": "Quito", "addressCountry": "EC"}},
     "areaServed": "Ecuador",
     "sameAs": [D["instagram"]],

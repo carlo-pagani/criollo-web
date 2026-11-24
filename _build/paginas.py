@@ -33,7 +33,7 @@ def precio(clave, con, sin):
     return con.format(D[clave]) if not D[clave].startswith("[") else sin
 
 
-CORREO_O_SITIO = D["correo"] if not D["correo"].startswith("[") else "los canales de contacto de este sitio"
+CORREO_O_SITIO = D["correo"] if not D["correo"].startswith("[") else "la consulta en línea de este sitio"
 
 
 def ld_pagina_medica(ruta, titulo, descripcion, tema):
@@ -55,7 +55,7 @@ pagina(ruta=r, prioridad="1.0",
 <h1>Tumores óseos y sarcomas, tratados por <span class="marcador">quien los opera</span>.</h1>
 <p class="lema">Soy el {D['nombre']}. Cuénteme su caso y suba sus estudios: los reviso personalmente antes de la cita.</p>
 </div>
-<figure class="placa">{img(r, 'felipe-retrato', 'Retrato del Dr. Felipe Criollo Palacios con bata blanca', eager=True)}<span class="lado" aria-hidden="true">D</span><figcaption><span>Criollo Palacios, F.</span><span>CITIMED · Quito</span></figcaption></figure>
+<figure class="placa">{img(r, 'felipe-retrato', 'Retrato del Dr. Felipe Criollo Palacios con bata blanca', eager=True)}<span class="lado" aria-hidden="true">D</span><figcaption><span>Criollo Palacios, F.</span><span>Citimed · Quito</span></figcaption></figure>
 <nav class="visor" aria-labelledby="visor-t">
 <div class="visor-titulo"><h2 id="visor-t">¿Qué le trae hoy?</h2><p>Elija su situación y empezamos por ahí.</p></div>
 <ul>
@@ -107,7 +107,7 @@ pagina(ruta=r, prioridad="1.0",
 <section class="seccion"><div class="contenedor">
 <p class="antetitulo">Consulta express</p>
 <h2>Su caso, ordenado antes de la cita</h2>
-<p class="entrada">Un asistente con inteligencia artificial le hace las preguntas que el doctor haría en la primera consulta. Usted responde con sus palabras y sube sus estudios. La valoración la hace el doctor.</p>
+<p class="entrada">Un formulario con guía inteligente le hace las preguntas que el doctor haría en la primera consulta. Usted responde con sus palabras y sube sus estudios. La valoración la hace el doctor.</p>
 <ol class="pasos">
 <li><strong>Elija el motivo</strong><span>Masa o tumor, lesión, dolor articular o control de una cirugía.</span></li>
 <li><strong>Cuente su caso</strong><span>Una pregunta a la vez: cuándo empezó, cómo evoluciona, qué tratamientos recibió.</span></li>
@@ -115,7 +115,7 @@ pagina(ruta=r, prioridad="1.0",
 <li><strong>Confirme y envíe</strong><span>Revisa el resumen y autoriza el uso de sus datos de salud{precio('precio_consulta', ', y paga {}, que se descuenta de su consulta', '')}.</span></li>
 <li><strong>El doctor responde</strong><span>Su equipo le contacta con la propuesta: cita, teleconsulta o derivación.</span></li>
 </ol>
-<div class="botones" style="margin-top:40px;align-items:center">{cta(r)}<p class="nota" style="max-width:600px">El asistente no diagnostica ni receta. Si describe una señal de alarma, le indica acudir a emergencias. <a href="{rel(r,'cuando-consultar/')}">Cuándo consultar sin esperar</a></p></div>
+<div class="botones" style="margin-top:40px;align-items:center">{cta(r)}<p class="nota" style="max-width:600px">La guía inteligente no diagnostica ni receta. Si describe una señal de alarma, le indica acudir a emergencias. <a href="{rel(r,'cuando-consultar/')}">Cuándo consultar sin esperar</a></p></div>
 </div></section>
 
 <section class="seccion blanca"><div class="contenedor">
@@ -132,11 +132,11 @@ pagina(ruta=r, prioridad="1.0",
 <section class="seccion"><div class="contenedor dos">
 <div class="texto">
 <p class="antetitulo">Dónde atiendo</p>
-<h2>CITIMED y Hospital Metropolitano, Quito</h2>
+<h2>Citimed y Hospital Metropolitano, Quito</h2>
 <p class="entrada">{D['direccion_citimed']}.</p>
 <div class="botones" style="margin-top:28px"><a class="btn btn-linea" href="{rel(r,'donde-atiendo/')}">Horarios y cómo llegar</a><a class="btn btn-neutro" href="{rel(r,'fuera-de-quito/')}">Si vive fuera de Quito</a></div>
 </div>
-<div class="media"><figure class="montada">{img(r,'felipe-consultorio','El Dr. Felipe Criollo Palacios en su consultorio de CITIMED','10/9')}<figcaption><span>Consultorio 628</span><span>CITIMED</span></figcaption></figure></div>
+<div class="media"><figure class="montada">{img(r,'felipe-consultorio','El Dr. Felipe Criollo Palacios en su consultorio de Citimed','10/9')}<figcaption><span>Consultorio 628</span><span>Citimed</span></figcaption></figure></div>
 </div></section>
 """)
 
@@ -288,13 +288,13 @@ pagina(ruta=r, prioridad="0.9", titulo="Segunda opinión en ortopedia oncológic
 <section class="seccion"><div class="contenedor">
 <h2>Cómo funciona</h2>
 <ol class="pasos">
-<li><strong>Cuente su caso</strong><span>En la consulta express, elija «Segunda opinión». Un asistente le pregunta por el diagnóstico, el tratamiento propuesto y cómo llegó hasta aquí.</span></li>
+<li><strong>Cuente su caso</strong><span>En la consulta express, elija «Segunda opinión». La guía inteligente le pregunta por el diagnóstico, el tratamiento propuesto y cómo llegó hasta aquí.</span></li>
 <li><strong>Suba sus documentos</strong><span>Informes, imágenes y patología. Más abajo está la lista exacta.</span></li>
 <li><strong>Autorice el envío</strong><span>Autoriza el uso de sus datos de salud para la revisión{precio('precio_segunda', ' y paga {}', '')}.</span></li>
 <li><strong>El doctor revisa</strong><span>Revisa personalmente sus estudios. Si falta algo importante, su equipo se lo pide.</span></li>
 <li><strong>Recibe su informe</strong><span>Un informe escrito y una videollamada con el doctor para explicárselo y responder sus preguntas.</span></li>
 </ol>
-<div class="botones" style="margin-top:32px">{cta(r,'segunda','Pedir mi segunda opinión')}</div>
+<div class="botones" style="margin-top:32px">{cta(r,'segunda','Pedir una segunda opinión')}</div>
 <p class="nota" style="margin-top:16px">El equipo del doctor le contacta cuando su caso esté revisado. El tiempo depende de la complejidad y de que los estudios estén completos.</p>
 </div></section>
 
@@ -398,8 +398,8 @@ pagina(ruta=r, prioridad="0.7", titulo="Si vive fuera de Quito o en el exterior"
 </ol>
 <div class="prosa" style="margin-top:48px">
 <h2>Qué esperar el día de la cita</h2>
-<p>Traiga sus estudios originales (discos de imagen, informes y láminas de patología si se las entregaron), la lista de sus medicamentos y, si puede, un acompañante. La consulta en CITIMED dura <span class="pendiente">[DURACIÓN APROXIMADA]</span>.</p>
-<h2>Dónde atiendo</h2>
+<p>Traiga sus estudios originales (discos de imagen, informes y láminas de patología si se las entregaron), la lista de sus medicamentos y, si puede, un acompañante. <span class="pendiente">[DURACIÓN APROXIMADA]</span>.</p>
+<h2>Consultorio</h2>
 <p>{D['direccion_citimed']}. También en el Hospital Metropolitano, Av. Mariana de Jesús y Nicolás Arteta, Quito. Los dos están a pocas cuadras, en el norte de la ciudad. <a href="{rel(r,'donde-atiendo/')}">Mapas y horarios</a>.</p>
 <h2>Desde el exterior</h2>
 <p>Todo el proceso inicial es en línea. La videollamada se coordina según su zona horaria y el pago puede hacerse con tarjeta internacional. <span class="pendiente">[CONFIRMAR CON EL DOCTOR SI OFRECE APOYO PARA ALOJAMIENTO O TRASLADOS]</span></p>
@@ -412,16 +412,16 @@ r = "donde-atiendo/"
 tel = f'<a href="tel:{D["telefono_enlace"]}">{D["telefono"]}</a>' if D["telefono_enlace"] else D["telefono"]
 mapa = lambda q, titulo: (f'<div class="mapa mapa-sustituto" data-mapa="{q}" data-titulo="{titulo}"><p>El mapa se carga desde Google Maps.<br>'
                           f'<button class="btn btn-linea" type="button" style="margin-top:12px">Mostrar el mapa</button><br><a href="https://www.google.com/maps/search/?api=1&query={q}" rel="noopener">Abrir en Google Maps</a></p></div>')
-pagina(ruta=r, prioridad="0.8", titulo="Dónde atiendo: CITIMED y Hospital Metropolitano, Quito",
-       descripcion="Consulta privada en el Centro Médico CITIMED, piso 6, consultorio 628, y atención en el Hospital Metropolitano de Quito. Cómo llegar.",
+pagina(ruta=r, prioridad="0.8", titulo="Consultorio: Citimed y Hospital Metropolitano, Quito",
+       descripcion="Consulta privada en el Centro Médico Citimed, piso 6, consultorio 628, y atención en el Hospital Metropolitano de Quito. Cómo llegar.",
        jsonld=[MEDICO_LD, migas_ld(r, [("", "Inicio")], "Consultorio")], scripts=("assets/mapa.js",),
        cuerpo=cabeza(r, [("", "Inicio")], "", "Consultorio") + f"""
 <section class="seccion"><div class="contenedor">
 <div class="rejilla">
-<article class="tarjeta destacada"><p class="eti">Consulta privada</p><h3>Centro Médico CITIMED</h3>
+<article class="tarjeta destacada"><p class="eti">Consulta privada</p><h3>Centro Médico Citimed</h3>
 <p>Piso 6, consultorio 628<br>Av. Mariana de Jesús y Nuño de Valderrama, Quito</p>
 <p>Horario: {D['horario_citimed']}</p>{f'<p>Teléfono: {tel}</p>' if D['telefono'] else ''}{f'<p><a href="{D["whatsapp_enlace"]}" rel="noopener">Escribir por WhatsApp</a></p>' if D["whatsapp_enlace"] else ""}
-{mapa('CITIMED+Mariana+de+Jesus+Quito', 'Mapa de CITIMED')}</article>
+{mapa('Citimed+Mariana+de+Jesus+Quito', 'Mapa de Citimed')}</article>
 <article class="tarjeta"><p class="eti">Atención hospitalaria</p><h3>Hospital Metropolitano</h3>
 <p>Av. Mariana de Jesús y Nicolás Arteta, Quito</p>
 <p>Horario: {D['horario_metropolitano']}</p>
@@ -429,7 +429,7 @@ pagina(ruta=r, prioridad="0.8", titulo="Dónde atiendo: CITIMED y Hospital Metro
 </div>
 <div class="dos" style="margin-top:56px">
 <div class="texto"><h2>Antes de venir</h2><p class="entrada">Si cuenta su caso en la consulta express, el doctor llega a la cita conociendo su historia y sus estudios, y usted no repite todo desde cero.</p><div class="botones" style="margin-top:24px">{cta(r)}</div></div>
-<div class="media">{img(r,'felipe-consultorio','El Dr. Felipe Criollo Palacios en su consultorio de CITIMED','10/9')}</div>
+<div class="media">{img(r,'felipe-consultorio','El Dr. Felipe Criollo Palacios en su consultorio de Citimed','10/9')}</div>
 </div>
 </div></section>""")
 
@@ -444,7 +444,7 @@ pagina(ruta=r, prioridad="0.7", titulo=t, descripcion=d,
 <div class="alarma-caja"><p><strong>Acuda hoy a emergencias o llame al 911 si:</strong></p><ul style="margin:10px 0 0"><li>Hay una deformidad visible después de un golpe o el hueso asoma por la piel.</li><li>Pierde la sensibilidad o la fuerza de un brazo o una pierna.</li><li>La extremidad está fría, pálida o morada.</li><li>Tiene fiebre y una herida quirúrgica enrojecida o que supura.</li><li>Tiene dolor de espalda con debilidad de las piernas o dificultad para orinar, sobre todo si tiene un diagnóstico de cáncer.</li><li>Una pierna está hinchada, caliente y dolorosa después de una cirugía o una inmovilización.</li></ul></div>
 <h2>Pida una valoración pronto, en los próximos días, si:</h2>
 <ul><li>Tiene un dolor en un hueso que dura más de unas semanas, que no se explica por un golpe y que lo despierta en la noche o no cede en reposo.</li><li>Nota un bulto que crece, sobre todo si mide más de 5 cm o está en la profundidad del músculo.</li><li>Se fracturó con un golpe menor o sin golpe.</li><li>Un niño o un adolescente cojea o se queja de dolor en un hueso sin causa clara.</li><li>Tiene un diagnóstico de cáncer y aparece dolor en un hueso que carga peso.</li></ul>
-<p>En estos casos puede contar su caso en la consulta express. El asistente está programado para reconocer las señales de alarma y, si las detecta, le indicará acudir a emergencias en lugar de esperar.</p>
+<p>En estos casos puede contar su caso en la consulta express. La guía inteligente está programado para reconocer las señales de alarma y, si las detecta, le indicará acudir a emergencias en lugar de esperar.</p>
 <div class="botones" style="margin:28px 0">{cta(r)}</div>
 {revisado()}
 </div></div></section>""")
@@ -470,7 +470,7 @@ pagina(ruta=r, prioridad="0.6", titulo="Casos y publicaciones",
 r = "preguntas-frecuentes/"
 FAQ = [
     ("¿La consulta express reemplaza a la cita?", "No. Prepara la cita: el doctor llega a ella conociendo su caso y sus estudios, y usted no repite la historia desde cero."),
-    ("¿El asistente con inteligencia artificial me da un diagnóstico?", "No. El asistente solo hace preguntas y ordena sus respuestas para el doctor. No diagnostica, no receta y no reemplaza la valoración médica. Quien revisa su caso y decide el siguiente paso es el doctor."),
+    ("¿La guía inteligente me da un diagnóstico?", "No. La guía solo hace preguntas y ordena sus respuestas para el doctor. No diagnostica, no receta y no reemplaza la valoración médica. Quien revisa su caso y decide el siguiente paso es el doctor."),
     ("¿Cuánto cuesta la consulta express?", precio("precio_consulta", "{}. Se paga en línea al enviar el caso y se descuenta del valor de su consulta.", "El consultorio le informa el valor antes de que usted pague. Ese valor se descuenta de su consulta.")),
     ("¿Cuándo me responden?", "El equipo del doctor le contacta cuando su caso esté revisado. El tiempo depende del número de casos y de la complejidad del suyo. Si tiene una señal de alarma, no espere la respuesta: acuda a emergencias."),
     ("¿Quién ve mis datos y mis estudios?", "Solo el doctor y su equipo, para valorar su caso, conforme a la Ley Orgánica de Protección de Datos Personales. Los detalles están en el aviso de privacidad."),
@@ -490,20 +490,20 @@ pagina(ruta=r, prioridad="0.6", titulo="Preguntas frecuentes",
 # ---------------------------------------------------------------- Consulta express (la aplicación)
 r = "consulta-express/"
 pagina(ruta=r, prioridad="0.9", titulo="Consulta express",
-       descripcion="Cuente su caso, suba sus estudios y el Dr. Felipe Criollo Palacios lo revisa antes de la cita. Asistente con inteligencia artificial que ordena su historia; no diagnostica.",
+       descripcion="Cuente su caso, suba sus estudios y el Dr. Felipe Criollo Palacios lo revisa antes de la cita. Formulario con guía inteligente que ordena su historia; no diagnostica.",
        jsonld=[migas_ld(r, [("", "Inicio")], "Consulta express")], scripts=("assets/consulta.js",),
        cuerpo=f"""
 <section class="cabeza-pagina"><div class="contenedor">
 <nav class="migas" aria-label="Ruta"><a href="{rel(r,'')}">Inicio</a></nav>
 <p class="antetitulo">Consulta express</p><h1>Cuente su caso antes de la cita</h1>
-<p class="entrada">Un asistente con inteligencia artificial le hace las preguntas de una primera consulta. Usted responde con sus palabras y sube sus estudios. El doctor revisa su caso personalmente.</p>
+<p class="entrada">Un formulario con guía inteligente le hace las preguntas de una primera consulta, programadas para orientarle y recoger su información de manera más eficaz. Usted responde con sus palabras y sube sus estudios. El doctor revisa su caso personalmente.</p>
 </div></section>
 <section class="seccion" style="padding-top:40px"><div class="contenedor">
 <div id="ce" class="ce" aria-live="polite">
 <noscript><p>La consulta express necesita JavaScript activado en su navegador.</p></noscript>
 </div>
 <script type="application/json" id="ce-contacto">{{"telefono": "{D['telefono']}", "tel": "{D['telefono_enlace']}", "whatsapp": "{D['whatsapp_enlace']}"}}</script>
-<p class="nota" style="margin-top:24px;max-width:760px">El asistente no diagnostica ni receta. Si describe una señal de alarma, le pedirá acudir a emergencias. Sus datos se tratan conforme al <a href="{rel(r,'privacidad/')}">aviso de privacidad</a>.</p>
+<p class="nota" style="margin-top:24px;max-width:760px">La guía inteligente no diagnostica ni receta. Si describe una señal de alarma, le pedirá acudir a emergencias. Sus datos se tratan conforme al <a href="{rel(r,'privacidad/')}">aviso de privacidad</a>.</p>
 </div></section>
 <link rel="stylesheet" href="{rel(r,'assets/consulta.css')}">""")
 
@@ -520,15 +520,15 @@ pagina(ruta=r, legal=True, prioridad="0.3", titulo="Aviso de privacidad y tratam
 <h2>1. Quién es el responsable</h2>
 <p>El responsable del tratamiento de sus datos es {D['nombre_completo']}, médico cirujano ortopedista oncólogo, con domicilio en {D['direccion_citimed']}. Para cualquier consulta sobre sus datos puede comunicarse por {CORREO_O_SITIO}.</p>
 <h2>2. Qué datos tratamos</h2>
-<ul><li><strong>Datos de identificación y contacto</strong>: nombre, cédula o pasaporte, fecha de nacimiento, correo, teléfono y ciudad.</li><li><strong>Datos de salud</strong>: el motivo de consulta, lo que usted cuenta al asistente, los estudios, informes e imágenes que sube y el resumen de su caso. La Ley Orgánica de Protección de Datos Personales los considera <strong>datos sensibles</strong>.</li><li><strong>Datos de facturación y pago</strong>: nombre o razón social, cédula o RUC, dirección y la constancia del pago. No recibimos ni guardamos el número completo de su tarjeta: el pago lo procesa directamente la plataforma de pagos.</li><li><strong>Datos técnicos mínimos</strong>: para evitar abusos del asistente, el sistema cuenta las solicitudes por conexión usando un código derivado de la dirección IP, que no permite identificarle y se borra a diario. El sitio no usa cookies publicitarias. [CONFIRMAR SI SE ACTIVA ANALÍTICA Y CUÁL]</li></ul>
+<ul><li><strong>Datos de identificación y contacto</strong>: nombre, cédula o pasaporte, fecha de nacimiento, correo, teléfono y ciudad.</li><li><strong>Datos de salud</strong>: el motivo de consulta, lo que usted cuenta en el formulario con guía inteligente, los estudios, informes e imágenes que sube y el resumen de su caso. La Ley Orgánica de Protección de Datos Personales los considera <strong>datos sensibles</strong>.</li><li><strong>Datos de facturación y pago</strong>: nombre o razón social, cédula o RUC, dirección y la constancia del pago. No recibimos ni guardamos el número completo de su tarjeta: el pago lo procesa directamente la plataforma de pagos.</li><li><strong>Datos técnicos mínimos</strong>: para evitar abusos del formulario, el sistema cuenta las solicitudes por conexión usando un código derivado de la dirección IP, que no permite identificarle y se borra a diario. El sitio no usa cookies publicitarias. [CONFIRMAR SI SE ACTIVA ANALÍTICA Y CUÁL]</li></ul>
 <h2>3. Para qué los usamos</h2>
 <ul><li>Valorar su caso, prepararle la cita, la teleconsulta o la segunda opinión, y contactarle con la propuesta de siguiente paso.</li><li>Emitir la factura electrónica del servicio que paga.</li><li>Si un médico le refirió, y solo si usted lo autoriza, enviarle a ese médico el informe de su caso.</li><li>Cumplir obligaciones legales, como las tributarias y las de la historia clínica.</li></ul>
-<p>No usamos sus datos de salud para publicidad ni los vendemos. No tomamos decisiones sobre usted de forma automatizada: el asistente con inteligencia artificial solo ordena la información; la valoración la hace el doctor.</p>
+<p>No usamos sus datos de salud para publicidad ni los vendemos. No tomamos decisiones sobre usted de forma automatizada: la guía inteligente es un sistema automatizado que solo ordena la información; la valoración la hace el doctor.</p>
 <h2>4. Base legal</h2>
 <p>Tratamos sus datos de salud con su <strong>consentimiento explícito</strong>, que usted otorga al marcar la casilla de autorización antes de enviar su caso, y para la prestación del servicio de salud que usted solicita. Los datos de facturación se tratan para cumplir obligaciones legales.</p>
 <h2>5. Con quién los compartimos</h2>
-<p>Sus datos solo los ven el doctor y el personal de su consultorio que necesita verlos para atenderle, con deber de confidencialidad. Para que el sitio funcione, intervienen proveedores tecnológicos que actúan como encargados del tratamiento, solo bajo instrucciones del doctor: alojamiento del sitio, el servicio de inteligencia artificial que formula las preguntas, el formulario donde se guardan los casos y las plataformas de pago. Algunos de estos proveedores están fuera del Ecuador, por lo que sus datos pueden transferirse a otros países con garantías adecuadas de protección. [LISTA DE PROVEEDORES Y PAÍSES, A DEFINIR CON EL ABOGADO SI SE PUBLICA O SE ENTREGA A PEDIDO]</p>
-<p>El proveedor de inteligencia artificial procesa el texto de la conversación para formular la siguiente pregunta y no lo usa para entrenar sus modelos. [CONFIRMAR CONDICIONES CONTRACTUALES VIGENTES]</p>
+<p>Sus datos solo los ven el doctor y el personal de su consultorio que necesita verlos para atenderle, con deber de confidencialidad. Para que el sitio funcione, intervienen proveedores tecnológicos que actúan como encargados del tratamiento, solo bajo instrucciones del doctor: alojamiento del sitio, el servicio automatizado que formula las preguntas de la guía, el formulario donde se guardan los casos y las plataformas de pago. Algunos de estos proveedores están fuera del Ecuador, por lo que sus datos pueden transferirse a otros países con garantías adecuadas de protección. [LISTA DE PROVEEDORES Y PAÍSES, A DEFINIR CON EL ABOGADO SI SE PUBLICA O SE ENTREGA A PEDIDO]</p>
+<p>El proveedor de ese servicio procesa el texto de la conversación para formular la siguiente pregunta y no lo usa para entrenar sus modelos. [CONFIRMAR CONDICIONES CONTRACTUALES VIGENTES]</p>
 <h2>6. Cuánto tiempo los conservamos</h2>
 <p>Los datos de su caso se conservan mientras sean necesarios para atenderle. Si su caso pasa a formar parte de su historia clínica, se conserva el tiempo que exige la normativa sanitaria. Los datos de facturación se conservan el tiempo que exige la normativa tributaria. [PLAZOS CONCRETOS A DEFINIR CON EL ABOGADO]</p>
 <h2>7. Sus derechos</h2>
@@ -551,9 +551,9 @@ pagina(ruta=r, legal=True, servicio=True, prioridad="0.3", titulo="Condiciones d
 <h2>1. Quién presta el servicio</h2>
 <p>La consulta express y la segunda opinión las presta {D['nombre_completo']}, médico cirujano ortopedista oncólogo, con consultorio en {D['direccion_citimed']}.</p>
 <h2>2. Qué es la consulta express</h2>
-<p>Es una preconsulta en línea. Usted cuenta su caso a un asistente con inteligencia artificial, que le hace preguntas y ordena sus respuestas, y sube sus estudios. El doctor revisa la información y su equipo le contacta para proponerle el siguiente paso: una cita presencial, una teleconsulta, estudios adicionales o la derivación a otro especialista.</p>
+<p>Es una preconsulta en línea. Usted cuenta su caso en un formulario con guía inteligente, un sistema automatizado que le hace preguntas y ordena sus respuestas, y sube sus estudios. El doctor revisa la información y su equipo le contacta para proponerle el siguiente paso: una cita presencial, una teleconsulta, estudios adicionales o la derivación a otro especialista.</p>
 <h2>3. Qué no es</h2>
-<ul><li>No es una atención de urgencia ni de emergencia. Ante una señal de alarma, acuda a emergencias o llame al 911.</li><li>El asistente con inteligencia artificial no diagnostica, no receta y no da indicaciones de tratamiento. Sus mensajes son preguntas para recoger información.</li><li>La consulta express no reemplaza la valoración médica presencial cuando esta es necesaria.</li></ul>
+<ul><li>No es una atención de urgencia ni de emergencia. Ante una señal de alarma, acuda a emergencias o llame al 911.</li><li>La guía inteligente no diagnostica, no receta y no da indicaciones de tratamiento. Sus mensajes son preguntas para recoger información.</li><li>La consulta express no reemplaza la valoración médica presencial cuando esta es necesaria.</li></ul>
 <h2>4. Qué es la segunda opinión</h2>
 <p>Es la revisión por el doctor de un diagnóstico o una propuesta de tratamiento previa, con sus estudios. Incluye un informe escrito y una videollamada para explicarlo. La opinión se basa en la información y los estudios enviados; si son incompletos, el doctor puede pedir información adicional o indicar que se requiere una valoración presencial.</p>
 <h2>5. Precio y pago</h2>
@@ -578,7 +578,7 @@ pagina(ruta=r, legal=True, servicio=True, prioridad="0.3", titulo="Consentimient
 {BORRADOR}
 <p>Este es el texto completo de la autorización que usted otorga al marcar la casilla antes de enviar su caso.</p>
 <div class="caja"><p>Autorizo de forma libre, específica, informada e inequívoca a {D['nombre_completo']} a tratar mis datos personales y los datos de salud que entrego en este formulario, incluidos los estudios, informes e imágenes que adjunto, con la finalidad de valorar mi caso, preparar mi atención y contactarme con la propuesta de siguiente paso, conforme al aviso de privacidad, que declaro haber leído.</p>
-<p>Entiendo que el asistente con inteligencia artificial solo ordena mi información y no emite diagnósticos, y que mis datos serán procesados por proveedores tecnológicos que pueden estar fuera del Ecuador, con garantías adecuadas.</p>
+<p>Entiendo que la guía inteligente es un sistema automatizado que solo ordena mi información y no emite diagnósticos, y que mis datos serán procesados por proveedores tecnológicos que pueden estar fuera del Ecuador, con garantías adecuadas.</p>
 <p>Sé que puedo revocar esta autorización y ejercer mis derechos de acceso, rectificación, eliminación, oposición, portabilidad y suspensión escribiendo a {CORREO_O_SITIO}.</p></div>
 <h2>Si un médico le refiere</h2>
 <div class="caja"><p>Autorizo, además, que el informe de mi caso se envíe al médico que me refirió. [CASILLA OPCIONAL]</p></div>
@@ -594,7 +594,7 @@ pagina(ruta=r, prioridad="0.2", titulo="Declaración de accesibilidad",
 <p>Queremos que todas las personas puedan usar este sitio, incluidas las que tienen alguna discapacidad visual, auditiva, motriz o cognitiva, y las personas mayores.</p>
 <h2>Norma de referencia</h2>
 <p>El sitio se construyó siguiendo las Pautas de Accesibilidad para el Contenido Web (WCAG) 2.2, nivel AA, del W3C. Entre otras medidas:</p>
-<ul><li>Contraste suficiente entre el texto y el fondo.</li><li>Textos alternativos en las imágenes.</li><li>Un enlace «Saltar al contenido» al inicio de cada página.</li><li>Navegación completa con teclado y foco visible.</li><li>Botones y enlaces de al menos 44 píxeles para tocarlos con facilidad.</li><li>Teléfonos que se marcan con un toque desde el celular.</li><li>Respeto de la preferencia de movimiento reducido del dispositivo.</li><li>Mapas que solo se cargan si usted lo pide.</li></ul>
+<ul><li>Contraste suficiente entre el texto y el fondo.</li><li>Textos alternativos en las imágenes.</li><li>Un enlace «Saltar al contenido» al inicio de cada página.</li><li>Navegación completa con teclado y foco visible.</li><li>Botones y enlaces de al menos 44 píxeles para tocarlos con facilidad.</li><li>Respeto de la preferencia de movimiento reducido del dispositivo.</li><li>Mapas que solo se cargan si usted lo pide.</li></ul>
 <h2>Limitaciones conocidas</h2>
 <p>Los documentos que suben los pacientes y algunos artículos científicos enlazados pertenecen a terceros y pueden no ser accesibles.</p>
 <h2>Cómo avisarnos</h2>
@@ -607,4 +607,4 @@ r = ""
 pagina(ruta="", archivo="404.html", sin_indice=True, titulo="Página no encontrada", descripcion="La página que busca no existe.",
        cuerpo=f"""<section class="seccion"><div class="contenedor estrecho"><h1>No encontramos esta página</h1>
 <p class="entrada">Puede que la dirección haya cambiado. Estas son las páginas más consultadas:</p>
-<ul style="margin-top:20px;line-height:2"><li><a href="/">Inicio</a></li><li><a href="/consulta-express/">Consulta express</a></li><li><a href="/segunda-opinion/">Segunda opinión</a></li><li><a href="/especialidades/">Especialidades</a></li><li><a href="/donde-atiendo/">Dónde atiendo</a></li></ul></div></section>""")
+<ul style="margin-top:20px;line-height:2"><li><a href="/">Inicio</a></li><li><a href="/consulta-express/">Consulta express</a></li><li><a href="/segunda-opinion/">Segunda opinión</a></li><li><a href="/#oncologia">Especialidades</a></li><li><a href="/donde-atiendo/">Consultorio</a></li></ul></div></section>""")
