@@ -413,14 +413,14 @@ tel = f'<a href="tel:{D["telefono_enlace"]}">{D["telefono"]}</a>' if D["telefono
 mapa = lambda q, titulo: (f'<div class="mapa mapa-sustituto" data-mapa="{q}" data-titulo="{titulo}"><p>El mapa se carga desde Google Maps.<br>'
                           f'<button class="btn btn-linea" type="button" style="margin-top:12px">Mostrar el mapa</button><br><a href="https://www.google.com/maps/search/?api=1&query={q}" rel="noopener">Abrir en Google Maps</a></p></div>')
 pagina(ruta=r, prioridad="0.8", titulo="Dónde atiendo: CITIMED y Hospital Metropolitano, Quito",
-       descripcion="Consulta privada en el Centro Médico CITIMED, piso 6, consultorio 628, y atención en el Hospital Metropolitano de Quito. Horarios, teléfono y cómo llegar.",
+       descripcion="Consulta privada en el Centro Médico CITIMED, piso 6, consultorio 628, y atención en el Hospital Metropolitano de Quito. Cómo llegar.",
        jsonld=[MEDICO_LD, migas_ld(r, [("", "Inicio")], "Dónde atiende")], scripts=("assets/mapa.js",),
        cuerpo=cabeza(r, [("", "Inicio")], "", "Dónde atiende") + f"""
 <section class="seccion"><div class="contenedor">
 <div class="rejilla">
 <article class="tarjeta destacada"><p class="eti">Consulta privada</p><h3>Centro Médico CITIMED</h3>
 <p>Piso 6, consultorio 628<br>Av. Mariana de Jesús y Nuño de Valderrama, Quito</p>
-<p>Horario: {D['horario_citimed']}</p><p>Teléfono: {tel}</p>{f'<p><a href="{D["whatsapp_enlace"]}" rel="noopener">Escribir por WhatsApp</a></p>' if D["whatsapp_enlace"] else ""}
+<p>Horario: {D['horario_citimed']}</p>{f'<p>Teléfono: {tel}</p>' if D['telefono'] else ''}{f'<p><a href="{D["whatsapp_enlace"]}" rel="noopener">Escribir por WhatsApp</a></p>' if D["whatsapp_enlace"] else ""}
 {mapa('CITIMED+Mariana+de+Jesus+Quito', 'Mapa de CITIMED')}</article>
 <article class="tarjeta"><p class="eti">Atención hospitalaria</p><h3>Hospital Metropolitano</h3>
 <p>Av. Mariana de Jesús y Nicolás Arteta, Quito</p>
@@ -500,7 +500,7 @@ pagina(ruta=r, prioridad="0.9", titulo="Consulta express",
 </div></section>
 <section class="seccion" style="padding-top:40px"><div class="contenedor">
 <div id="ce" class="ce" aria-live="polite">
-<noscript><p>La consulta express necesita JavaScript. También puede escribir al consultorio: {D['telefono']}.</p></noscript>
+<noscript><p>La consulta express necesita JavaScript activado en su navegador.</p></noscript>
 </div>
 <script type="application/json" id="ce-contacto">{{"telefono": "{D['telefono']}", "tel": "{D['telefono_enlace']}", "whatsapp": "{D['whatsapp_enlace']}"}}</script>
 <p class="nota" style="margin-top:24px;max-width:760px">El asistente no diagnostica ni receta. Si describe una señal de alarma, le pedirá acudir a emergencias. Sus datos se tratan conforme al <a href="{rel(r,'privacidad/')}">aviso de privacidad</a>.</p>
@@ -598,7 +598,7 @@ pagina(ruta=r, prioridad="0.2", titulo="Declaración de accesibilidad",
 <h2>Limitaciones conocidas</h2>
 <p>Los documentos que suben los pacientes y algunos artículos científicos enlazados pertenecen a terceros y pueden no ser accesibles.</p>
 <h2>Cómo avisarnos</h2>
-<p>Si encuentra una barrera, escríbanos por {CORREO_O_SITIO} o llame al {D['telefono']}. Le ayudaremos por otro medio y corregiremos el problema.</p>
+<p>Si encuentra una barrera, escríbanos por {CORREO_O_SITIO}. Le ayudaremos por otro medio y corregiremos el problema.</p>
 <p>Fecha de esta declaración: [FECHA DE PUBLICACIÓN]</p>
 </div></div></section>""")
 

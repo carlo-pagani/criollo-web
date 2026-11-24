@@ -350,7 +350,7 @@
     raiz.appendChild(el('div', { class: 'ce-caja' }, [
       el('p', { class: 'rotulo', style: 'color:var(--acento)', texto: 'Muy pronto' }),
       el('h2', { texto: 'La consulta express en línea se activa en los próximos días' }),
-      el('p', { class: 'ce-sub', texto: 'Estamos terminando de prepararla para que pueda contar su caso y enviar sus estudios desde aquí. Mientras tanto, el consultorio le atiende directamente y le indica cómo hacer llegar sus estudios.' }),
+      el('p', { class: 'ce-sub', texto: 'Estamos terminando de prepararla para que pueda contar su caso y enviar sus estudios desde aquí. Vuelva a visitarnos en unos días.' }),
       el('div', { class: 'botones' }, [
         c.whatsapp ? el('a', { class: 'btn', href: c.whatsapp, rel: 'noopener', texto: 'Escribir por WhatsApp' }) : null,
         c.tel ? el('a', { class: 'btn btn-neutro', href: 'tel:' + c.tel, texto: 'Llamar al ' + c.telefono }) : null]),
