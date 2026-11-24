@@ -16,7 +16,7 @@ def img(ruta, nombre, alt, proporcion="4/5", clase="", eager=False):
             f'alt="{alt}" style="aspect-ratio:{proporcion};object-fit:cover;object-position:center top" width="900" height="{round(900 * alto / ancho)}" {carga} class="{clase}">')
 
 
-def cta(ruta, motivo=None, texto="Llena tu ficha médica", clase="btn"):
+def cta(ruta, motivo=None, texto="Llene su ficha médica", clase="btn"):
     q = f"?motivo={motivo}" if motivo else ""
     return f'<a class="{clase}" href="{rel(ruta, "consulta-express/")}{q}">{texto}</a>'
 
@@ -98,7 +98,7 @@ pagina(ruta=r, prioridad="1.0",
 <div class="texto">
 <p class="antetitulo">Segunda opinión</p>
 <h2>Una decisión que no tiene vuelta atrás merece <span class="marcador">una segunda mirada</span>.</h2>
-<p class="entrada">Si ya tiene un diagnóstico, una resonancia o una biopsia, envíe sus estudios antes de viajar a Quito. El doctor los revisa, le entrega un informe escrito y se lo explica por videollamada.</p>
+<p class="entrada">Si ya tiene un diagnóstico, una resonancia o una biopsia, envíe sus estudios antes de viajar a Quito. El doctor los revisa, le entrega un informe escrito y firmado. Para quienes viven fuera de Quito, el doctor también ofrece teleconsulta.</p>
 <div class="botones" style="margin-top:30px"><a class="btn" href="{rel(r,'segunda-opinion/')}">Cómo funciona y qué enviar</a>{cta(r,'segunda','Enviar mis estudios','btn btn-neutro')}</div>
 </div>
 <div class="media"><figure class="montada">{img(r,'felipe-quirofano','El Dr. Felipe Criollo Palacios operando junto a otro cirujano','8/7')}<figcaption><span>Quirófano</span><span>Quito</span></figcaption></figure></div>
@@ -134,7 +134,7 @@ pagina(ruta=r, prioridad="1.0",
 <p class="antetitulo">Dónde atiendo</p>
 <h2>Citimed y Hospital Metropolitano, Quito</h2>
 <p class="entrada">{D['direccion_citimed']}.</p>
-<div class="botones" style="margin-top:28px"><a class="btn btn-linea" href="{rel(r,'donde-atiendo/')}">Horarios y cómo llegar</a><a class="btn btn-neutro" href="{rel(r,'fuera-de-quito/')}">Si vives fuera de Quito</a></div>
+<div class="botones" style="margin-top:28px"><a class="btn btn-linea" href="{rel(r,'donde-atiendo/')}">Horarios y cómo llegar</a><a class="btn btn-neutro" href="{rel(r,'fuera-de-quito/')}">Si vive fuera de Quito</a></div>
 </div>
 <div class="media"><figure class="montada">{img(r,'felipe-consultorio','El Dr. Felipe Criollo Palacios en su consultorio de Citimed','10/9')}<figcaption><span>Consultorio 628</span><span>Citimed</span></figcaption></figure></div>
 </div></section>
@@ -279,51 +279,51 @@ pagina(ruta=r, prioridad="0.8", titulo=t, descripcion=d,
 # ---------------------------------------------------------------- Segunda opinión
 r = "segunda-opinion/"
 pagina(ruta=r, prioridad="0.9", titulo="Segunda opinión en ortopedia oncológica",
-       descripcion="Segunda opinión sobre tumores óseos, sarcomas y metástasis: qué enviar, quién revisa, qué recibes y cuánto cuesta. Para pacientes de Quito, provincia y el exterior.",
+       descripcion="Segunda opinión sobre tumores óseos, sarcomas y metástasis: qué enviar, quién revisa, qué recibe y cuánto cuesta. Para pacientes de Quito, provincia y el exterior.",
        jsonld=[migas_ld(r, [("", "Inicio")], "Segunda opinión"),
                {"@context": "https://schema.org", "@type": "MedicalProcedure", "name": "Segunda opinión en ortopedia oncológica", "procedureType": "https://schema.org/NoninvasiveProcedure",
-                "description": "Revisión de estudios, informe escrito y videollamada con el Dr. Felipe Criollo Palacios.", "url": D["dominio"] + "/" + r}],
+                "description": "Revisión completa de estudios e imágenes e informe escrito y firmado por el Dr. Felipe Criollo Palacios.", "url": D["dominio"] + "/" + r}],
        cuerpo=cabeza(r, [("", "Inicio")], "Servicio en línea", "Segunda opinión en ortopedia oncológica",
-                     "Si ya tienes un diagnóstico o una propuesta de tratamiento y quieres confirmarla antes de decidir: una cirugía, un salvamento de extremidad, una amputación o un tratamiento largo.") + f"""
+                     "Para quien ya tiene un diagnóstico o una propuesta de tratamiento y quiere confirmarla antes de decidir: una cirugía, un salvamento de extremidad, una amputación o un tratamiento largo.") + f"""
 <section class="seccion"><div class="contenedor">
 <h2>Cómo funciona</h2>
 <ol class="pasos">
-<li><strong>Cuenta tu caso</strong><span>En la ficha médica inteligente, elige «Segunda opinión». La guía inteligente te pregunta por el diagnóstico, el tratamiento propuesto y cómo llegaste hasta aquí.</span></li>
-<li><strong>Sube tus documentos</strong><span>Informes, imágenes y patología. Más abajo está la lista exacta.</span></li>
-<li><strong>Autoriza el envío</strong><span>Autorizas el uso de tus datos de salud para la revisión{precio('precio_segunda', ' y pagas {}', '')}.</span></li>
-<li><strong>El doctor revisa</strong><span>Revisa personalmente tus estudios. Si falta algo importante, su equipo te lo pide.</span></li>
-<li><strong>Recibes tu informe</strong><span>Un informe escrito y una videollamada con el doctor para explicártelo y responder tus preguntas.</span></li>
+<li><strong>Cuente su caso</strong><span>En la ficha médica inteligente, elija «Segunda opinión». La guía inteligente le pregunta por el diagnóstico, el tratamiento propuesto y cómo llegó hasta aquí.</span></li>
+<li><strong>Suba sus documentos</strong><span>Informes, imágenes y patología. Más abajo está la lista exacta.</span></li>
+<li><strong>Autorice el envío</strong><span>Autoriza el uso de sus datos de salud para la revisión{precio('precio_segunda', ' y paga {}', '')}.</span></li>
+<li><strong>El doctor revisa</strong><span>Revisa personalmente sus estudios. Si falta algo importante, su equipo se lo pide.</span></li>
+<li><strong>Recibe su informe</strong><span>Un informe escrito y firmado por el doctor. Si usted lo autoriza, se envía también a su médico tratante.</span></li>
 </ol>
 <div class="botones" style="margin-top:32px">{cta(r,'segunda','Pedir una segunda opinión')}</div>
-<p class="nota" style="margin-top:16px">El equipo del doctor te contacta cuando tu caso esté revisado. El tiempo depende de la complejidad y de que los estudios estén completos.</p>
+<p class="nota" style="margin-top:16px">La secretaria del doctor le contacta cuando su caso esté revisado, por WhatsApp, llamada o correo, de 09h00 a 18h00. El tiempo depende de la complejidad y de que los estudios estén completos.</p>
 </div></section>
 
 <section class="seccion blanca"><div class="contenedor"><div class="prosa">
 <h2>Qué documentos enviar</h2>
-<p>Cuanto más completo llegue tu caso, más precisa será la opinión. Reúne lo que tengas de esta lista:</p>
+<p>Cuanto más completo llegue su caso, más precisa será la opinión. Reúna lo que tenga de esta lista:</p>
 <table><thead><tr><th>Documento</th><th>Por qué importa</th></tr></thead><tbody>
-<tr><td><strong>Imágenes originales</strong>: resonancia, tomografía, radiografías, PET o gammagrafía. Idealmente en formato DICOM (el disco o el enlace que entrega el centro de imagen).</td><td>El doctor necesita ver las imágenes, no solo leer el informe. Si solo tienes fotos o PDF, envíalos igual.</td></tr>
+<tr><td><strong>Imágenes originales</strong>: resonancia, tomografía, radiografías, PET o gammagrafía. Idealmente en formato DICOM (el disco o el enlace que entrega el centro de imagen).</td><td>El doctor necesita ver las imágenes, no solo leer el informe. Si solo tiene fotos o PDF, envíelos igual.</td></tr>
 <tr><td><strong>Informes de radiología</strong> de cada estudio.</td><td>Ubican cada hallazgo y su fecha.</td></tr>
 <tr><td><strong>Informe de patología</strong> de la biopsia o de la cirugía, si se hizo.</td><td>Es la base del diagnóstico. En algunos casos se pedirán las láminas o los bloques para revisión.</td></tr>
-<tr><td><strong>Nota operatoria</strong>, si ya te operaron.</td><td>Indica qué se hizo, por dónde y qué quedó.</td></tr>
+<tr><td><strong>Nota operatoria</strong>, si ya le operaron.</td><td>Indica qué se hizo, por dónde y qué quedó.</td></tr>
 <tr><td><strong>Tratamientos recibidos</strong>: quimioterapia, radioterapia, medicamentos.</td><td>Cambian las opciones de cirugía y reconstrucción.</td></tr>
-<tr><td><strong>La propuesta de tratamiento</strong> que te hicieron.</td><td>Es lo que la segunda opinión va a confirmar o a matizar.</td></tr>
+<tr><td><strong>La propuesta de tratamiento</strong> que le hicieron.</td><td>Es lo que la segunda opinión va a confirmar o a matizar.</td></tr>
 </tbody></table>
 <p>Los archivos muy pesados, como los discos DICOM completos, pueden enviarse con el enlace de descarga del centro de imagen. <span class="pendiente">[CONFIRMAR CON EL DOCTOR EL CANAL PARA DICOM GRANDES]</span></p>
 
 <h2>Qué recibe</h2>
-<ul><li>Un <strong>informe escrito</strong> del {D['nombre']} con su lectura del caso, su opinión sobre el diagnóstico y el tratamiento propuesto, y los estudios adicionales que recomendaría si hacen falta.</li><li>Una <strong>videollamada</strong> para explicarte el informe a ti y a tu familia.</li><li>Si tu caso lo requiere, la propuesta de una cita presencial en Quito. <a href="{rel(r,'fuera-de-quito/')}">Si vives fuera de Quito</a>.</li></ul>
+<ul><li>Un <strong>informe escrito y firmado</strong> del {D['nombre']} con su lectura del caso, su opinión sobre el diagnóstico y el tratamiento propuesto, y los estudios adicionales que recomendaría si hacen falta.</li><li>Si usted lo autoriza de forma expresa, el envío del informe a su médico tratante.</li><li>Si su caso lo requiere, la propuesta de una cita presencial en Quito o de una teleconsulta. <a href="{rel(r,'fuera-de-quito/')}">Si vive fuera de Quito</a>.</li></ul>
 <h2>Cuánto cuesta</h2>
-<p>{precio('precio_segunda', 'La segunda opinión con informe escrito y videollamada cuesta {}. Se paga en línea al enviar el caso.', 'El consultorio te informa el valor de la segunda opinión antes de iniciar la revisión.')} <span class="pendiente">[CONFIRMAR SI SE DESCUENTA DE UNA CIRUGÍA O CONSULTA POSTERIOR]</span></p>
+<p>{precio('precio_segunda', 'La segunda opinión, con la revisión completa de sus estudios e imágenes y el informe escrito y firmado, cuesta {}. Se paga en línea al enviar el caso.', 'El consultorio le informa el valor de la segunda opinión antes de iniciar la revisión.')} <span class="pendiente">[CONFIRMAR SI SE DESCUENTA DE UNA CIRUGÍA O CONSULTA POSTERIOR]</span></p>
 <h2>Lo que la segunda opinión no es</h2>
-<p>No es una atención de urgencia ni reemplaza el seguimiento con tu médico tratante. Si tu médico te refirió, el doctor puede enviarle también a él el informe, con tu autorización. Si presentas una <a href="{rel(r,'cuando-consultar/')}">señal de alarma</a>, acude a emergencias.</p>
+<p>No es una atención de urgencia ni reemplaza el seguimiento con su médico tratante. Si su médico le refirió, el doctor puede enviarle también a él el informe, con su autorización. Si presenta una <a href="{rel(r,'cuando-consultar/')}">señal de alarma</a>, acuda a emergencias.</p>
 <h2>Preguntas frecuentes</h2>
 </div>
 <div class="estrecho">
-<details><summary>¿Tengo que decirle a mi médico que pido una segunda opinión?</summary><p>No es obligatorio, pero es lo habitual y la mayoría de los médicos lo ven bien. Una segunda opinión suele dar tranquilidad a todos y, si tu médico lo desea, el doctor puede comentarle el caso.</p></details>
-<details><summary>Me dijeron que la única opción es amputar. ¿Vale la pena consultar?</summary><p>Sí. Es una decisión irreversible y merece una segunda mirada. A veces la amputación sí es la mejor opción, y otras veces existe una alternativa de salvamento. El doctor te explicará con claridad cuál es tu caso.</p></details>
-<details><summary>¿Puedo pedirla si vivo en el exterior?</summary><p>Sí. Todo el proceso es en línea. La videollamada se coordina según tu zona horaria.</p></details>
-<details><summary>¿Quién ve mis estudios?</summary><p>El doctor y su equipo, solo para revisar tu caso, conforme a la Ley Orgánica de Protección de Datos Personales. Detalles en el <a href="{rel(r,'privacidad/')}">aviso de privacidad</a>.</p></details>
+<details><summary>¿Tengo que decirle a mi médico que pido una segunda opinión?</summary><p>No es obligatorio, pero es lo habitual y la mayoría de los médicos lo ven bien. Una segunda opinión suele dar tranquilidad a todos y, si su médico lo desea, el doctor puede comentarle el caso.</p></details>
+<details><summary>Me dijeron que la única opción es amputar. ¿Vale la pena consultar?</summary><p>Sí. Es una decisión irreversible y merece una segunda mirada. A veces la amputación sí es la mejor opción, y otras veces existe una alternativa de salvamento. El doctor le explicará con claridad cuál es su caso.</p></details>
+<details><summary>¿Puedo pedirla si vivo en el exterior?</summary><p>Sí. Todo el proceso es en línea y el doctor ofrece teleconsulta para pacientes de fuera de Quito.</p></details>
+<details><summary>¿Quién ve mis estudios?</summary><p>El doctor, que lleva y custodia toda la documentación, y el equipo que él autoriza para recopilarla, solo para revisar su caso, conforme a la Ley Orgánica de Protección de Datos Personales. Detalles en el <a href="{rel(r,'privacidad/')}">aviso de privacidad</a>.</p></details>
 </div>
 </div></section>""")
 
@@ -333,7 +333,7 @@ cv = f'<a class="btn btn-linea" href="{rel(r, D["cv_pdf"])}">Descargar currícul
 pagina(ruta=r, prioridad="0.9", titulo="Perfil y formación",
        descripcion="Formación, cargos, publicaciones y sociedades científicas del Dr. Felipe Criollo Palacios, cirujano ortopedista oncólogo en Quito.",
        jsonld=[MEDICO_LD, migas_ld(r, [("", "Inicio")], "Perfil")],
-       cuerpo=cabeza(r, [("", "Inicio")], "Sobre el doctor", D["nombre"], "Cirujano ortopedista oncólogo. Atiende en su consultorio de Citimed e interviene en casos complejos en el Hospital Metropolitano y en el Hospital Vozandes, en Quito.") + f"""
+       cuerpo=cabeza(r, [("", "Inicio")], "Sobre el doctor", D["nombre"], "Cirujano ortopedista oncólogo. Atiende en su consultorio del Centro Médico Citimed, en Quito.") + f"""
 <section class="seccion"><div class="contenedor dos" style="align-items:flex-start">
 <div class="texto prosa">
 <h2 style="margin-top:0">A qué se dedica</h2>
@@ -347,7 +347,7 @@ pagina(ruta=r, prioridad="0.9", titulo="Perfil y formación",
 <tr><th>Otros estudios</th><td>Diplomado en Medicina Transfusional. Universidad Central del Ecuador.</td></tr>
 </tbody></table>
 <h2>Dónde ejerce</h2>
-<ul><li><strong>Hospital Metropolitano, Quito.</strong> Cirujano ortopedista oncólogo y coordinador de Tumores Musculoesqueléticos.</li><li><strong>Hospital Vozandes Quito.</strong> Traumatólogo oncólogo; interviene en los casos complejos para los que se le llama.</li><li><strong>Consulta privada</strong> en el Centro Médico Citimed, Quito.</li></ul>
+<ul><li><strong>Consultorio</strong> en el Centro Médico Citimed, Quito.</li><li><strong>Cirugías.</strong> Tiene convenios para operar en la mayor parte de los hospitales de Quito.</li><li><strong>Hospital Metropolitano, Quito.</strong> Coordinador de Tumores Musculoesqueléticos.</li></ul>
 <h2>Trayectoria</h2>
 <ul><li><strong>SOLCA Quito.</strong> Ortopedista oncólogo y directivo de la institución durante más de diez años: sarcomas, lesiones metastásicas y lesiones pseudotumorales.</li><li><strong>Instituto Ecuatoriano de Seguridad Social, Latacunga.</strong> Traumatólogo y ortopedista.</li></ul>
 <h2>Docencia</h2>
@@ -384,25 +384,25 @@ pagina(ruta=r, prioridad="0.8", titulo="Para colegas que refieren pacientes",
 
 # ---------------------------------------------------------------- Fuera de Quito
 r = "fuera-de-quito/"
-pagina(ruta=r, prioridad="0.7", titulo="Si vives fuera de Quito o en el exterior",
+pagina(ruta=r, prioridad="0.7", titulo="Si vive fuera de Quito o en el exterior",
        descripcion="Cómo consultar con el Dr. Felipe Criollo Palacios desde provincia o el exterior: qué enviar antes, cómo se coordina la visita y dónde atiende en Quito.",
-       jsonld=[migas_ld(r, [("", "Inicio")], "Si vives fuera de Quito")],
-       cuerpo=cabeza(r, [("", "Inicio")], "Pacientes de provincia y del exterior", "Si vives fuera de Quito",
-                     "Viajar por un problema de salud cuesta tiempo, dinero y cansancio. Por eso el primer paso se hace a distancia: el doctor revisa tu caso antes de que viajes.") + f"""
+       jsonld=[migas_ld(r, [("", "Inicio")], "Si vive fuera de Quito")],
+       cuerpo=cabeza(r, [("", "Inicio")], "Pacientes de provincia y del exterior", "Si vive fuera de Quito",
+                     "Viajar por un problema de salud cuesta tiempo, dinero y cansancio. Por eso el primer paso se hace a distancia: el doctor revisa su caso antes de que usted viaje.") + f"""
 <section class="seccion"><div class="contenedor">
 <ol class="pasos">
-<li><strong>Envía tu caso antes</strong><span>Por la ficha médica inteligente o la segunda opinión, con tus estudios.</span></li>
-<li><strong>El doctor decide contigo</strong><span>Si basta una teleconsulta, si necesitas estudios adicionales en tu ciudad o si conviene venir.</span></li>
-<li><strong>La visita, bien preparada</strong><span>Si vienes, su equipo coordina la cita y, en lo posible, los estudios del mismo viaje.</span></li>
-<li><strong>Seguimiento a distancia</strong><span>Los controles que lo permitan se hacen por teleconsulta, con tu médico local.</span></li>
+<li><strong>Envíe su caso antes</strong><span>Por la ficha médica inteligente o la segunda opinión, con sus estudios.</span></li>
+<li><strong>El doctor decide con usted</strong><span>Si basta una teleconsulta, si necesita estudios adicionales en su ciudad o si conviene venir.</span></li>
+<li><strong>La visita, bien preparada</strong><span>Si viene, el equipo del doctor coordina la cita y, en lo posible, los estudios del mismo viaje.</span></li>
+<li><strong>Seguimiento a distancia</strong><span>Los controles que lo permitan se hacen por teleconsulta, con su médico local.</span></li>
 </ol>
 <div class="prosa" style="margin-top:48px">
 <h2>Qué esperar el día de la cita</h2>
-<p>Trae tus estudios originales (discos de imagen, informes y láminas de patología si te las entregaron), la lista de tus medicamentos y, si puedes, un acompañante.</p>
+<p>Traiga sus estudios originales (discos de imagen, informes y láminas de patología si se las entregaron), la lista de sus medicamentos y, si puede, un acompañante.</p>
 <h2>Consultorio</h2>
-<p>{D['direccion_citimed']}. Las cirugías se realizan en el Hospital Metropolitano, Av. Mariana de Jesús y Nicolás Arteta, a pocas cuadras del consultorio. <a href="{rel(r,'donde-atiendo/')}">Mapas y horarios</a>.</p>
+<p>{D['direccion_citimed']}. Para las cirugías, el doctor tiene convenios para operar en la mayor parte de los hospitales de Quito. <a href="{rel(r,'donde-atiendo/')}">Mapas y horarios</a>.</p>
 <h2>Desde el exterior</h2>
-<p>Todo el proceso inicial es en línea. La videollamada se coordina según tu zona horaria y el pago puede hacerse con tarjeta internacional. <span class="pendiente">[CONFIRMAR CON EL DOCTOR SI OFRECE APOYO PARA ALOJAMIENTO O TRASLADOS]</span></p>
+<p>Todo el proceso inicial es en línea. La teleconsulta se coordina según su zona horaria y el pago puede hacerse con tarjeta internacional. <span class="pendiente">[CONFIRMAR CON EL DOCTOR SI OFRECE APOYO PARA ALOJAMIENTO O TRASLADOS]</span></p>
 <div class="botones" style="margin:28px 0">{cta(r)}<a class="btn btn-neutro" href="{rel(r,'segunda-opinion/')}">Pedir una segunda opinión</a></div>
 </div>
 </div></section>""")
@@ -412,8 +412,8 @@ r = "donde-atiendo/"
 tel = f'<a href="tel:{D["telefono_enlace"]}">{D["telefono"]}</a>' if D["telefono_enlace"] else D["telefono"]
 mapa = lambda q, titulo: (f'<div class="mapa mapa-sustituto" data-mapa="{q}" data-titulo="{titulo}"><p>El mapa se carga desde Google Maps.<br>'
                           f'<button class="btn btn-linea" type="button" style="margin-top:12px">Mostrar el mapa</button><br><a href="https://www.google.com/maps/search/?api=1&query={q}" rel="noopener">Abrir en Google Maps</a></p></div>')
-pagina(ruta=r, prioridad="0.8", titulo="Consultorio: Citimed y Hospital Metropolitano, Quito",
-       descripcion="Consulta privada en el Centro Médico Citimed, piso 6, consultorio 628, y cirugías en el Hospital Metropolitano de Quito. Cómo llegar.",
+pagina(ruta=r, prioridad="0.8", titulo="Consultorio en el Centro Médico Citimed, Quito",
+       descripcion="Consulta privada en el Centro Médico Citimed, piso 6, consultorio 628, en Quito. Cómo llegar.",
        jsonld=[MEDICO_LD, migas_ld(r, [("", "Inicio")], "Consultorio")], scripts=("assets/mapa.js",),
        cuerpo=cabeza(r, [("", "Inicio")], "", "Consultorio") + f"""
 <section class="seccion"><div class="contenedor">
@@ -422,13 +422,11 @@ pagina(ruta=r, prioridad="0.8", titulo="Consultorio: Citimed y Hospital Metropol
 <p>Piso 6, consultorio 628<br>Av. Mariana de Jesús y Nuño de Valderrama, Quito</p>
 <p>Horario: {D['horario_citimed']}</p>{f'<p>Teléfono: {tel}</p>' if D['telefono'] else ''}{f'<p><a href="{D["whatsapp_enlace"]}" rel="noopener">Escribir por WhatsApp</a></p>' if D["whatsapp_enlace"] else ""}
 {mapa('Citimed+Mariana+de+Jesus+Quito', 'Mapa de Citimed')}</article>
-<article class="tarjeta"><p class="eti">Cirugías y casos complejos</p><h3>Hospital Metropolitano</h3>
-<p>Av. Mariana de Jesús y Nicolás Arteta, Quito</p>
-<p>Horario: {D['horario_metropolitano']}</p>
-{mapa('Hospital+Metropolitano+Quito', 'Mapa del Hospital Metropolitano')}</article>
+<article class="tarjeta"><p class="eti">Cirugías</p><h3>Hospitales de Quito</h3>
+<p>El doctor tiene convenios para operar en la mayor parte de los hospitales de Quito. El hospital se define con usted según su caso.</p></article>
 </div>
 <div class="dos" style="margin-top:56px">
-<div class="texto"><h2>Antes de venir</h2><p class="entrada">Si cuentas tu caso en la ficha médica inteligente, el doctor llega a la cita conociendo tu historia y tus estudios, y no repites todo desde cero.</p><div class="botones" style="margin-top:24px">{cta(r)}</div></div>
+<div class="texto"><h2>Antes de venir</h2><p class="entrada">Si cuenta su caso en la ficha médica inteligente, el doctor llega a la cita conociendo su historia y sus estudios, y usted no repite todo desde cero.</p><div class="botones" style="margin-top:24px">{cta(r)}</div></div>
 <div class="media">{img(r,'felipe-consultorio','El Dr. Felipe Criollo Palacios en su consultorio de Citimed','10/9')}</div>
 </div>
 </div></section>""")
@@ -471,8 +469,8 @@ r = "preguntas-frecuentes/"
 FAQ = [
     ("¿La ficha médica inteligente reemplaza a la cita?", "No. Prepara la cita: el doctor llega a ella conociendo su caso y sus estudios, y usted no repite la historia desde cero."),
     ("¿La guía inteligente me da un diagnóstico?", "No. La guía solo hace preguntas y ordena sus respuestas para el doctor. No diagnostica, no receta y no reemplaza la valoración médica. Quien revisa su caso y decide el siguiente paso es el doctor."),
-    ("¿Cuánto cuesta la ficha médica inteligente?", precio("precio_consulta", "{}. Se paga en línea al enviar el caso y se descuenta del valor de su consulta.", "El consultorio te informa el valor antes de que usted pague. Ese valor se descuenta de su consulta.")),
-    ("¿Cuándo me responden?", "El equipo del doctor te contacta cuando tu caso esté revisado. El tiempo depende del número de casos y de la complejidad del suyo. Si tiene una señal de alarma, no espere la respuesta: acuda a emergencias."),
+    ("¿Cuánto cuesta la ficha médica inteligente?", precio("precio_consulta", "{}. Se paga en línea al enviar el caso y se descuenta del valor de su consulta.", "El consultorio le informa el valor antes de que usted pague. Ese valor se descuenta de su consulta.")),
+    ("¿Cuándo me responden?", "El equipo del doctor le contacta cuando su caso esté revisado. El tiempo depende del número de casos y de la complejidad del suyo. Si tiene una señal de alarma, no espere la respuesta: acuda a emergencias."),
     ("¿Quién ve mis datos y mis estudios?", "Solo el doctor y su equipo, para valorar su caso, conforme a la Ley Orgánica de Protección de Datos Personales. Los detalles están en el aviso de privacidad."),
     ("¿Qué archivos puedo subir?", "Radiografías, resonancias, tomografías, informes y biopsias, en PDF o imagen (JPG, PNG o HEIC). Si tiene un disco de imágenes en formato DICOM, envíe el enlace de descarga del centro de imagen."),
     ("Vivo fuera de Quito, ¿puedo consultar?", "Sí. Envíe sus estudios por la ficha médica inteligente y el doctor le dirá si conviene una teleconsulta o viajar para una cita presencial."),
@@ -490,20 +488,20 @@ pagina(ruta=r, prioridad="0.6", titulo="Preguntas frecuentes",
 # ---------------------------------------------------------------- Ficha médica inteligente (la aplicación)
 r = "consulta-express/"
 pagina(ruta=r, prioridad="0.9", titulo="Ficha médica inteligente",
-       descripcion="Cuenta tu caso, sube tus estudios y el Dr. Felipe Criollo Palacios lo revisa antes de la cita. Ficha médica inteligente que ordena tu historia; no diagnostica.",
+       descripcion="Cuente su caso, suba sus estudios y el Dr. Felipe Criollo Palacios lo revisa antes de la cita. Ficha médica inteligente que ordena su historia; no diagnostica.",
        jsonld=[migas_ld(r, [("", "Inicio")], "Ficha médica inteligente")], scripts=("assets/consulta.js",),
        cuerpo=f"""
 <section class="cabeza-pagina"><div class="contenedor">
 <nav class="migas" aria-label="Ruta"><a href="{rel(r,'')}">Inicio</a></nav>
-<p class="antetitulo">Ficha médica inteligente</p><h1>Cuenta tu caso antes de la cita</h1>
-<p class="entrada">La ficha médica inteligente te hace las preguntas de una primera consulta, programadas para orientarte y recoger tu información de manera más eficaz. Respondes con tus palabras y subes tus estudios. El doctor revisa tu caso personalmente.</p>
+<p class="antetitulo">Ficha médica inteligente</p><h1>Cuente su caso antes de la cita</h1>
+<p class="entrada">La ficha médica inteligente le hace las preguntas de una primera consulta, programadas para orientarle y recoger su información de manera más eficaz. Usted responde con sus palabras y sube sus estudios. El doctor revisa su caso personalmente.</p>
 </div></section>
 <section class="seccion" style="padding-top:40px"><div class="contenedor">
 <div id="ce" class="ce" aria-live="polite">
-<noscript><p>La ficha médica inteligente necesita JavaScript activado en tu navegador.</p></noscript>
+<noscript><p>La ficha médica inteligente necesita JavaScript activado en su navegador.</p></noscript>
 </div>
 <script type="application/json" id="ce-contacto">{{"telefono": "{D['telefono']}", "tel": "{D['telefono_enlace']}", "whatsapp": "{D['whatsapp_enlace']}", "precio_consulta": "{D['precio_consulta']}", "precio_segunda": "{D['precio_segunda']}"}}</script>
-<p class="nota" style="margin-top:24px;max-width:760px">La guía inteligente no diagnostica ni receta. Si describes una señal de alarma, te pedirá acudir a emergencias. Tus datos se tratan conforme al <a href="{rel(r,'privacidad/')}">aviso de privacidad</a>.</p>
+<p class="nota" style="margin-top:24px;max-width:760px">La guía inteligente no diagnostica ni receta. Si describe una señal de alarma, le pedirá acudir a emergencias. Sus datos se tratan conforme al <a href="{rel(r,'privacidad/')}">aviso de privacidad</a>.</p>
 </div></section>
 <link rel="stylesheet" href="{rel(r,'assets/consulta.css')}">""")
 
@@ -518,23 +516,23 @@ pagina(ruta=r, legal=True, prioridad="0.3", titulo="Aviso de privacidad y tratam
 <section class="seccion"><div class="contenedor"><div class="prosa">
 <div class="caja"><p><strong>Hoy este sitio no recoge datos personales.</strong> No tiene formularios activos ni cookies publicitarias o de analítica. La ficha médica inteligente en línea todavía no está en funcionamiento; lo que sigue describe cómo se tratarán los datos cuando se active, y se actualizará antes de esa fecha.</p></div>
 <h2>1. Quién es el responsable</h2>
-<p>El responsable del tratamiento de tus datos es {D['nombre_completo']}, médico cirujano ortopedista oncólogo, con domicilio en {D['direccion_citimed']}. Para cualquier consulta sobre tus datos puedes presentar {CORREO_O_SITIO}.</p>
+<p>El responsable del tratamiento de sus datos es {D['nombre_completo']}, médico cirujano ortopedista oncólogo, con domicilio en {D['direccion_citimed']}. Para cualquier consulta sobre sus datos puede presentar {CORREO_O_SITIO}.</p>
 <h2>2. Qué datos tratamos</h2>
-<ul><li><strong>Datos de identificación y contacto</strong>: nombre, cédula o pasaporte, fecha de nacimiento, correo, teléfono y ciudad.</li><li><strong>Datos de salud</strong>: el motivo de consulta, lo que cuentas en la ficha médica inteligente, los estudios, informes e imágenes que subes y el resumen de tu caso. La Ley Orgánica de Protección de Datos Personales los considera <strong>datos sensibles</strong>.</li><li><strong>Datos de facturación y pago</strong>: nombre o razón social, cédula o RUC, dirección y la constancia del pago. No recibimos ni guardamos el número completo de tu tarjeta: el pago lo procesa directamente la plataforma de pagos.</li><li><strong>Datos técnicos mínimos</strong>: para evitar abusos del formulario, el sistema cuenta las solicitudes por conexión usando un código derivado de la dirección IP, que no permite identificarte y se borra a diario. El sitio no usa cookies publicitarias. [CONFIRMAR SI SE ACTIVA ANALÍTICA Y CUÁL]</li></ul>
+<ul><li><strong>Datos de identificación y contacto</strong>: nombre, cédula o pasaporte, fecha de nacimiento, correo, teléfono y ciudad.</li><li><strong>Datos de salud</strong>: el motivo de consulta, lo que usted cuenta en la ficha médica inteligente, los estudios, informes e imágenes que sube y el resumen de su caso. La Ley Orgánica de Protección de Datos Personales los considera <strong>datos sensibles</strong>.</li><li><strong>Datos de facturación y pago</strong>: nombre o razón social, cédula o RUC, dirección y la constancia del pago. No recibimos ni guardamos el número completo de su tarjeta: el pago lo procesa directamente la plataforma de pagos.</li><li><strong>Datos técnicos mínimos</strong>: para evitar abusos del formulario, el sistema cuenta las solicitudes por conexión usando un código derivado de la dirección IP, que no permite identificarle y se borra a diario. El sitio no usa cookies publicitarias. [CONFIRMAR SI SE ACTIVA ANALÍTICA Y CUÁL]</li></ul>
 <h2>3. Para qué los usamos</h2>
-<ul><li>Valorar tu caso, prepararte la cita, la teleconsulta o la segunda opinión, y contactarte con la propuesta de siguiente paso.</li><li>Emitir la factura electrónica del servicio que pagas.</li><li>Si un médico te refirió, y solo si lo autorizas, enviarle a ese médico el informe de tu caso.</li><li>Cumplir obligaciones legales, como las tributarias y las de la historia clínica.</li></ul>
-<p>No usamos tus datos de salud para publicidad ni los vendemos. No tomamos decisiones sobre ti de forma automatizada: la guía inteligente es un sistema automatizado que solo ordena la información; la valoración la hace el doctor.</p>
+<ul><li>Valorar su caso, prepararle la cita, la teleconsulta o la segunda opinión, y contactarle con la propuesta de siguiente paso.</li><li>Emitir la factura electrónica del servicio que paga.</li><li>Si un médico le refirió, y solo si usted lo autoriza, enviarle a ese médico el informe de su caso.</li><li>Cumplir obligaciones legales, como las tributarias y las de la historia clínica.</li></ul>
+<p>No usamos sus datos de salud para publicidad ni los vendemos. No tomamos decisiones sobre usted de forma automatizada: la guía inteligente es un sistema automatizado que solo ordena la información; la valoración la hace el doctor.</p>
 <h2>4. Base legal</h2>
-<p>Tratamos tus datos de salud con tu <strong>consentimiento explícito</strong>, que otorgas al marcar la casilla de autorización antes de enviar tu caso, y para la prestación del servicio de salud que solicitas. Los datos de facturación se tratan para cumplir obligaciones legales.</p>
+<p>Tratamos sus datos de salud con su <strong>consentimiento explícito</strong>, que usted otorga al marcar la casilla de autorización antes de enviar su caso, y para la prestación del servicio de salud que usted solicita. Los datos de facturación se tratan para cumplir obligaciones legales.</p>
 <h2>5. Con quién los compartimos</h2>
-<p>Tus datos solo los ven el doctor y el personal de su consultorio que necesita verlos para atenderte, con deber de confidencialidad. Para que el sitio funcione, intervienen proveedores tecnológicos que actúan como encargados del tratamiento, solo bajo instrucciones del doctor: alojamiento del sitio, el servicio automatizado que formula las preguntas de la guía, el formulario donde se guardan los casos y las plataformas de pago. Algunos de estos proveedores están fuera del Ecuador, por lo que tus datos pueden transferirse a otros países con garantías adecuadas de protección.</p>
+<p>Un equipo capacitado y autorizado por el doctor recopila y ordena la información para ayudarle, con deber de confidencialidad. El doctor es quien lleva y custodia toda la documentación de su caso. Para que el sitio funcione, intervienen proveedores tecnológicos que actúan como encargados del tratamiento, solo bajo instrucciones del doctor: alojamiento del sitio, el servicio automatizado que formula las preguntas de la guía, el formulario donde se guardan los casos y las plataformas de pago. Algunos de estos proveedores están fuera del Ecuador, por lo que sus datos pueden transferirse a otros países con garantías adecuadas de protección.</p>
 <p>El proveedor de ese servicio procesa el texto de la conversación para formular la siguiente pregunta y no lo usa para entrenar sus modelos. [CONFIRMAR CONDICIONES CONTRACTUALES VIGENTES]</p>
 <h2>6. Cuánto tiempo los conservamos</h2>
-<p>Los datos de tu caso se conservan mientras sean necesarios para atenderte. Si tu caso pasa a formar parte de tu historia clínica, se conserva el tiempo que exige la normativa sanitaria. Los datos de facturación se conservan el tiempo que exige la normativa tributaria.</p>
-<h2>7. Tus derechos</h2>
-<p>Puedes ejercer en cualquier momento tus derechos de acceso, rectificación y actualización, eliminación, oposición, portabilidad, y suspensión del tratamiento, así como revocar tu consentimiento, con {CORREO_O_SITIO}, junto con una copia de tu documento de identidad. Te responderemos en el plazo que fija la ley. Si consideras que tus derechos no fueron atendidos, puedes acudir a la Superintendencia de Protección de Datos Personales.</p>
+<p>Los datos de su caso se conservan mientras sean necesarios para atenderle. Si su caso pasa a formar parte de su historia clínica, se conserva el tiempo que exige la normativa sanitaria. Los datos de facturación se conservan el tiempo que exige la normativa tributaria.</p>
+<h2>7. Sus derechos</h2>
+<p>Usted puede ejercer en cualquier momento sus derechos de acceso, rectificación y actualización, eliminación, oposición, portabilidad, y suspensión del tratamiento, así como revocar su consentimiento, con {CORREO_O_SITIO}, junto con una copia de su documento de identidad. Le responderemos en el plazo que fija la ley. Si considera que sus derechos no fueron atendidos, puede acudir a la Superintendencia de Protección de Datos Personales.</p>
 <h2>8. Seguridad</h2>
-<p>Las comunicaciones del sitio viajan cifradas. Los casos se guardan en un espacio de acceso restringido al doctor y su equipo. Te pedimos no enviar por el sitio contraseñas ni datos completos de tarjetas.</p>
+<p>Las comunicaciones del sitio viajan cifradas. Los casos se guardan en un espacio de acceso restringido al doctor y al equipo que él autoriza. Le pedimos no enviar por el sitio contraseñas ni datos completos de tarjetas.</p>
 <h2>9. Menores de edad</h2>
 <p>Si el paciente es menor de edad, la consulta debe enviarla su madre, padre o representante legal, quien otorga el consentimiento.</p>
 <h2>10. Cambios</h2>
@@ -551,25 +549,25 @@ pagina(ruta=r, legal=True, servicio=True, prioridad="0.3", titulo="Condiciones d
 <h2>1. Quién presta el servicio</h2>
 <p>La ficha médica inteligente y la segunda opinión las presta {D['nombre_completo']}, médico cirujano ortopedista oncólogo, con consultorio en {D['direccion_citimed']}.</p>
 <h2>2. Qué es la ficha médica inteligente</h2>
-<p>Es una ficha previa a tu cita, que se llena en línea. Cuentas tu caso en ella, con la guía de un sistema automatizado que te hace preguntas y ordena tus respuestas, y subes tus estudios. El doctor revisa la información y su equipo te contacta para proponerte el siguiente paso: una cita presencial, una teleconsulta, estudios adicionales o la derivación a otro especialista.</p>
+<p>Es una ficha previa a su cita, que se llena en línea. Usted cuenta su caso en ella, guiado por un sistema automatizado que le hace preguntas y ordena sus respuestas, y sube sus estudios. El doctor revisa la información y su equipo le contacta para proponerle el siguiente paso: una cita presencial, una teleconsulta, estudios adicionales o la derivación a otro especialista.</p>
 <h2>3. Qué no es</h2>
-<ul><li>No es una atención de urgencia ni de emergencia. Ante una señal de alarma, acude a emergencias o llama al 911.</li><li>La guía inteligente no diagnostica, no receta y no da indicaciones de tratamiento. Sus mensajes son preguntas para recoger información.</li><li>La ficha médica inteligente no reemplaza la valoración médica presencial cuando esta es necesaria.</li></ul>
+<ul><li>No es una atención de urgencia ni de emergencia. Ante una señal de alarma, acuda a emergencias o llame al 911.</li><li>La guía inteligente no diagnostica, no receta y no da indicaciones de tratamiento. Sus mensajes son preguntas para recoger información.</li><li>La ficha médica inteligente no reemplaza la valoración médica presencial cuando esta es necesaria.</li></ul>
 <h2>4. Casos que el doctor no recibe por la ficha</h2>
 <p>Por la ficha médica inteligente el doctor no recibe los siguientes casos:</p>
 <ul><li>Problemas de columna vertebral.</li><li>Artroscopia y medicina deportiva.</li><li>Peritajes, certificados o informes médico-legales.</li><li>Accidentes de trabajo o de tránsito con trámite de seguro.</li><li>Infecciones de cirugías realizadas en otros centros.</li><li>Certificados de discapacidad.</li></ul>
-<p>Si tu caso es uno de estos, el equipo del doctor te orientará hacia un colega de confianza. Antes de empezar la ficha se te pide confirmar que tu caso no está en esta lista.</p>
+<p>Si su caso es uno de estos, el equipo del doctor le orientará hacia un colega de confianza. Antes de empezar la ficha se le pide confirmar que su caso no está en esta lista.</p>
 <h2>5. Qué es la segunda opinión</h2>
-<p>Es la revisión por el doctor de un diagnóstico o una propuesta de tratamiento previa, con tus estudios. Incluye un informe escrito y una videollamada para explicarlo. La opinión se basa en la información y los estudios enviados; si son incompletos, el doctor puede pedir información adicional o indicar que se requiere una valoración presencial.</p>
+<p>Es la revisión por el doctor de un diagnóstico o una propuesta de tratamiento previa, con sus estudios. Incluye la revisión completa de los estudios e imágenes y un informe escrito y firmado. Si usted lo autoriza de forma expresa, el informe se envía también a su médico tratante. La opinión se basa en la información y los estudios enviados; si son incompletos, el doctor puede pedir información adicional o indicar que se requiere una valoración presencial.</p>
 <h2>5. Precio y pago</h2>
-<ul><li>Ficha médica inteligente: {D['precio_consulta']}.</li><li>Segunda opinión: {D['precio_segunda']}.</li><li>Los precios incluyen IVA cuando corresponde. El pago se hace en línea con las plataformas disponibles en el sitio, que pueden cobrar sus propias comisiones al paciente según sus condiciones.</li><li>El consultorio emite la factura electrónica con los datos que indiques.</li></ul>
+<ul><li>Ficha médica inteligente: {D['precio_consulta']}. Incluye una respuesta escrita con el siguiente paso recomendado. Este valor se descuenta de la consulta presencial con el doctor.</li><li>Segunda opinión: {D['precio_segunda']}.</li><li>Los precios incluyen IVA cuando corresponde. El pago se hace en línea con las plataformas disponibles en el sitio, que pueden cobrar sus propias comisiones al paciente según sus condiciones.</li><li>El consultorio emite la factura electrónica con los datos que usted indica.</li></ul>
 <h2>6. Plazos</h2>
-<p>El equipo del doctor te contacta cuando el caso está revisado. No se garantiza un plazo de respuesta, que depende del volumen de casos y de la complejidad de cada uno.</p>
+<p>La secretaria del doctor le contacta cuando el caso está revisado, por WhatsApp, llamada o correo, de 09h00 a 18h00. No se garantiza un plazo de respuesta, que depende del volumen de casos y de la complejidad de cada uno.</p>
 <h2>7. Devoluciones</h2>
 <p>[POLÍTICA A DEFINIR CON EL DOCTOR Y SU ABOGADO. Por ejemplo: si el doctor determina que el caso no corresponde a su especialidad antes de revisarlo a fondo, se devuelve el valor pagado.]</p>
 <h2>8. Responsabilidad del paciente</h2>
-<p>Te comprometes a dar información veraz y completa, a enviar estudios que te pertenecen o que estás autorizado a compartir y a no usar el servicio para fines distintos de tu atención.</p>
+<p>Usted se compromete a dar información veraz y completa, a enviar estudios que le pertenecen o que está autorizado a compartir y a no usar el servicio para fines distintos de su atención.</p>
 <h2>9. Datos personales</h2>
-<p>El tratamiento de tus datos se rige por el <a href="{rel(r,'privacidad/')}">aviso de privacidad</a>.</p>
+<p>El tratamiento de sus datos se rige por el <a href="{rel(r,'privacidad/')}">aviso de privacidad</a>.</p>
 <h2>10. Ley aplicable</h2>
 <p>Estas condiciones se rigen por las leyes de la República del Ecuador.</p>
 </div></div></section>""")
@@ -580,11 +578,11 @@ pagina(ruta=r, legal=True, servicio=True, prioridad="0.3", titulo="Consentimient
        cuerpo=cabeza(r, [("", "Inicio")], "", "Consentimiento para el tratamiento de datos de salud") + f"""
 <section class="seccion"><div class="contenedor"><div class="prosa">
 {BORRADOR}
-<p>Este es el texto completo de la autorización que otorgas al marcar la casilla antes de enviar tu caso.</p>
+<p>Este es el texto completo de la autorización que usted otorga al marcar la casilla antes de enviar su caso.</p>
 <div class="caja"><p>Autorizo de forma libre, específica, informada e inequívoca a {D['nombre_completo']} a tratar mis datos personales y los datos de salud que entrego en este formulario, incluidos los estudios, informes e imágenes que adjunto, con la finalidad de valorar mi caso, preparar mi atención y contactarme con la propuesta de siguiente paso, conforme al aviso de privacidad, que declaro haber leído.</p>
-<p>Entiendo que la guía inteligente es un sistema automatizado que solo ordena mi información y no emite diagnósticos, y que mis datos serán procesados por proveedores tecnológicos que pueden estar fuera del Ecuador, con garantías adecuadas.</p>
+<p>Entiendo que un equipo capacitado y autorizado por el doctor recopila mi información para ayudarle, que el doctor lleva y custodia toda la documentación, que la guía inteligente es un sistema automatizado que solo ordena mi información y no emite diagnósticos, y que mis datos serán procesados por proveedores tecnológicos que pueden estar fuera del Ecuador, con garantías adecuadas.</p>
 <p>Sé que puedo revocar esta autorización y ejercer mis derechos de acceso, rectificación, eliminación, oposición, portabilidad y suspensión con {CORREO_O_SITIO}.</p></div>
-<h2>Si un médico te refiere</h2>
+<h2>Si un médico le refiere</h2>
 <div class="caja"><p>Autorizo, además, que el informe de mi caso se envíe al médico que me refirió. [CASILLA OPCIONAL]</p></div>
 <h2>Si envía el caso un médico o un familiar</h2>
 <div class="caja"><p>Declaro que cuento con la autorización del paciente, o que soy su representante legal, para compartir sus datos de salud con el doctor con esta finalidad.</p></div>
@@ -598,17 +596,17 @@ pagina(ruta=r, prioridad="0.2", titulo="Declaración de accesibilidad",
 <p>Queremos que todas las personas puedan usar este sitio, incluidas las que tienen alguna discapacidad visual, auditiva, motriz o cognitiva, y las personas mayores.</p>
 <h2>Norma de referencia</h2>
 <p>El sitio se construyó siguiendo las Pautas de Accesibilidad para el Contenido Web (WCAG) 2.2, nivel AA, del W3C. Entre otras medidas:</p>
-<ul><li>Contraste suficiente entre el texto y el fondo.</li><li>Textos alternativos en las imágenes.</li><li>Un enlace «Saltar al contenido» al inicio de cada página.</li><li>Navegación completa con teclado y foco visible.</li><li>Botones y enlaces de al menos 44 píxeles para tocarlos con facilidad.</li><li>Respeto de la preferencia de movimiento reducido del dispositivo.</li><li>Mapas que solo se cargan si lo pides.</li></ul>
+<ul><li>Contraste suficiente entre el texto y el fondo.</li><li>Textos alternativos en las imágenes.</li><li>Un enlace «Saltar al contenido» al inicio de cada página.</li><li>Navegación completa con teclado y foco visible.</li><li>Botones y enlaces de al menos 44 píxeles para tocarlos con facilidad.</li><li>Respeto de la preferencia de movimiento reducido del dispositivo.</li><li>Mapas que solo se cargan si usted lo pide.</li></ul>
 <h2>Limitaciones conocidas</h2>
 <p>Los documentos que suben los pacientes y algunos artículos científicos enlazados pertenecen a terceros y pueden no ser accesibles.</p>
 <h2>Cómo avisarnos</h2>
-<p>Si encuentras una barrera, cuéntanoslo en el consultorio del doctor. Te ayudaremos por otro medio y corregiremos el problema.</p>
+<p>Si encuentra una barrera, cuéntenoslo en el consultorio del doctor. Le ayudaremos por otro medio y corregiremos el problema.</p>
 <p>Fecha de esta declaración: [FECHA DE PUBLICACIÓN]</p>
 </div></div></section>""")
 
 # ---------------------------------------------------------------- 404
 r = ""
-pagina(ruta="", archivo="404.html", sin_indice=True, titulo="Página no encontrada", descripcion="La página que buscas no existe.",
+pagina(ruta="", archivo="404.html", sin_indice=True, titulo="Página no encontrada", descripcion="La página que busca no existe.",
        cuerpo=f"""<section class="seccion"><div class="contenedor estrecho"><h1>No encontramos esta página</h1>
 <p class="entrada">Puede que la dirección haya cambiado. Estas son las páginas más consultadas:</p>
 <ul style="margin-top:20px;line-height:2"><li><a href="/">Inicio</a></li><li><a href="/consulta-express/">Ficha médica inteligente</a></li><li><a href="/segunda-opinion/">Segunda opinión</a></li><li><a href="/#oncologia">Especialidades</a></li><li><a href="/donde-atiendo/">Consultorio</a></li></ul></div></section>""")
