@@ -16,7 +16,7 @@ def img(ruta, nombre, alt, proporcion="4/5", clase="", eager=False):
             f'alt="{alt}" style="aspect-ratio:{proporcion};object-fit:cover;object-position:center top" width="900" height="{round(900 * alto / ancho)}" {carga} class="{clase}">')
 
 
-def cta(ruta, motivo=None, texto="Iniciar consulta express", clase="btn"):
+def cta(ruta, motivo=None, texto="Llene su ficha médica", clase="btn"):
     q = f"?motivo={motivo}" if motivo else ""
     return f'<a class="{clase}" href="{rel(ruta, "consulta-express/")}{q}">{texto}</a>'
 
@@ -33,7 +33,7 @@ def precio(clave, con, sin):
     return con.format(D[clave]) if not D[clave].startswith("[") else sin
 
 
-CORREO_O_SITIO = D["correo"] if not D["correo"].startswith("[") else "la consulta en línea de este sitio"
+CORREO_O_SITIO = D["correo"] if not D["correo"].startswith("[") else "la ficha médica inteligente de este sitio"
 
 
 def ld_pagina_medica(ruta, titulo, descripcion, tema):
@@ -46,7 +46,7 @@ def ld_pagina_medica(ruta, titulo, descripcion, tema):
 r = ""
 pagina(ruta=r, prioridad="1.0",
        titulo=f"{D['nombre']} · Ortopedista oncólogo en Quito",
-       descripcion="Cirujano ortopedista oncólogo en Quito. Tumores óseos y de partes blandas, metástasis en extremidades, segunda opinión y traumatología. Consulta express en línea con subida de estudios.",
+       descripcion="Cirujano ortopedista oncólogo en Quito. Tumores óseos y de partes blandas, metástasis en extremidades, segunda opinión y traumatología. Ficha médica inteligente previa a la cita, con subida de estudios.",
        jsonld=[MEDICO_LD, {"@context": "https://schema.org", "@type": "WebSite", "name": D["nombre"], "url": D["dominio"] + "/", "inLanguage": "es-EC"}],
        cuerpo=f"""
 <section class="negatoscopio"><div class="contenedor">
@@ -105,9 +105,9 @@ pagina(ruta=r, prioridad="1.0",
 </div></section>
 
 <section class="seccion"><div class="contenedor">
-<p class="antetitulo">Consulta express</p>
+<p class="antetitulo">Ficha médica inteligente</p>
 <h2>Su caso, ordenado antes de la cita</h2>
-<p class="entrada">Un formulario con guía inteligente le hace las preguntas que el doctor haría en la primera consulta. Usted responde con sus palabras y sube sus estudios. La valoración la hace el doctor.</p>
+<p class="entrada">La ficha médica inteligente le hace las preguntas que el doctor haría en la primera consulta. Usted responde con sus palabras y sube sus estudios. La valoración la hace el doctor.</p>
 <ol class="pasos">
 <li><strong>Elija el motivo</strong><span>Masa o tumor, lesión, dolor articular o control de una cirugía.</span></li>
 <li><strong>Cuente su caso</strong><span>Una pregunta a la vez: cuándo empezó, cómo evoluciona, qué tratamientos recibió.</span></li>
@@ -157,7 +157,7 @@ pagina(ruta=r, prioridad="0.8", titulo="Especialidades: ortopedia oncológica y 
 <a class="tarjeta" href="{rel(r,'biopsia/')}"><span class="eti">Diagnóstico</span><strong>La biopsia en un tumor óseo</strong><p>Por qué debe planificarla el cirujano que va a operar.</p></a>
 <a class="tarjeta" href="{rel(r,'especialidades/traumatologia/')}"><span class="eti" style="color:var(--gris)">Atención general</span><strong>Traumatología y ortopedia</strong><p>Fracturas, lesiones deportivas, mano y prótesis.</p></a>
 </div>
-<p class="nota" style="margin-top:32px">¿Tiene dudas sobre si su caso corresponde a esta especialidad? {cta(r, None, 'Cuéntelo en la consulta express', '')}.</p>
+<p class="nota" style="margin-top:32px">¿Tiene dudas sobre si su caso corresponde a esta especialidad? {cta(r, None, 'Cuéntelo en la ficha médica inteligente', '')}.</p>
 </div></section>""")
 
 
@@ -168,7 +168,7 @@ def condicion(slug, tema, titulo, descripcion, entrada, cuerpo, motivo="tumor"):
            jsonld=[ld_pagina_medica(r, titulo, descripcion, tema), migas_ld(r, migas, tema)],
            cuerpo=cabeza(r, migas, "Ortopedia oncológica" if motivo == "tumor" else "Traumatología", titulo, entrada) +
            f'<section class="seccion"><div class="contenedor"><div class="prosa">{cuerpo}'
-           f'<div class="caja"><p><strong>¿Quiere que el doctor revise su caso?</strong> Cuente su historia y suba sus estudios en la consulta express. Si ya tiene un diagnóstico, puede pedir una <a href="{rel(r,"segunda-opinion/")}">segunda opinión</a>.</p><div class="botones" style="margin-top:14px">{cta(r, motivo)}</div></div>'
+           f'<div class="caja"><p><strong>¿Quiere que el doctor revise su caso?</strong> Cuente su historia y suba sus estudios en la ficha médica inteligente. Si ya tiene un diagnóstico, puede pedir una <a href="{rel(r,"segunda-opinion/")}">segunda opinión</a>.</p><div class="botones" style="margin-top:14px">{cta(r, motivo)}</div></div>'
            f'{revisado()}</div></div></section>')
 
 
@@ -249,7 +249,7 @@ condicion("traumatologia", "Traumatología y ortopedia", "Traumatología y ortop
 <h2>Cuándo ir a emergencias</h2>
 <div class="alarma-caja"><p><strong>No espere a una cita</strong> si hay una deformidad visible, el hueso asoma por la piel, pierde la sensibilidad o la fuerza de un brazo o una pierna, la extremidad se pone fría o pálida, o tiene fiebre con una herida quirúrgica que supura. Acuda a emergencias o llame al 911.</p></div>
 <h2>Para todo lo demás</h2>
-<p>Cuente su caso en la consulta express y suba la radiografía o el informe que tenga. El equipo del doctor le contactará para proponerle el siguiente paso.</p>
+<p>Cuente su caso en la ficha médica inteligente y suba la radiografía o el informe que tenga. El equipo del doctor le contactará para proponerle el siguiente paso.</p>
 """, motivo="lesion")
 
 # ---------------------------------------------------------------- Biopsia
@@ -271,7 +271,7 @@ pagina(ruta=r, prioridad="0.8", titulo=t, descripcion=d,
 <h2>La experiencia del doctor</h2>
 <p>El {D['nombre']} publicó en 2015 el artículo «Biopsia percutánea en ortopedia oncológica. Serie de casos», en la Revista Colombiana de Ortopedia y Traumatología, con una serie de 152 pacientes. <span class="pendiente">[ENLACE AL ARTÍCULO Y, SI EL DOCTOR LO APRUEBA, UNA FRASE CON SU HALLAZGO PRINCIPAL]</span></p>
 <h2>Si ya le hicieron una biopsia</h2>
-<p>No se preocupe: muchas biopsias se hacen bien en cualquier centro. Lo importante es que el cirujano que va a operar conozca dónde y cómo se tomó. Envíe el informe de patología, las imágenes previas y, si la tiene, la descripción del procedimiento en la consulta express o en una <a href="{rel(r,'segunda-opinion/')}">segunda opinión</a>.</p>
+<p>No se preocupe: muchas biopsias se hacen bien en cualquier centro. Lo importante es que el cirujano que va a operar conozca dónde y cómo se tomó. Envíe el informe de patología, las imágenes previas y, si la tiene, la descripción del procedimiento en la ficha médica inteligente o en una <a href="{rel(r,'segunda-opinion/')}">segunda opinión</a>.</p>
 <div class="botones" style="margin:28px 0">{cta(r,'tumor')}<a class="btn btn-neutro" href="{rel(r,'para-colegas/')}">Soy médico y quiero referir</a></div>
 {revisado()}
 </div></div></section>""")
@@ -288,7 +288,7 @@ pagina(ruta=r, prioridad="0.9", titulo="Segunda opinión en ortopedia oncológic
 <section class="seccion"><div class="contenedor">
 <h2>Cómo funciona</h2>
 <ol class="pasos">
-<li><strong>Cuente su caso</strong><span>En la consulta express, elija «Segunda opinión». La guía inteligente le pregunta por el diagnóstico, el tratamiento propuesto y cómo llegó hasta aquí.</span></li>
+<li><strong>Cuente su caso</strong><span>En la ficha médica inteligente, elija «Segunda opinión». La guía inteligente le pregunta por el diagnóstico, el tratamiento propuesto y cómo llegó hasta aquí.</span></li>
 <li><strong>Suba sus documentos</strong><span>Informes, imágenes y patología. Más abajo está la lista exacta.</span></li>
 <li><strong>Autorice el envío</strong><span>Autoriza el uso de sus datos de salud para la revisión{precio('precio_segunda', ' y paga {}', '')}.</span></li>
 <li><strong>El doctor revisa</strong><span>Revisa personalmente sus estudios. Si falta algo importante, su equipo se lo pide.</span></li>
@@ -391,7 +391,7 @@ pagina(ruta=r, prioridad="0.7", titulo="Si vive fuera de Quito o en el exterior"
                      "Viajar por un problema de salud cuesta tiempo, dinero y cansancio. Por eso el primer paso se hace a distancia: el doctor revisa su caso antes de que usted viaje.") + f"""
 <section class="seccion"><div class="contenedor">
 <ol class="pasos">
-<li><strong>Envíe su caso antes</strong><span>Por la consulta express o la segunda opinión, con sus estudios.</span></li>
+<li><strong>Envíe su caso antes</strong><span>Por la ficha médica inteligente o la segunda opinión, con sus estudios.</span></li>
 <li><strong>El doctor decide con usted</strong><span>Si basta una teleconsulta, si necesita estudios adicionales en su ciudad o si conviene venir.</span></li>
 <li><strong>Una sola visita</strong><span>Si viene, su equipo coordina la cita y, en lo posible, los estudios del mismo viaje.</span></li>
 <li><strong>Seguimiento a distancia</strong><span>Los controles que lo permitan se hacen por teleconsulta, con su médico local.</span></li>
@@ -428,7 +428,7 @@ pagina(ruta=r, prioridad="0.8", titulo="Consultorio: Citimed y Hospital Metropol
 {mapa('Hospital+Metropolitano+Quito', 'Mapa del Hospital Metropolitano')}</article>
 </div>
 <div class="dos" style="margin-top:56px">
-<div class="texto"><h2>Antes de venir</h2><p class="entrada">Si cuenta su caso en la consulta express, el doctor llega a la cita conociendo su historia y sus estudios, y usted no repite todo desde cero.</p><div class="botones" style="margin-top:24px">{cta(r)}</div></div>
+<div class="texto"><h2>Antes de venir</h2><p class="entrada">Si cuenta su caso en la ficha médica inteligente, el doctor llega a la cita conociendo su historia y sus estudios, y usted no repite todo desde cero.</p><div class="botones" style="margin-top:24px">{cta(r)}</div></div>
 <div class="media">{img(r,'felipe-consultorio','El Dr. Felipe Criollo Palacios en su consultorio de Citimed','10/9')}</div>
 </div>
 </div></section>""")
@@ -444,7 +444,7 @@ pagina(ruta=r, prioridad="0.7", titulo=t, descripcion=d,
 <div class="alarma-caja"><p><strong>Acuda hoy a emergencias o llame al 911 si:</strong></p><ul style="margin:10px 0 0"><li>Hay una deformidad visible después de un golpe o el hueso asoma por la piel.</li><li>Pierde la sensibilidad o la fuerza de un brazo o una pierna.</li><li>La extremidad está fría, pálida o morada.</li><li>Tiene fiebre y una herida quirúrgica enrojecida o que supura.</li><li>Tiene dolor de espalda con debilidad de las piernas o dificultad para orinar, sobre todo si tiene un diagnóstico de cáncer.</li><li>Una pierna está hinchada, caliente y dolorosa después de una cirugía o una inmovilización.</li></ul></div>
 <h2>Pida una valoración pronto, en los próximos días, si:</h2>
 <ul><li>Tiene un dolor en un hueso que dura más de unas semanas, que no se explica por un golpe y que lo despierta en la noche o no cede en reposo.</li><li>Nota un bulto que crece, sobre todo si mide más de 5 cm o está en la profundidad del músculo.</li><li>Se fracturó con un golpe menor o sin golpe.</li><li>Un niño o un adolescente cojea o se queja de dolor en un hueso sin causa clara.</li><li>Tiene un diagnóstico de cáncer y aparece dolor en un hueso que carga peso.</li></ul>
-<p>En estos casos puede contar su caso en la consulta express. La guía inteligente está programado para reconocer las señales de alarma y, si las detecta, le indicará acudir a emergencias en lugar de esperar.</p>
+<p>En estos casos puede contar su caso en la ficha médica inteligente. La guía inteligente está programada para reconocer las señales de alarma y, si las detecta, le indicará acudir a emergencias en lugar de esperar.</p>
 <div class="botones" style="margin:28px 0">{cta(r)}</div>
 {revisado()}
 </div></div></section>""")
@@ -469,38 +469,38 @@ pagina(ruta=r, prioridad="0.6", titulo="Casos y publicaciones",
 # ---------------------------------------------------------------- Preguntas frecuentes
 r = "preguntas-frecuentes/"
 FAQ = [
-    ("¿La consulta express reemplaza a la cita?", "No. Prepara la cita: el doctor llega a ella conociendo su caso y sus estudios, y usted no repite la historia desde cero."),
+    ("¿La ficha médica inteligente reemplaza a la cita?", "No. Prepara la cita: el doctor llega a ella conociendo su caso y sus estudios, y usted no repite la historia desde cero."),
     ("¿La guía inteligente me da un diagnóstico?", "No. La guía solo hace preguntas y ordena sus respuestas para el doctor. No diagnostica, no receta y no reemplaza la valoración médica. Quien revisa su caso y decide el siguiente paso es el doctor."),
-    ("¿Cuánto cuesta la consulta express?", precio("precio_consulta", "{}. Se paga en línea al enviar el caso y se descuenta del valor de su consulta.", "El consultorio le informa el valor antes de que usted pague. Ese valor se descuenta de su consulta.")),
+    ("¿Cuánto cuesta la ficha médica inteligente?", precio("precio_consulta", "{}. Se paga en línea al enviar el caso y se descuenta del valor de su consulta.", "El consultorio le informa el valor antes de que usted pague. Ese valor se descuenta de su consulta.")),
     ("¿Cuándo me responden?", "El equipo del doctor le contacta cuando su caso esté revisado. El tiempo depende del número de casos y de la complejidad del suyo. Si tiene una señal de alarma, no espere la respuesta: acuda a emergencias."),
     ("¿Quién ve mis datos y mis estudios?", "Solo el doctor y su equipo, para valorar su caso, conforme a la Ley Orgánica de Protección de Datos Personales. Los detalles están en el aviso de privacidad."),
     ("¿Qué archivos puedo subir?", "Radiografías, resonancias, tomografías, informes y biopsias, en PDF o imagen (JPG, PNG o HEIC). Si tiene un disco de imágenes en formato DICOM, envíe el enlace de descarga del centro de imagen."),
-    ("Vivo fuera de Quito, ¿puedo consultar?", "Sí. Envíe sus estudios por la consulta express y el doctor le dirá si conviene una teleconsulta o viajar para una cita presencial."),
+    ("Vivo fuera de Quito, ¿puedo consultar?", "Sí. Envíe sus estudios por la ficha médica inteligente y el doctor le dirá si conviene una teleconsulta o viajar para una cita presencial."),
     ("¿Atiende por seguro médico?", "[CONFIRMAR CON EL DOCTOR LOS SEGUROS CON LOS QUE TRABAJA]"),
     ("¿Cómo obtengo mi factura?", "Al pagar, el sistema le pide su nombre, cédula o RUC y correo. La factura electrónica la emite el consultorio con esos datos."),
 ]
 pagina(ruta=r, prioridad="0.6", titulo="Preguntas frecuentes",
-       descripcion="Respuestas sobre la consulta express, la segunda opinión, los costos, la privacidad de sus datos y cómo consultar desde fuera de Quito.",
+       descripcion="Respuestas sobre la ficha médica inteligente, la segunda opinión, los costos, la privacidad de sus datos y cómo consultar desde fuera de Quito.",
        jsonld=[{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ if not a.startswith("[")]},
                migas_ld(r, [("", "Inicio")], "Preguntas frecuentes")],
        cuerpo=cabeza(r, [("", "Inicio")], "", "Preguntas frecuentes") +
        '<section class="seccion"><div class="contenedor estrecho">' + "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in FAQ if not (D.get("publicado") and a.startswith("["))) +
        f'<div class="botones" style="margin-top:32px">{cta(r)}</div></div></section>')
 
-# ---------------------------------------------------------------- Consulta express (la aplicación)
+# ---------------------------------------------------------------- Ficha médica inteligente (la aplicación)
 r = "consulta-express/"
-pagina(ruta=r, prioridad="0.9", titulo="Consulta express",
-       descripcion="Cuente su caso, suba sus estudios y el Dr. Felipe Criollo Palacios lo revisa antes de la cita. Formulario con guía inteligente que ordena su historia; no diagnostica.",
-       jsonld=[migas_ld(r, [("", "Inicio")], "Consulta express")], scripts=("assets/consulta.js",),
+pagina(ruta=r, prioridad="0.9", titulo="Ficha médica inteligente",
+       descripcion="Cuente su caso, suba sus estudios y el Dr. Felipe Criollo Palacios lo revisa antes de la cita. Ficha médica inteligente que ordena su historia; no diagnostica.",
+       jsonld=[migas_ld(r, [("", "Inicio")], "Ficha médica inteligente")], scripts=("assets/consulta.js",),
        cuerpo=f"""
 <section class="cabeza-pagina"><div class="contenedor">
 <nav class="migas" aria-label="Ruta"><a href="{rel(r,'')}">Inicio</a></nav>
-<p class="antetitulo">Consulta express</p><h1>Cuente su caso antes de la cita</h1>
-<p class="entrada">Un formulario con guía inteligente le hace las preguntas de una primera consulta, programadas para orientarle y recoger su información de manera más eficaz. Usted responde con sus palabras y sube sus estudios. El doctor revisa su caso personalmente.</p>
+<p class="antetitulo">Ficha médica inteligente</p><h1>Cuente su caso antes de la cita</h1>
+<p class="entrada">La ficha médica inteligente le hace las preguntas de una primera consulta, programadas para orientarle y recoger su información de manera más eficaz. Usted responde con sus palabras y sube sus estudios. El doctor revisa su caso personalmente.</p>
 </div></section>
 <section class="seccion" style="padding-top:40px"><div class="contenedor">
 <div id="ce" class="ce" aria-live="polite">
-<noscript><p>La consulta express necesita JavaScript activado en su navegador.</p></noscript>
+<noscript><p>La ficha médica inteligente necesita JavaScript activado en su navegador.</p></noscript>
 </div>
 <script type="application/json" id="ce-contacto">{{"telefono": "{D['telefono']}", "tel": "{D['telefono_enlace']}", "whatsapp": "{D['whatsapp_enlace']}"}}</script>
 <p class="nota" style="margin-top:24px;max-width:760px">La guía inteligente no diagnostica ni receta. Si describe una señal de alarma, le pedirá acudir a emergencias. Sus datos se tratan conforme al <a href="{rel(r,'privacidad/')}">aviso de privacidad</a>.</p>
@@ -516,11 +516,11 @@ pagina(ruta=r, legal=True, prioridad="0.3", titulo="Aviso de privacidad y tratam
        descripcion="Cómo el Dr. Felipe Criollo Palacios trata los datos personales y de salud que recibe a través de este sitio, conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador.",
        cuerpo=cabeza(r, [("", "Inicio")], "", "Aviso de privacidad") + f"""
 <section class="seccion"><div class="contenedor"><div class="prosa">
-<div class="caja"><p><strong>Hoy este sitio no recoge datos personales.</strong> No tiene formularios activos ni cookies publicitarias o de analítica. La consulta express en línea todavía no está en funcionamiento; lo que sigue describe cómo se tratarán los datos cuando se active, y se actualizará antes de esa fecha.</p></div>
+<div class="caja"><p><strong>Hoy este sitio no recoge datos personales.</strong> No tiene formularios activos ni cookies publicitarias o de analítica. La ficha médica inteligente en línea todavía no está en funcionamiento; lo que sigue describe cómo se tratarán los datos cuando se active, y se actualizará antes de esa fecha.</p></div>
 <h2>1. Quién es el responsable</h2>
 <p>El responsable del tratamiento de sus datos es {D['nombre_completo']}, médico cirujano ortopedista oncólogo, con domicilio en {D['direccion_citimed']}. Para cualquier consulta sobre sus datos puede comunicarse por {CORREO_O_SITIO}.</p>
 <h2>2. Qué datos tratamos</h2>
-<ul><li><strong>Datos de identificación y contacto</strong>: nombre, cédula o pasaporte, fecha de nacimiento, correo, teléfono y ciudad.</li><li><strong>Datos de salud</strong>: el motivo de consulta, lo que usted cuenta en el formulario con guía inteligente, los estudios, informes e imágenes que sube y el resumen de su caso. La Ley Orgánica de Protección de Datos Personales los considera <strong>datos sensibles</strong>.</li><li><strong>Datos de facturación y pago</strong>: nombre o razón social, cédula o RUC, dirección y la constancia del pago. No recibimos ni guardamos el número completo de su tarjeta: el pago lo procesa directamente la plataforma de pagos.</li><li><strong>Datos técnicos mínimos</strong>: para evitar abusos del formulario, el sistema cuenta las solicitudes por conexión usando un código derivado de la dirección IP, que no permite identificarle y se borra a diario. El sitio no usa cookies publicitarias. [CONFIRMAR SI SE ACTIVA ANALÍTICA Y CUÁL]</li></ul>
+<ul><li><strong>Datos de identificación y contacto</strong>: nombre, cédula o pasaporte, fecha de nacimiento, correo, teléfono y ciudad.</li><li><strong>Datos de salud</strong>: el motivo de consulta, lo que usted cuenta en la ficha médica inteligente, los estudios, informes e imágenes que sube y el resumen de su caso. La Ley Orgánica de Protección de Datos Personales los considera <strong>datos sensibles</strong>.</li><li><strong>Datos de facturación y pago</strong>: nombre o razón social, cédula o RUC, dirección y la constancia del pago. No recibimos ni guardamos el número completo de su tarjeta: el pago lo procesa directamente la plataforma de pagos.</li><li><strong>Datos técnicos mínimos</strong>: para evitar abusos del formulario, el sistema cuenta las solicitudes por conexión usando un código derivado de la dirección IP, que no permite identificarle y se borra a diario. El sitio no usa cookies publicitarias. [CONFIRMAR SI SE ACTIVA ANALÍTICA Y CUÁL]</li></ul>
 <h2>3. Para qué los usamos</h2>
 <ul><li>Valorar su caso, prepararle la cita, la teleconsulta o la segunda opinión, y contactarle con la propuesta de siguiente paso.</li><li>Emitir la factura electrónica del servicio que paga.</li><li>Si un médico le refirió, y solo si usted lo autoriza, enviarle a ese médico el informe de su caso.</li><li>Cumplir obligaciones legales, como las tributarias y las de la historia clínica.</li></ul>
 <p>No usamos sus datos de salud para publicidad ni los vendemos. No tomamos decisiones sobre usted de forma automatizada: la guía inteligente es un sistema automatizado que solo ordena la información; la valoración la hace el doctor.</p>
@@ -543,21 +543,21 @@ pagina(ruta=r, legal=True, prioridad="0.3", titulo="Aviso de privacidad y tratam
 
 r = "condiciones/"
 pagina(ruta=r, legal=True, servicio=True, prioridad="0.3", titulo="Condiciones del servicio",
-       descripcion="Condiciones de la consulta express y la segunda opinión en línea del Dr. Felipe Criollo Palacios.",
+       descripcion="Condiciones de la ficha médica inteligente y la segunda opinión en línea del Dr. Felipe Criollo Palacios.",
        cuerpo=cabeza(r, [("", "Inicio")], "", "Condiciones del servicio") + f"""
 <section class="seccion"><div class="contenedor"><div class="prosa">
 {BORRADOR}
 <p>Última actualización: [FECHA DE APROBACIÓN]</p>
 <h2>1. Quién presta el servicio</h2>
-<p>La consulta express y la segunda opinión las presta {D['nombre_completo']}, médico cirujano ortopedista oncólogo, con consultorio en {D['direccion_citimed']}.</p>
-<h2>2. Qué es la consulta express</h2>
-<p>Es una preconsulta en línea. Usted cuenta su caso en un formulario con guía inteligente, un sistema automatizado que le hace preguntas y ordena sus respuestas, y sube sus estudios. El doctor revisa la información y su equipo le contacta para proponerle el siguiente paso: una cita presencial, una teleconsulta, estudios adicionales o la derivación a otro especialista.</p>
+<p>La ficha médica inteligente y la segunda opinión las presta {D['nombre_completo']}, médico cirujano ortopedista oncólogo, con consultorio en {D['direccion_citimed']}.</p>
+<h2>2. Qué es la ficha médica inteligente</h2>
+<p>Es una ficha previa a su cita, que se llena en línea. Usted cuenta su caso en ella, guiado por un sistema automatizado que le hace preguntas y ordena sus respuestas, y sube sus estudios. El doctor revisa la información y su equipo le contacta para proponerle el siguiente paso: una cita presencial, una teleconsulta, estudios adicionales o la derivación a otro especialista.</p>
 <h2>3. Qué no es</h2>
-<ul><li>No es una atención de urgencia ni de emergencia. Ante una señal de alarma, acuda a emergencias o llame al 911.</li><li>La guía inteligente no diagnostica, no receta y no da indicaciones de tratamiento. Sus mensajes son preguntas para recoger información.</li><li>La consulta express no reemplaza la valoración médica presencial cuando esta es necesaria.</li></ul>
+<ul><li>No es una atención de urgencia ni de emergencia. Ante una señal de alarma, acuda a emergencias o llame al 911.</li><li>La guía inteligente no diagnostica, no receta y no da indicaciones de tratamiento. Sus mensajes son preguntas para recoger información.</li><li>La ficha médica inteligente no reemplaza la valoración médica presencial cuando esta es necesaria.</li></ul>
 <h2>4. Qué es la segunda opinión</h2>
 <p>Es la revisión por el doctor de un diagnóstico o una propuesta de tratamiento previa, con sus estudios. Incluye un informe escrito y una videollamada para explicarlo. La opinión se basa en la información y los estudios enviados; si son incompletos, el doctor puede pedir información adicional o indicar que se requiere una valoración presencial.</p>
 <h2>5. Precio y pago</h2>
-<ul><li>Consulta express: {D['precio_consulta']}, que se descuenta del valor de la consulta presencial o la teleconsulta posterior con el doctor. [CONFIRMAR VIGENCIA DEL DESCUENTO]</li><li>Segunda opinión: {D['precio_segunda']}.</li><li>Los precios incluyen IVA cuando corresponde. El pago se hace en línea con las plataformas disponibles en el sitio, que pueden cobrar sus propias comisiones al paciente según sus condiciones.</li><li>El consultorio emite la factura electrónica con los datos que usted indica.</li></ul>
+<ul><li>Ficha médica inteligente: {D['precio_consulta']}, que se descuenta del valor de la consulta presencial o la teleconsulta posterior con el doctor. [CONFIRMAR VIGENCIA DEL DESCUENTO]</li><li>Segunda opinión: {D['precio_segunda']}.</li><li>Los precios incluyen IVA cuando corresponde. El pago se hace en línea con las plataformas disponibles en el sitio, que pueden cobrar sus propias comisiones al paciente según sus condiciones.</li><li>El consultorio emite la factura electrónica con los datos que usted indica.</li></ul>
 <h2>6. Plazos</h2>
 <p>El equipo del doctor le contacta cuando el caso está revisado. No se garantiza un plazo de respuesta, que depende del volumen de casos y de la complejidad de cada uno.</p>
 <h2>7. Devoluciones</h2>
@@ -572,7 +572,7 @@ pagina(ruta=r, legal=True, servicio=True, prioridad="0.3", titulo="Condiciones d
 
 r = "consentimiento/"
 pagina(ruta=r, legal=True, servicio=True, prioridad="0.3", titulo="Consentimiento para el tratamiento de datos de salud",
-       descripcion="Texto del consentimiento que el paciente otorga en la consulta express y la segunda opinión del Dr. Felipe Criollo Palacios.",
+       descripcion="Texto del consentimiento que el paciente otorga en la ficha médica inteligente y la segunda opinión del Dr. Felipe Criollo Palacios.",
        cuerpo=cabeza(r, [("", "Inicio")], "", "Consentimiento para el tratamiento de datos de salud") + f"""
 <section class="seccion"><div class="contenedor"><div class="prosa">
 {BORRADOR}
@@ -607,4 +607,4 @@ r = ""
 pagina(ruta="", archivo="404.html", sin_indice=True, titulo="Página no encontrada", descripcion="La página que busca no existe.",
        cuerpo=f"""<section class="seccion"><div class="contenedor estrecho"><h1>No encontramos esta página</h1>
 <p class="entrada">Puede que la dirección haya cambiado. Estas son las páginas más consultadas:</p>
-<ul style="margin-top:20px;line-height:2"><li><a href="/">Inicio</a></li><li><a href="/consulta-express/">Consulta express</a></li><li><a href="/segunda-opinion/">Segunda opinión</a></li><li><a href="/#oncologia">Especialidades</a></li><li><a href="/donde-atiendo/">Consultorio</a></li></ul></div></section>""")
+<ul style="margin-top:20px;line-height:2"><li><a href="/">Inicio</a></li><li><a href="/consulta-express/">Ficha médica inteligente</a></li><li><a href="/segunda-opinion/">Segunda opinión</a></li><li><a href="/#oncologia">Especialidades</a></li><li><a href="/donde-atiendo/">Consultorio</a></li></ul></div></section>""")

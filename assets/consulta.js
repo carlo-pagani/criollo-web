@@ -1,4 +1,4 @@
-// Consulta express del Dr. Felipe Criollo Palacios.
+// Ficha médica inteligente del Dr. Felipe Criollo Palacios.
 // Recorrido: quién escribe y motivo → filtro de señales de alarma → relato → entrevista con el asistente (IA en el Worker;
 // si no responde, preguntas fijas) → resumen que el paciente confirma → estudios → datos y consentimiento → pago y envío.
 // Nada sale del navegador hasta que el paciente autoriza el tratamiento de sus datos, salvo el texto de la entrevista,
@@ -122,7 +122,7 @@
 
   P.urgencia = function () {
     marco(0, [el('h2', { texto: 'Acuda a emergencias' }), cajaAlarma(),
-      el('p', { class: 'ce-sub', texto: 'La consulta express no es un servicio de urgencias y la respuesta no es inmediata. Cuando ya le hayan atendido, puede volver y enviar su caso para el seguimiento con el doctor.' }),
+      el('p', { class: 'ce-sub', texto: 'La ficha médica inteligente no es un servicio de urgencias y la respuesta no es inmediata. Cuando ya le hayan atendido, puede volver y enviar su caso para el seguimiento con el doctor.' }),
       el('div', { class: 'botones' }, [el('a', { class: 'btn', href: 'tel:911', texto: 'Llamar al 911' }),
         boton('Ya me atendieron; quiero enviar mi caso', function () { ir('relato'); }, 'btn btn-neutro')])]);
   };
@@ -273,7 +273,7 @@
         ? ['Declaro que cuento con la autorización del paciente para compartir sus datos de salud con el Dr. Felipe Criollo Palacios con el fin de valorar su caso, conforme al ', enlace('privacidad/', 'aviso de privacidad'), '.']
         : [(familiar ? 'Declaro que soy el representante legal del paciente o cuento con su autorización, y autorizo' : 'Autorizo') + ' al Dr. Felipe Criollo Palacios a tratar los datos personales y de salud de este formulario, incluidos los estudios adjuntos, para valorar el caso y contactarme, conforme al ',
           enlace('privacidad/', 'aviso de privacidad'), ' y al ', enlace('consentimiento/', 'texto completo del consentimiento'), '.'], true),
-      casilla('condiciones', ['Leí y acepto las ', enlace('condiciones/', 'condiciones del servicio'), '. Entiendo que la consulta express no es un servicio de urgencias y que la guía inteligente no diagnostica.'], true),
+      casilla('condiciones', ['Leí y acepto las ', enlace('condiciones/', 'condiciones del servicio'), '. Entiendo que la ficha médica inteligente no es un servicio de urgencias y que la guía inteligente no diagnostica.'], true),
       medico ? null : casilla('informar_medico', ['Si un médico me refirió, autorizo que el doctor le envíe el informe de mi caso. (Opcional)']),
       aviso,
       el('div', { class: 'botones' }, [el('button', { type: 'submit', class: 'btn', texto: 'Revisar y enviar' }), boton('Volver', function () { ir('estudios'); }, 'btn btn-neutro')])
@@ -349,7 +349,7 @@
     raiz.innerHTML = '';
     raiz.appendChild(el('div', { class: 'ce-caja' }, [
       el('p', { class: 'rotulo', style: 'color:var(--acento)', texto: 'Muy pronto' }),
-      el('h2', { texto: 'La consulta express en línea se activa en los próximos días' }),
+      el('h2', { texto: 'La ficha médica inteligente estará disponible pronto' }),
       el('p', { class: 'ce-sub', texto: 'Estamos terminando de prepararla para que pueda contar su caso y enviar sus estudios desde aquí. Vuelva a visitarnos en unos días.' }),
       el('div', { class: 'botones' }, [
         c.whatsapp ? el('a', { class: 'btn', href: c.whatsapp, rel: 'noopener', texto: 'Escribir por WhatsApp' }) : null,

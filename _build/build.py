@@ -86,7 +86,7 @@ def cabecera(ruta):
 <div class="contenedor">
 <a class="marca" href="{rel(ruta, '')}"><strong>Dr. Felipe Criollo</strong><span>Traumatología y ortopedia oncológica</span></a>
 <button class="abrir-menu" type="button" aria-expanded="false" aria-controls="menu">Menú</button>
-<nav class="menu" id="menu" aria-label="Principal"><a href="{rel(ruta, '')}#asistente">Guía inteligente</a>{items}<a class="btn" href="{rel(ruta, 'consulta-express/')}">Consulta en línea →</a></nav>
+<nav class="menu" id="menu" aria-label="Principal"><a href="{rel(ruta, '')}#asistente">Guía inteligente</a>{items}<a class="btn" href="{rel(ruta, 'consulta-express/')}">Llene su ficha →</a></nav>
 </div>
 </header>"""
 
@@ -100,7 +100,7 @@ def pie(ruta):
 <div class="contenedor">
 <div class="columnas">
 <div><h2>Consulta privada</h2><p>{D['direccion_citimed']}</p><p style="margin-top:8px">También atiende en el Hospital Metropolitano y en el Hospital Vozandes, Quito.</p>{f'<p style="margin-top:8px">Teléfono: {tel_html}</p>' if tel else ''}{f'<p style="margin-top:8px"><a href="{D["whatsapp_enlace"]}" rel="noopener">Escribir por WhatsApp</a></p>' if D["whatsapp_enlace"] else ""}</div>
-<div><h2>Pacientes</h2><ul><li><a href="{r('consulta-express/')}">Consulta express</a></li><li><a href="{r('segunda-opinion/')}">Segunda opinión</a></li><li><a href="{r('fuera-de-quito/')}">Si vive fuera de Quito</a></li><li><a href="{r('cuando-consultar/')}">Cuándo consultar sin esperar</a></li><li><a href="{r('preguntas-frecuentes/')}">Preguntas frecuentes</a></li></ul></div>
+<div><h2>Pacientes</h2><ul><li><a href="{r('consulta-express/')}">Ficha médica inteligente</a></li><li><a href="{r('segunda-opinion/')}">Segunda opinión</a></li><li><a href="{r('fuera-de-quito/')}">Si vive fuera de Quito</a></li><li><a href="{r('cuando-consultar/')}">Cuándo consultar sin esperar</a></li><li><a href="{r('preguntas-frecuentes/')}">Preguntas frecuentes</a></li></ul></div>
 {ESPECIALIDAD}
 <div><h2>El doctor</h2><ul><li><a href="{r('perfil/')}">Perfil y formación</a></li><li><a href="{r('para-colegas/')}">Para colegas que refieren</a></li><li><a href="{D['instagram']}" rel="noopener">Instagram</a></li></ul></div>
 </div>

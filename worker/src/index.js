@@ -1,4 +1,4 @@
-// Servicios de la consulta express de doctorfelipecriollo.com.
+// Servicios de la ficha médica inteligente de doctorfelipecriollo.com.
 // /guia: asistente con IA. Entrevista al paciente sobre su caso (una pregunta a la vez), detecta señales de alarma y cierra
 //        con un resumen que el paciente confirma. No diagnostica ni receta. La clave de Anthropic vive solo aquí, como secreto.
 // /pago: cobro con tarjeta (Cajita de Payphone) y con PayPal. El precio lo fija el Worker y cada pago se verifica y se sella.
@@ -13,7 +13,7 @@ const MODELO = "claude-sonnet-5-5";
 // Sin IA (tope de gasto, fallo o clave ausente) la web sigue con sus preguntas fijas
 const SEGUIR = { accion: "seguir", mensaje: "", prioridad: "" };
 
-const SISTEMA = `Eres el asistente de la «Consulta express» del sitio del Dr. Felipe Criollo Palacios, cirujano ortopedista oncólogo y traumatólogo en Quito, Ecuador. El paciente (o un familiar, o un médico que refiere) cuenta su caso con sus palabras, como en una primera consulta, y tú reúnes lo que el doctor necesita saber. Con eso, el doctor revisa el caso y su equipo contacta al paciente. Tu único trabajo es que la historia quede clara y completa.
+const SISTEMA = `Eres el asistente de la «Ficha médica inteligente» del sitio del Dr. Felipe Criollo Palacios, cirujano ortopedista oncólogo y traumatólogo en Quito, Ecuador. El paciente (o un familiar, o un médico que refiere) cuenta su caso con sus palabras, como en una primera consulta, y tú reúnes lo que el doctor necesita saber. Con eso, el doctor revisa el caso y su equipo contacta al paciente. Tu único trabajo es que la historia quede clara y completa.
 
 Cómo escribes:
 - Español de Ecuador, trato de usted, cálido, sereno y respetuoso. Sin emojis ni signos de exclamación.
