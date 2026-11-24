@@ -179,8 +179,8 @@ tr:first-child th{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;
     <label class="campo"><span>Fecha:</span><input type="text" class="ln" id="f-fecha" value=""></label>
   </div>
   <div class="envio">
-    <p><b>¿Listo?</b> Toque «Guardar y enviar a Carlo»: sus respuestas le llegan de inmediato. Puede volver a enviarlas cuantas veces quiera si cambia algo. Si el envío fallara, copie sus respuestas y péguelas en WhatsApp.</p>
-    <p><label class="campo copia"><span>Su correo, para recibir una copia (opcional):</span><input type="email" class="ln" id="f-copia" autocomplete="email" inputmode="email"></label></p>
+    <p><b>¿Listo?</b> Toque «Guardar y enviar a Carlo»: sus respuestas le llegan de inmediato. Puede volver a enviarlas cuantas veces quiera si cambia algo, y con «Descargar copia» se queda con un archivo idéntico para su registro. Si el envío fallara, copie sus respuestas y péguelas en WhatsApp.</p>
+    <p><label class="campo copia"><span>Su correo, para que Carlo le responda (opcional):</span><input type="email" class="ln" id="f-copia" autocomplete="email" inputmode="email"></label></p>
     <p class="est-envio" id="est-envio" role="status"></p>
     <p><button type="button" class="b-enviar">Guardar y enviar a Carlo</button> <button type="button" class="b-copiar sec2">Copiar respuestas</button> <button type="button" class="b-bajar sec2">Descargar copia</button> <button type="button" class="b-imprimir sec2">Imprimir o PDF</button></p>
   </div>
@@ -246,8 +246,9 @@ tr:first-child th{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;
   }
   function avisar(t){var a=document.getElementById('aviso');a.textContent=t;a.classList.add('ver');setTimeout(function(){a.classList.remove('ver');},2600);}
   function cada(c,f){[].forEach.call(document.querySelectorAll(c),function(b){b.addEventListener('click',f);});}
-  // Envío a Carlo: FormSubmit reenvía las respuestas a su correo. Solo se envía cuando el doctor toca el botón.
-  var ENVIO='https://formsubmit.co/ajax/carlo.galarza.pagani@gmail.com';
+  // Envío a Carlo: Web3Forms reenvía las respuestas a su correo. La clave de acceso es pública por diseño (solo sirve para
+  // enviar a ese correo). Solo se envía cuando el doctor toca el botón.
+  var CLAVE_ENVIO='', ENVIO=CLAVE_ENVIO?'https://api.web3forms.com/submit':'';
   var enviando=false;
   function estadoEnvio(t){var e=document.getElementById('est-envio');if(e)e.textContent=t;}
   cada('.b-enviar',function(){
@@ -256,10 +257,10 @@ tr:first-child th{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;
     if(!ENVIO){avisar('El envío aún no está activo: use «Copiar respuestas».');return;}
     enviando=true;estadoEnvio('Enviando…');
     var nombre=limpio(document.getElementById('f-nombre').value)||'Dr. Felipe Criollo Palacios';
-    var datos={_subject:'Cuestionario de la ficha médica inteligente · '+nombre,_template:'box',_captcha:'false',
+    var datos={access_key:CLAVE_ENVIO,subject:'Cuestionario de la ficha médica inteligente · '+nombre,from_name:'Cuestionario · doctorfelipecriollo.com',
       'Enviado por':nombre,'Fecha y hora':new Date().toLocaleString('es-EC',{dateStyle:'full',timeStyle:'long'})};
     var cc=limpio(document.getElementById('f-copia').value);
-    if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cc)){datos._cc=cc;datos['Copia enviada a']=cc;}
+    if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cc)){datos.replyto=cc;datos['Correo del doctor']=cc;}
     // Una entrada por sección, para que el correo se lea ordenado
     resumen().split(/\n(?=== )/).forEach(function(b,i){
       var ls=b.trim().split('\n');if(!i)return;
