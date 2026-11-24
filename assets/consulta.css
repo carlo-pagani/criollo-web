@@ -49,3 +49,8 @@
 .ce-resumen{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:15px}
 .ce-resumen dt{color:var(--gris)}.ce-resumen dd{margin:0;overflow-wrap:anywhere}
 .ce-ficha{white-space:pre-wrap;overflow-wrap:anywhere;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:var(--fondo);border:1px solid var(--linea);border-radius:8px;padding:14px;margin:0;max-height:60vh;overflow:auto}
+
+.ce-fuera{background:#F3F8FF;border:1px solid #CFE0F7;border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;font-size:15.5px}
+.ce-fuera ul{margin:0;padding-left:20px;display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
+.ce-fuera p{margin:0}
+@media(max-width:640px){.ce-fuera ul{grid-template-columns:1fr}}

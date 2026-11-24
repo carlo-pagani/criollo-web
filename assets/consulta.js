@@ -31,6 +31,8 @@
     control: ['¿Qué cirugía te hicieron, cuándo y dónde?', '¿Cómo está la herida? ¿Has tenido fiebre?', '¿Cómo van el dolor y la movilidad?', '¿Qué te preocupa o qué quieres revisar?'],
     colega: ['¿Cuál es tu especialidad y en qué ciudad atiendes?', 'Edad y sexo del paciente, localización y tiempo de evolución.', 'Hallazgos de imagen y, si existe, resultado o plan de biopsia.', '¿Cuál es tu pregunta concreta y cómo prefieres recibir la respuesta?']
   };
+  var NO_RECIBE = ['Problemas de columna vertebral', 'Artroscopia y medicina deportiva', 'Peritajes, certificados o informes médico-legales',
+    'Accidentes de trabajo o de tránsito con trámite de seguro', 'Infecciones de cirugías realizadas en otros centros', 'Certificados de discapacidad'];
   var ALARMAS = [
     'Una deformidad visible después de un golpe, o el hueso asoma por la piel',
     'Pérdida de la sensibilidad o de la fuerza de un brazo o una pierna',
@@ -106,8 +108,22 @@
         ir(m.id === 'colega' ? 'relato' : 'alarma');
       } } }, [el('strong', { texto: m.t }), el('span', { texto: m.d })]);
     }));
+    // Casos que el doctor no recibe por la ficha: se muestran y se aceptan antes de elegir el motivo
+    var avisoLista = el('p', { class: 'ce-error', role: 'alert' });
+    var chk = el('input', { type: 'checkbox', id: 'ce-fuera', checked: !!E.fuera });
+    chk.addEventListener('change', function () { E.fuera = chk.checked; if (chk.checked) avisoLista.textContent = ''; guardar(); });
+    var fuera = el('div', { class: 'ce-fuera' }, [
+      el('strong', { texto: 'Antes de empezar: casos que el doctor no recibe por esta ficha' }),
+      el('ul', {}, NO_RECIBE.map(function (t) { return el('li', { texto: t }); })),
+      el('p', { texto: 'Si tu caso es uno de estos, el equipo del doctor te orientará hacia un colega de confianza.' }),
+      el('label', { class: 'ce-casilla', for: 'ce-fuera' }, [chk, el('span', {}, ['Leí la lista y mi caso no está en ella. Acepto las ',
+        el('a', { href: BASE + 'condiciones/', target: '_blank', rel: 'noopener', texto: 'condiciones del servicio' }), '.'])]),
+      avisoLista]);
+    lista.addEventListener('click', function (e) {
+      if (!E.fuera) { e.stopPropagation(); e.preventDefault(); avisoLista.textContent = 'Marca la casilla para continuar.'; chk.focus(); }
+    }, true);
     marco(0, [el('h2', { texto: '¿Por qué motivo quieres consultar?' }),
-      el('p', { class: 'ce-sub', texto: 'Las preguntas están programadas para orientarte y recoger tu información de manera más eficaz. La valoración la hace el doctor.' }), quien, lista]);
+      el('p', { class: 'ce-sub', texto: 'Las preguntas están programadas para orientarte y recoger tu información de manera más eficaz. La valoración la hace el doctor.' }), fuera, quien, lista]);
   };
 
   P.alarma = function () {

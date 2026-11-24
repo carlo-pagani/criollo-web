@@ -554,7 +554,11 @@ pagina(ruta=r, legal=True, servicio=True, prioridad="0.3", titulo="Condiciones d
 <p>Es una ficha previa a tu cita, que se llena en línea. Cuentas tu caso en ella, con la guía de un sistema automatizado que te hace preguntas y ordena tus respuestas, y subes tus estudios. El doctor revisa la información y su equipo te contacta para proponerte el siguiente paso: una cita presencial, una teleconsulta, estudios adicionales o la derivación a otro especialista.</p>
 <h2>3. Qué no es</h2>
 <ul><li>No es una atención de urgencia ni de emergencia. Ante una señal de alarma, acude a emergencias o llama al 911.</li><li>La guía inteligente no diagnostica, no receta y no da indicaciones de tratamiento. Sus mensajes son preguntas para recoger información.</li><li>La ficha médica inteligente no reemplaza la valoración médica presencial cuando esta es necesaria.</li></ul>
-<h2>4. Qué es la segunda opinión</h2>
+<h2>4. Casos que el doctor no recibe por la ficha</h2>
+<p>Por la ficha médica inteligente el doctor no recibe los siguientes casos:</p>
+<ul><li>Problemas de columna vertebral.</li><li>Artroscopia y medicina deportiva.</li><li>Peritajes, certificados o informes médico-legales.</li><li>Accidentes de trabajo o de tránsito con trámite de seguro.</li><li>Infecciones de cirugías realizadas en otros centros.</li><li>Certificados de discapacidad.</li></ul>
+<p>Si tu caso es uno de estos, el equipo del doctor te orientará hacia un colega de confianza. Antes de empezar la ficha se te pide confirmar que tu caso no está en esta lista.</p>
+<h2>5. Qué es la segunda opinión</h2>
 <p>Es la revisión por el doctor de un diagnóstico o una propuesta de tratamiento previa, con tus estudios. Incluye un informe escrito y una videollamada para explicarlo. La opinión se basa en la información y los estudios enviados; si son incompletos, el doctor puede pedir información adicional o indicar que se requiere una valoración presencial.</p>
 <h2>5. Precio y pago</h2>
 <ul><li>Ficha médica inteligente: {D['precio_consulta']}.</li><li>Segunda opinión: {D['precio_segunda']}.</li><li>Los precios incluyen IVA cuando corresponde. El pago se hace en línea con las plataformas disponibles en el sitio, que pueden cobrar sus propias comisiones al paciente según sus condiciones.</li><li>El consultorio emite la factura electrónica con los datos que indiques.</li></ul>
