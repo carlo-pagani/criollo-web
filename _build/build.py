@@ -59,7 +59,6 @@ MENU = [(r, t) for r, t in [
     ("segunda-opinion/", "Segunda opinión"),
     ("perfil/", "El doctor"),
     ("para-colegas/", "Para colegas"),
-    ("fuera-de-quito/", "Fuera de Quito"),
     ("donde-atiendo/", "Consultorio"),
 ] if not retenida(r)]
 
@@ -86,7 +85,7 @@ def cabecera(ruta):
 <div class="contenedor">
 <a class="marca" href="{rel(ruta, '')}"><strong>Dr. Felipe Criollo</strong><span>Traumatología y ortopedia oncológica</span></a>
 <button class="abrir-menu" type="button" aria-expanded="false" aria-controls="menu">Menú</button>
-<nav class="menu" id="menu" aria-label="Principal"><a href="{rel(ruta, '')}#asistente">Guía inteligente</a>{items}<a class="btn" href="{rel(ruta, 'consulta-express/')}">Llene su ficha →</a></nav>
+<nav class="menu" id="menu" aria-label="Principal"><a href="{rel(ruta, '')}#asistente">Guía inteligente</a><a href="{rel(ruta, '')}#oncologia">Especialidades</a>{items}<a class="btn" href="{rel(ruta, 'consulta-express/')}">Llena tu ficha →</a></nav>
 </div>
 </header>"""
 
@@ -99,12 +98,12 @@ def pie(ruta):
     return f"""<footer class="pie">
 <div class="contenedor">
 <div class="columnas">
-<div><h2>Consulta privada</h2><p>{D['direccion_citimed']}</p><p style="margin-top:8px">También atiende en el Hospital Metropolitano y en el Hospital Vozandes, Quito.</p>{f'<p style="margin-top:8px">Teléfono: {tel_html}</p>' if tel else ''}{f'<p style="margin-top:8px"><a href="{D["whatsapp_enlace"]}" rel="noopener">Escribir por WhatsApp</a></p>' if D["whatsapp_enlace"] else ""}</div>
-<div><h2>Pacientes</h2><ul><li><a href="{r('consulta-express/')}">Ficha médica inteligente</a></li><li><a href="{r('segunda-opinion/')}">Segunda opinión</a></li><li><a href="{r('fuera-de-quito/')}">Si vive fuera de Quito</a></li><li><a href="{r('cuando-consultar/')}">Cuándo consultar sin esperar</a></li><li><a href="{r('preguntas-frecuentes/')}">Preguntas frecuentes</a></li></ul></div>
+<div><h2>Consulta privada</h2><p>{D['direccion_citimed']}</p><p style="margin-top:8px">Opera e interviene en casos complejos en el Hospital Metropolitano y en el Hospital Vozandes, Quito.</p>{f'<p style="margin-top:8px">Teléfono: {tel_html}</p>' if tel else ''}{f'<p style="margin-top:8px"><a href="{D["whatsapp_enlace"]}" rel="noopener">Escribir por WhatsApp</a></p>' if D["whatsapp_enlace"] else ""}</div>
+<div><h2>Pacientes</h2><ul><li><a href="{r('consulta-express/')}">Ficha médica inteligente</a></li><li><a href="{r('segunda-opinion/')}">Segunda opinión</a></li><li><a href="{r('fuera-de-quito/')}">Si vives fuera de Quito</a></li><li><a href="{r('cuando-consultar/')}">Cuándo consultar sin esperar</a></li><li><a href="{r('preguntas-frecuentes/')}">Preguntas frecuentes</a></li></ul></div>
 {ESPECIALIDAD}
 <div><h2>El doctor</h2><ul><li><a href="{r('perfil/')}">Perfil y formación</a></li><li><a href="{r('para-colegas/')}">Para colegas que refieren</a></li><li><a href="{D['instagram']}" rel="noopener">Instagram</a></li></ul></div>
 </div>
-<p class="aviso-medico">La información de este sitio es educativa y no reemplaza una consulta médica. Ante una urgencia, acuda a emergencias o llame al 911.</p>
+<p class="aviso-medico">La información de este sitio es educativa y no reemplaza una consulta médica. Ante una urgencia, acude a emergencias o llama al 911.</p>
 <div class="legal"><span>© {datetime.date.today().year} {D['nombre']} · {D['especialidad']}</span><span><a href="{r('privacidad/')}">Privacidad</a>{"" if D.get("borradores_legales") else f' · <a href="{r("condiciones/")}">Condiciones del servicio</a>'} · <a href="{r('accesibilidad/')}">Accesibilidad</a></span></div>
 </div>
 </footer>"""
@@ -210,8 +209,14 @@ def main():
         cuerpo = limpiar(p["cuerpo"]) if D.get("publicado") else pend(p["cuerpo"])
         if D.get("publicado") and re.search(PEND, cuerpo):
             raise SystemExit(f"Quedó un dato pendiente visible en /{ruta}: {re.search(PEND, cuerpo).group(0)}")
-        if not D.get("borradores_legales") and p.get("legal"):
+        if p.get("legal"):
+            # el rótulo de borrador no se muestra al público; los apartados se renumeran si alguno quedó fuera por datos pendientes
             cuerpo = re.sub(r'<div class="caja borrador">.*?</div>', "", cuerpo, flags=re.S)
+            n = [0]
+            def _num(m):
+                n[0] += 1
+                return f"<h2>{n[0]}. "
+            cuerpo = re.sub(r"<h2>\d+\. ", _num, cuerpo)
         oculta = p.get("sin_indice", False) or bool(p.get("servicio") and D.get("borradores_legales"))
         doc = sin_enlaces_retenidos(documento(ruta, p["titulo"], p["descripcion"], cuerpo, p.get("jsonld"), p.get("scripts", ()), oculta))
         destino = os.path.join(RAIZ, ruta, "index.html") if ruta else os.path.join(RAIZ, "index.html")

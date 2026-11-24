@@ -15,32 +15,32 @@
 
   var MOTIVOS = [
     { id: 'tumor', t: 'Masa, bulto o tumor', d: 'Un bulto, un dolor en el hueso o un hallazgo en un estudio' },
-    { id: 'segunda', t: 'Segunda opinión', d: 'Ya tiene un diagnóstico o una propuesta de tratamiento y quiere revisarla' },
+    { id: 'segunda', t: 'Segunda opinión', d: 'Ya tienes un diagnóstico o una propuesta de tratamiento y quieres revisarla' },
     { id: 'lesion', t: 'Lesión o fractura', d: 'Un golpe, una caída o un accidente' },
     { id: 'dolor', t: 'Dolor articular o lesión deportiva', d: 'Rodilla, hombro, cadera, mano u otra articulación' },
     { id: 'control', t: 'Control después de una cirugía', d: 'Seguimiento de una operación' },
     { id: 'colega', t: 'Soy médico y refiero a un paciente', d: 'Envío el caso de un paciente con sus estudios' }
   ];
   // Preguntas fijas: se usan cuando el asistente con IA no está disponible. VALIDACIÓN CLÍNICA PENDIENTE con el doctor.
-  var COMUNES = ['¿Qué edad tiene el paciente y en qué ciudad vive?', '¿Tiene otras enfermedades, cirugías previas o alergias? ¿Qué medicamentos toma?', '¿Qué espera de esta consulta?'];
+  var COMUNES = ['¿Tienes otras enfermedades, cirugías previas o alergias? ¿Qué medicamentos tomas?', '¿Qué esperas de la consulta con el doctor?'];
   var FIJAS = {
-    tumor: ['¿En qué parte del cuerpo está y desde cuándo lo nota?', '¿Ha crecido? ¿Le duele de noche o en reposo?', '¿Ha tenido pérdida de peso, fiebre o algún antecedente de cáncer, personal o en la familia?', '¿Qué estudios le han hecho (radiografía, resonancia, tomografía, biopsia) y cuándo? Podrá subirlos en el siguiente paso.'],
-    segunda: ['¿Qué diagnóstico le dieron, quién y cuándo?', '¿Qué tratamiento le propusieron y para cuándo?', '¿Le hicieron una biopsia? ¿Dónde y qué resultado dio?', '¿Qué estudios de imagen tiene y de qué fechas? Podrá subirlos en el siguiente paso.', '¿Qué duda concreta quiere resolver con la segunda opinión?'],
-    lesion: ['¿Qué pasó, cómo y cuándo?', '¿Puede mover o apoyar la zona? ¿Hay hinchazón o moretón?', '¿Ya lo atendieron? ¿Qué le hicieron y qué le indicaron?', '¿Tiene radiografías u otros estudios? Podrá subirlos en el siguiente paso.'],
-    dolor: ['¿Dónde le duele y desde cuándo?', '¿Qué lo empeora y qué lo alivia? ¿Le duele de noche?', '¿Practica algún deporte o hace trabajo físico?', '¿Qué tratamientos ha probado y con qué resultado?'],
-    control: ['¿Qué cirugía le hicieron, cuándo y dónde?', '¿Cómo está la herida? ¿Ha tenido fiebre?', '¿Cómo van el dolor y la movilidad?', '¿Qué le preocupa o qué quiere revisar?'],
-    colega: ['¿Cuál es su especialidad y en qué ciudad atiende?', 'Edad y sexo del paciente, localización y tiempo de evolución.', 'Hallazgos de imagen y, si existe, resultado o plan de biopsia.', '¿Cuál es su pregunta concreta y cómo prefiere recibir la respuesta?']
+    tumor: ['¿En qué parte del cuerpo está y desde cuándo lo notas?', '¿Ha crecido? ¿Te duele de noche o en reposo?', '¿Has tenido pérdida de peso, fiebre o algún antecedente de cáncer, personal o en la familia?', '¿Qué estudios te han hecho (radiografía, resonancia, tomografía, biopsia) y cuándo? Podrás subirlos en el siguiente paso.'],
+    segunda: ['¿Quién te dio el diagnóstico y cuándo?', '¿Qué tratamiento te propusieron y para cuándo?', '¿Te hicieron una biopsia? ¿Dónde y qué resultado dio?', '¿Qué estudios de imagen tienes y de qué fechas? Podrás subirlos en el siguiente paso.', '¿Qué duda concreta quieres resolver con la segunda opinión?'],
+    lesion: ['¿Qué pasó, cómo y cuándo?', '¿Puedes mover o apoyar la zona? ¿Hay hinchazón o moretón?', '¿Ya te atendieron? ¿Qué te hicieron y qué te indicaron?', '¿Tienes radiografías u otros estudios? Podrás subirlos en el siguiente paso.'],
+    dolor: ['¿Dónde te duele y desde cuándo?', '¿Qué lo empeora y qué lo alivia? ¿Te duele de noche?', '¿Practicas algún deporte o haces trabajo físico?', '¿Qué tratamientos has probado y con qué resultado?'],
+    control: ['¿Qué cirugía te hicieron, cuándo y dónde?', '¿Cómo está la herida? ¿Has tenido fiebre?', '¿Cómo van el dolor y la movilidad?', '¿Qué te preocupa o qué quieres revisar?'],
+    colega: ['¿Cuál es tu especialidad y en qué ciudad atiendes?', 'Edad y sexo del paciente, localización y tiempo de evolución.', 'Hallazgos de imagen y, si existe, resultado o plan de biopsia.', '¿Cuál es tu pregunta concreta y cómo prefieres recibir la respuesta?']
   };
   var ALARMAS = [
     'Una deformidad visible después de un golpe, o el hueso asoma por la piel',
-    'Perdió la sensibilidad o la fuerza de un brazo o una pierna',
+    'Pérdida de la sensibilidad o de la fuerza de un brazo o una pierna',
     'La extremidad está fría, pálida o morada',
     'Fiebre con una herida de cirugía enrojecida o que supura',
     'Dolor de espalda con debilidad en las piernas o dificultad para orinar',
     'Una pierna hinchada, caliente y dolorosa después de una cirugía, o falta de aire'
   ];
-  var TEXTO_ALARMA = 'Por lo que describe, no espere la respuesta de esta consulta: acuda hoy a un servicio de emergencias o llame al 911.';
-  var PASOS = ['Motivo', 'Su caso', 'Estudios', 'Sus datos', 'Enviar'];
+  var TEXTO_ALARMA = 'Por lo que describes, no esperes la respuesta de esta ficha: acude hoy a un servicio de emergencias o llama al 911.';
+  var PASOS = ['Motivo', 'Tu caso', 'Estudios', 'Tus datos', 'Enviar'];
 
   // ---------- Estado ----------
   var E = nuevo();
@@ -106,12 +106,12 @@
         ir(m.id === 'colega' ? 'relato' : 'alarma');
       } } }, [el('strong', { texto: m.t }), el('span', { texto: m.d })]);
     }));
-    marco(0, [el('h2', { texto: '¿Por qué motivo quiere consultar?' }),
-      el('p', { class: 'ce-sub', texto: 'Las preguntas están programadas para orientarle y recoger su información de manera más eficaz. La valoración la hace el doctor.' }), quien, lista]);
+    marco(0, [el('h2', { texto: '¿Por qué motivo quieres consultar?' }),
+      el('p', { class: 'ce-sub', texto: 'Las preguntas están programadas para orientarte y recoger tu información de manera más eficaz. La valoración la hace el doctor.' }), quien, lista]);
   };
 
   P.alarma = function () {
-    marco(0, [el('h2', { texto: 'Antes de empezar: ¿tiene ahora alguna de estas señales?' }),
+    marco(0, [el('h2', { texto: 'Antes de empezar: ¿tienes ahora alguna de estas señales?' }),
       el('ul', { class: 'ce-lista' }, ALARMAS.map(function (a) { return el('li', { texto: a }); })),
       el('div', { class: 'botones' }, [
         boton('No, ninguna', function () { E.alarma = false; ir('relato'); }),
@@ -121,8 +121,8 @@
   };
 
   P.urgencia = function () {
-    marco(0, [el('h2', { texto: 'Acuda a emergencias' }), cajaAlarma(),
-      el('p', { class: 'ce-sub', texto: 'La ficha médica inteligente no es un servicio de urgencias y la respuesta no es inmediata. Cuando ya le hayan atendido, puede volver y enviar su caso para el seguimiento con el doctor.' }),
+    marco(0, [el('h2', { texto: 'Acude a emergencias' }), cajaAlarma(),
+      el('p', { class: 'ce-sub', texto: 'La ficha médica inteligente no es un servicio de urgencias y la respuesta no es inmediata. Cuando ya te hayan atendido, puedes volver y enviar tu caso para el seguimiento con el doctor.' }),
       el('div', { class: 'botones' }, [el('a', { class: 'btn', href: 'tel:911', texto: 'Llamar al 911' }),
         boton('Ya me atendieron; quiero enviar mi caso', function () { ir('relato'); }, 'btn btn-neutro')])]);
   };
@@ -133,21 +133,21 @@
     ta.value = E.relato;
     ta.addEventListener('input', function () { E.relato = ta.value; guardar(); });
     var aviso = el('p', { class: 'ce-error', role: 'alert' });
-    marco(1, [el('h2', { texto: medico ? 'Cuénteme el caso de su paciente' : 'Cuénteme su caso con sus palabras' }),
-      el('label', { class: 'ce-sub', for: 'ce-relato', texto: medico ? 'Sin el nombre ni la identificación del paciente: esos datos se piden después.' : 'Qué notó, en qué parte del cuerpo y desde cuándo. No hace falta que sea ordenado: después le haré algunas preguntas.' }),
+    marco(1, [el('h2', { texto: medico ? 'Cuéntanos el caso de tu paciente' : 'Cuéntanos tu caso con tus palabras' }),
+      el('label', { class: 'ce-sub', for: 'ce-relato', texto: medico ? 'Sin el nombre ni la identificación del paciente: esos datos se piden después.' : 'Qué notaste, en qué parte del cuerpo y desde cuándo. No hace falta que sea ordenado: después vienen algunas preguntas.' }),
       ta,
-      el('p', { class: 'ce-nota', texto: 'Para formular las preguntas, lo que escriba aquí lo procesa un sistema automatizado. No escriba todavía su nombre, su cédula ni su teléfono: se los pediremos al final, junto con su autorización.' }),
+      el('p', { class: 'ce-nota', texto: 'Para formular las preguntas, lo que escribas aquí lo procesa un sistema automatizado. No escribas todavía tu nombre, tu cédula ni tu teléfono: te los pediremos al final, junto con tu autorización.' }),
       aviso,
       el('div', { class: 'botones' }, [boton('Continuar', function () {
-        if (E.relato.trim().length < 15) { aviso.textContent = 'Escriba al menos una o dos frases para poder continuar.'; ta.focus(); return; }
+        if (E.relato.trim().length < 15) { aviso.textContent = 'Escribe al menos una o dos frases para poder continuar.'; ta.focus(); return; }
         E.conv = []; E.fija = 0; E.resumen = ''; E.pregunta = ''; ir('entrevista');
       }), boton('Volver', function () { ir('inicio'); }, 'btn btn-neutro')])]);
   };
 
   function fijas() { return (FIJAS[E.motivo] || FIJAS.dolor).concat(E.motivo === 'colega' ? [] : COMUNES); }
   function resumenFijo() {
-    return 'Así entendí su caso.\nMotivo: ' + (MOTIVOS.filter(function (m) { return m.id === E.motivo; })[0] || {}).t + '\nRelato: ' + E.relato.trim() + '\n' +
-      E.conv.map(function (c) { return '· ' + c.pregunta + '\n  ' + c.respuesta; }).join('\n') + '\n¿Es correcto, o desea corregir o añadir algo?';
+    return 'Así quedó registrado tu caso.\nMotivo: ' + (MOTIVOS.filter(function (m) { return m.id === E.motivo; })[0] || {}).t + '\nRelato: ' + E.relato.trim() + '\n' +
+      E.conv.map(function (c) { return '· ' + c.pregunta + '\n  ' + c.respuesta; }).join('\n');
   }
   // Pide al asistente la siguiente pregunta. Si no hay asistente o falla, sigue con las preguntas fijas.
   function siguiente() {
@@ -186,10 +186,10 @@
     } else if (E.alarmaIA) {
       hilo.appendChild(cajaAlarma());
       pie.appendChild(el('div', { class: 'botones' }, [el('a', { class: 'btn', href: 'tel:911', texto: 'Llamar al 911' }),
-        boton('Ya me atendieron; quiero continuar', function () { E.alarmaIA = false; E.conv.push({ pregunta: E.pregunta, respuesta: 'Ya recibí atención de emergencia y deseo continuar con la consulta.' }); E.pregunta = ''; guardar(); pintar(); }, 'btn btn-neutro')]));
+        boton('Ya me atendieron; quiero continuar', function () { E.alarmaIA = false; E.conv.push({ pregunta: E.pregunta, respuesta: 'Ya recibí atención de emergencia y deseo continuar con la ficha.' }); E.pregunta = ''; guardar(); pintar(); }, 'btn btn-neutro')]));
     } else if (E.resumen) {
       burbuja(E.resumen, false);
-      var corr = el('textarea', { rows: 3, maxlength: 1500, 'aria-label': 'Corrección o dato adicional', placeholder: 'Si falta algo o hay un error, escríbalo aquí…' });
+      var corr = el('textarea', { rows: 3, maxlength: 1500, 'aria-label': 'Corrección o dato adicional', placeholder: '¿Es correcto? Si falta algo o hay un error, escríbelo aquí…' });
       pie.appendChild(corr);
       pie.appendChild(el('div', { class: 'botones' }, [boton('Es correcto, continuar', function () { ir('estudios'); }),
         boton('Enviar corrección', function () {
@@ -200,7 +200,7 @@
         }, 'btn btn-neutro')]));
     } else {
       burbuja(E.pregunta, false);
-      var ta = el('textarea', { rows: 3, maxlength: 1500, 'aria-label': 'Su respuesta', placeholder: 'Escriba su respuesta…' });
+      var ta = el('textarea', { rows: 3, maxlength: 1500, 'aria-label': 'Tu respuesta', placeholder: 'Escribe tu respuesta…' });
       var enviar = function () {
         var v = ta.value.trim(); if (!v) { ta.focus(); return; }
         E.conv.push({ pregunta: E.pregunta, respuesta: v }); E.pregunta = ''; guardar(); pintar();
@@ -209,11 +209,10 @@
       pie.appendChild(ta);
       pie.appendChild(el('div', { class: 'botones' }, [boton('Responder', enviar),
         boton('No lo sé', function () { ta.value = 'No lo sé.'; enviar(); }, 'btn btn-neutro'),
-        E.conv.length >= 3 ? boton('Ya conté todo', function () { ta.value = 'Eso es todo lo que puedo contar.'; enviar(); }, 'ce-link') : null]));
+        E.conv.length >= 3 ? boton('Ya conté todo', function () { E.resumen = resumenFijo(); E.pregunta = ''; guardar(); pintar(); }, 'ce-link') : null]));
       setTimeout(function () { ta.focus({ preventScroll: true }); }, 0);
     }
-    marco(1, [el('h2', { texto: 'Algunas preguntas sobre su caso' }), hilo, pie,
-      el('p', { class: 'ce-nota', texto: 'La guía no diagnostica ni receta. Solo ordena su información para el doctor.' })]);
+    marco(1, [el('h2', { texto: 'Algunas preguntas sobre tu caso' }), hilo, pie]);
     hilo.scrollTop = hilo.scrollHeight;
   };
 
@@ -237,10 +236,10 @@
       pintar();
       if (malos.length) document.querySelector('.ce-error').textContent = 'No se añadieron: ' + malos.join('; ') + '.';
     });
-    marco(2, [el('h2', { texto: 'Suba sus estudios' }),
-      el('p', { class: 'ce-sub', texto: 'Radiografías, resonancias, tomografías, informes de radiología y de patología, en PDF o imagen. Hasta ' + CFG.maxMB + ' MB por archivo. Si tiene un disco de imágenes (DICOM), pegue el enlace de descarga del centro de imagen en el siguiente paso.' }),
+    marco(2, [el('h2', { texto: 'Sube tus estudios' }),
+      el('p', { class: 'ce-sub', texto: 'Radiografías, resonancias, tomografías, informes de radiología y de patología, en PDF o imagen. Hasta ' + CFG.maxMB + ' MB por archivo. Si tienes un disco de imágenes (DICOM), pega el enlace de descarga del centro de imagen en el siguiente paso.' }),
       lista, el('label', { class: 'ce-agregar' }, ['+ Agregar archivos', input]), aviso,
-      el('p', { class: 'ce-nota', texto: 'Sus archivos no salen de su dispositivo hasta que usted autorice y envíe el caso.' }),
+      el('p', { class: 'ce-nota', texto: 'Tus archivos no salen de tu dispositivo hasta que autorices y envíes el caso.' }),
       el('div', { class: 'botones' }, [boton(archivos.length ? 'Continuar' : 'Continuar sin estudios', function () { ir('datos'); }), boton('Volver', function () { ir('entrevista'); }, 'btn btn-neutro')])]);
   };
 
@@ -254,20 +253,20 @@
     }
     var enlace = function (ruta, texto) { return el('a', { href: BASE + ruta, target: '_blank', rel: 'noopener', texto: texto }); };
     var form = el('form', { novalidate: true, class: 'ce-form' }, [
-      medico ? el('p', { class: 'ce-grupo', texto: 'Sus datos' }) : null,
-      medico ? campo('medico', 'Su nombre y especialidad', 'text', { required: true, autocomplete: 'name' }) : null,
-      medico ? campo('medico_contacto', 'Su correo o celular para la respuesta', 'text', { required: true }) : null,
+      medico ? el('p', { class: 'ce-grupo', texto: 'Tus datos' }) : null,
+      medico ? campo('medico', 'Tu nombre y especialidad', 'text', { required: true, autocomplete: 'name' }) : null,
+      medico ? campo('medico_contacto', 'Tu correo o celular para la respuesta', 'text', { required: true }) : null,
       el('p', { class: 'ce-grupo', texto: 'Datos del paciente' }),
       campo('nombre', 'Nombres y apellidos del paciente', 'text', { required: true, autocomplete: medico || familiar ? 'off' : 'name' }),
       campo('documento', 'Cédula o pasaporte', 'text', { required: !medico, inputmode: 'text', autocomplete: 'off' }),
       campo('nacimiento', 'Fecha de nacimiento', 'date', { required: !medico, autocomplete: medico || familiar ? 'off' : 'bday' }),
-      campo('ciudad', 'Ciudad y país donde vive', 'text', { required: true }),
-      familiar ? campo('contacto_nombre', 'Su nombre y su relación con el paciente', 'text', { required: true, autocomplete: 'name' }) : null,
+      campo('ciudad', 'Ciudad y país de residencia', 'text', { required: true }),
+      familiar ? campo('contacto_nombre', 'Tu nombre y tu relación con el paciente', 'text', { required: true, autocomplete: 'name' }) : null,
       medico ? null : campo('correo', 'Correo electrónico', 'email', { required: true, autocomplete: 'email' }),
       medico ? null : campo('celular', 'Celular o WhatsApp, con código de país', 'tel', { required: true, autocomplete: 'tel' }),
       campo('enlace', 'Enlace a imágenes DICOM (opcional)', 'url', { placeholder: 'https://…' }),
       medico ? null : el('p', { class: 'ce-grupo', texto: 'Datos para la factura' }),
-      medico ? null : campo('factura', 'Nombre o razón social, cédula o RUC y dirección', 'text', { placeholder: 'Si son los mismos del paciente, deje este campo vacío' }),
+      medico ? null : campo('factura', 'Nombre o razón social, cédula o RUC y dirección', 'text', { placeholder: 'Si son los mismos del paciente, deja este campo vacío' }),
       el('p', { class: 'ce-grupo', texto: 'Autorización' }),
       casilla('consentimiento', medico
         ? ['Declaro que cuento con la autorización del paciente para compartir sus datos de salud con el Dr. Felipe Criollo Palacios con el fin de valorar su caso, conforme al ', enlace('privacidad/', 'aviso de privacidad'), '.']
@@ -281,11 +280,11 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var malo = form.querySelector(':invalid');
-      if (malo) { aviso.textContent = malo.type === 'checkbox' ? 'Para enviar su caso necesitamos las dos autorizaciones.' : 'Revise el campo «' + (malo.closest('label').querySelector('span').textContent) + '».'; malo.focus(); return; }
+      if (malo) { aviso.textContent = malo.type === 'checkbox' ? 'Para enviar tu caso necesitamos las dos autorizaciones.' : 'Revisa el campo «' + (malo.closest('label').querySelector('span').textContent) + '».'; malo.focus(); return; }
       ir('enviar');
     });
-    marco(3, [el('h2', { texto: medico ? 'Datos para responderle' : 'Sus datos' }),
-      el('p', { class: 'ce-sub', texto: 'Los usamos solo para identificar el caso, contactarle y emitir la factura.' }), form]);
+    marco(3, [el('h2', { texto: medico ? 'Datos para responderle' : 'Tus datos' }),
+      el('p', { class: 'ce-sub', texto: 'Los usamos solo para identificar el caso, contactarte y emitir la factura.' }), form]);
   };
 
   function textoCaso() {
@@ -303,16 +302,19 @@
     var aviso = el('p', { class: 'ce-error', role: 'alert' });
     var filas = [['Motivo', (MOTIVOS.filter(function (x) { return x.id === E.motivo; })[0] || {}).t], ['Paciente', d.nombre], ['Contacto', [d.correo, d.celular, d.medico_contacto].filter(Boolean).join(' · ')],
       ['Estudios adjuntos', archivos.length ? archivos.map(function (f) { return f.name; }).join(', ') : 'Ninguno']];
+    var pr = {}; try { pr = JSON.parse(document.getElementById('ce-contacto').textContent); } catch (e) { /* sin precios */ }
+    var valor = E.motivo === 'segunda' ? pr.precio_segunda : pr.precio_consulta;
+    if (valor && E.motivo !== 'colega') filas.push(['Valor', valor + (E.motivo === 'segunda' ? ' (segunda opinión)' : ' (ficha médica inteligente)')]);
     var b = boton(demo ? 'Ver lo que recibiría el doctor' : 'Enviar mi caso', function () {
       if (demo) return ir('demo');
       b.disabled = true; b.textContent = 'Enviando…';
       enviarCaso().then(function () { borrar(); E.pantalla = 'enviado'; pintar(); })
-        .catch(function () { b.disabled = false; b.textContent = 'Enviar mi caso'; aviso.textContent = 'No pudimos enviar su caso. Revise su conexión e inténtelo de nuevo; sus respuestas siguen aquí.'; });
+        .catch(function () { b.disabled = false; b.textContent = 'Enviar mi caso'; aviso.textContent = 'No pudimos enviar tu caso. Revisa tu conexión e inténtalo de nuevo; tus respuestas siguen aquí.'; });
     });
-    marco(4, [el('h2', { texto: 'Revise y envíe' }),
+    marco(4, [el('h2', { texto: 'Revisa y envía' }),
       el('dl', { class: 'ce-resumen' }, filas.reduce(function (a, f) { return a.concat([el('dt', { texto: f[0] }), el('dd', { texto: f[1] || '—' })]); }, [])),
-      el('div', { class: 'ce-bur ia', style: 'max-width:100%' }, [el('b', { texto: 'Resumen de su caso' }), E.resumen]),
-      el('p', { class: 'ce-nota', texto: 'Este resumen no es un diagnóstico. El doctor revisa su caso y su equipo le contacta para proponerle el siguiente paso.' }),
+      el('div', { class: 'ce-bur ia', style: 'max-width:100%' }, [el('b', { texto: 'Resumen de tu caso' }), String(E.resumen || '').replace(/\s*¿Es correcto[^?]*\?\s*$/, '')]),
+      el('p', { class: 'ce-nota', texto: 'Este resumen no es un diagnóstico. El doctor revisa tu caso y su equipo te contacta para proponerte el siguiente paso.' }),
       demo ? el('p', { class: 'ce-demo', texto: 'Versión de prueba: todavía no se envía ni se cobra nada.' }) : null,
       aviso, el('div', { class: 'botones' }, [b, boton('Volver', function () { ir('datos'); }, 'btn btn-neutro')])]);
   };
@@ -338,9 +340,9 @@
   };
 
   P.enviado = function () {
-    marco(5, [el('h2', { texto: 'Su caso llegó al doctor' }),
-      el('p', { class: 'ce-sub', texto: 'El equipo del doctor revisará su caso y le escribirá para proponerle el siguiente paso: cita presencial, teleconsulta o derivación. Su referencia es ' + E.ref + '.' }),
-      el('p', { class: 'ce-nota', texto: 'Si aparece una señal de alarma mientras espera, no aguarde la respuesta: acuda a emergencias.' }),
+    marco(5, [el('h2', { texto: 'Tu caso llegó al doctor' }),
+      el('p', { class: 'ce-sub', texto: 'El equipo del doctor revisará tu caso y te escribirá para proponerte el siguiente paso: cita presencial, teleconsulta o derivación. Tu referencia es ' + E.ref + '.' }),
+      el('p', { class: 'ce-nota', texto: 'Si aparece una señal de alarma mientras esperas, no aguardes la respuesta: acude a emergencias.' }),
       el('div', { class: 'botones' }, [el('a', { class: 'btn btn-neutro', href: BASE, texto: 'Volver al inicio' })])]);
   };
 
@@ -350,11 +352,11 @@
     raiz.appendChild(el('div', { class: 'ce-caja' }, [
       el('p', { class: 'rotulo', style: 'color:var(--acento)', texto: 'Muy pronto' }),
       el('h2', { texto: 'La ficha médica inteligente estará disponible pronto' }),
-      el('p', { class: 'ce-sub', texto: 'Estamos terminando de prepararla para que pueda contar su caso y enviar sus estudios desde aquí. Vuelva a visitarnos en unos días.' }),
+      el('p', { class: 'ce-sub', texto: 'Estamos terminando de prepararla para que puedas contar tu caso y enviar tus estudios desde aquí.' }),
       el('div', { class: 'botones' }, [
         c.whatsapp ? el('a', { class: 'btn', href: c.whatsapp, rel: 'noopener', texto: 'Escribir por WhatsApp' }) : null,
         c.tel ? el('a', { class: 'btn btn-neutro', href: 'tel:' + c.tel, texto: 'Llamar al ' + c.telefono }) : null]),
-      el('p', { class: 'ce-nota', texto: 'Si tiene una señal de alarma (deformidad tras un golpe, pérdida de fuerza o de sensibilidad, fiebre con una herida que supura), no espere: acuda a emergencias o llame al 911.' })
+      el('p', { class: 'ce-nota', texto: 'Si tienes una señal de alarma (deformidad tras un golpe, pérdida de fuerza o de sensibilidad, fiebre con una herida que supura), no esperes: acude a emergencias o llama al 911.' })
     ]));
   }
 
