@@ -246,31 +246,30 @@ tr:first-child th{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;
   }
   function avisar(t){var a=document.getElementById('aviso');a.textContent=t;a.classList.add('ver');setTimeout(function(){a.classList.remove('ver');},2600);}
   function cada(c,f){[].forEach.call(document.querySelectorAll(c),function(b){b.addEventListener('click',f);});}
-  // Envío a Carlo: Web3Forms reenvía las respuestas a su correo. La clave de acceso es pública por diseño (solo sirve para
-  // enviar a ese correo). Solo se envía cuando el doctor toca el botón.
-  var CLAVE_ENVIO='', ENVIO=CLAVE_ENVIO?'https://api.web3forms.com/submit':'';
+  // Envío a Carlo: las respuestas llegan a un formulario de Jotform de su cuenta, que le avisa por correo y guarda
+  // cada envío como registro. Solo se envía cuando el doctor toca el botón.
+  var FORMULARIO='263274363944060';
   var enviando=false;
   function estadoEnvio(t){var e=document.getElementById('est-envio');if(e)e.textContent=t;}
   cada('.b-enviar',function(){
     if(enviando)return;
     guardar();
-    if(!ENVIO){avisar('El envío aún no está activo: use «Copiar respuestas».');return;}
+    if(!FORMULARIO){avisar('El envío aún no está activo: use «Copiar respuestas».');return;}
     enviando=true;estadoEnvio('Enviando…');
     var nombre=limpio(document.getElementById('f-nombre').value)||'Dr. Felipe Criollo Palacios';
-    var datos={access_key:CLAVE_ENVIO,subject:'Cuestionario de la ficha médica inteligente · '+nombre,from_name:'Cuestionario · doctorfelipecriollo.com',
-      'Enviado por':nombre,'Fecha y hora':new Date().toLocaleString('es-EC',{dateStyle:'full',timeStyle:'long'})};
-    var cc=limpio(document.getElementById('f-copia').value);
-    if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cc)){datos.replyto=cc;datos['Correo del doctor']=cc;}
-    // Una entrada por sección, para que el correo se lea ordenado
+    var f=new FormData();
+    f.append('formID',FORMULARIO);f.append('simple_spc',FORMULARIO+'-'+FORMULARIO);
+    f.append('q2_q2_textbox0',nombre);
+    f.append('q3_q3_textbox1',new Date().toLocaleString('es-EC',{dateStyle:'full',timeStyle:'long'}));
+    var cc=limpio(document.getElementById('f-copia').value);if(cc)f.append('q4_q4_textbox2',cc);
+    // Una entrada por sección (01 a 11), para que el registro se lea ordenado
     resumen().split(/\n(?=== )/).forEach(function(b,i){
-      var ls=b.trim().split('\n');if(!i)return;
-      var cab=ls.shift().replace(/^== | ==$/g,'');
-      datos[cab]=ls.map(function(x){return /^\d/.test(x)?'▸ '+x:x;}).join('\n');
+      if(!i)return;var ls=b.trim().split('\n');var cab=ls.shift();var n=parseInt(cab.replace(/^== /,''),10);
+      if(n>=1&&n<=11)f.append('q'+(n+4)+'_q'+(n+4)+'_textarea'+(n+2),ls.join('\n'));
     });
-
     var corte=window.AbortController?new AbortController():null;if(corte)setTimeout(function(){corte.abort();},30000);
-    fetch(ENVIO,{method:'POST',signal:corte?corte.signal:undefined,headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(datos),referrerPolicy:'no-referrer'})
-      .then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok||String(j.success)==='false')throw new Error(j.message||r.status);});})
+    // Jotform no responde a otros sitios: el envío es «opaco» y se da por recibido si la conexión no falla
+    fetch('https://submit.jotform.com/submit/'+FORMULARIO+'/',{method:'POST',mode:'no-cors',body:f,signal:corte?corte.signal:undefined,referrerPolicy:'no-referrer'})
       .then(function(){var h=new Date().toLocaleTimeString('es-EC',{hour:'2-digit',minute:'2-digit'});estadoEnvio('Enviado a Carlo ('+h+'). Si cambia algo, puede volver a enviarlo.');avisar('Listo: sus respuestas le llegaron a Carlo.');})
       .catch(function(){estadoEnvio('No se pudo enviar. Toque «Copiar respuestas» y péguelas en WhatsApp para Carlo.');avisar('No se pudo enviar; use «Copiar respuestas».');})
       .then(function(){enviando=false;});
