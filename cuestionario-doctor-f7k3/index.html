@@ -267,7 +267,8 @@ tr:first-child th{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;
       datos[cab]=ls.map(function(x){return /^\d/.test(x)?'▸ '+x:x;}).join('\n');
     });
 
-    fetch(ENVIO,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(datos),referrerPolicy:'no-referrer'})
+    var corte=window.AbortController?new AbortController():null;if(corte)setTimeout(function(){corte.abort();},30000);
+    fetch(ENVIO,{method:'POST',signal:corte?corte.signal:undefined,headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(datos),referrerPolicy:'no-referrer'})
       .then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok||String(j.success)==='false')throw new Error(j.message||r.status);});})
       .then(function(){var h=new Date().toLocaleTimeString('es-EC',{hour:'2-digit',minute:'2-digit'});estadoEnvio('Enviado a Carlo ('+h+'). Si cambia algo, puede volver a enviarlo.');avisar('Listo: sus respuestas le llegaron a Carlo.');})
       .catch(function(){estadoEnvio('No se pudo enviar. Toque «Copiar respuestas» y péguelas en WhatsApp para Carlo.');avisar('No se pudo enviar; use «Copiar respuestas».');})
