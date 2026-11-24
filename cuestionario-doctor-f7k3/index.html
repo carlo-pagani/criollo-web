@@ -83,7 +83,7 @@ tr:first-child th{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;
 .envio{margin-top:26px;background:var(--pelicula);color:#E8EDF0;border-radius:14px;padding:18px 20px}
 .envio p{margin:0 0 10px}.envio p:last-child{margin:0;display:flex;flex-wrap:wrap;gap:8px}
 .envio button,.barra button{font:inherit;font-weight:600;border:0;border-radius:999px;padding:8px 14px;cursor:pointer;background:var(--acento-luz);color:var(--pelicula)}
-.est-envio:empty{display:none}.est-envio{font-weight:600;color:var(--acento-luz)}
+.est-envio:empty{display:none}.envio .copia>span{color:#BFC9CE}.envio .ln{color:#fff;border-bottom-color:#5E6B72}.est-envio{font-weight:600;color:var(--acento-luz)}
 .barra button.sec2,.envio button.sec2{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px #5E6B72}
 .aviso{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--pelicula);color:#fff;padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .25s;pointer-events:none}
 .aviso.ver{opacity:1}
@@ -180,6 +180,7 @@ tr:first-child th{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;
   </div>
   <div class="envio">
     <p><b>¿Listo?</b> Toque «Guardar y enviar a Carlo»: sus respuestas le llegan de inmediato. Puede volver a enviarlas cuantas veces quiera si cambia algo. Si el envío fallara, copie sus respuestas y péguelas en WhatsApp.</p>
+    <p><label class="campo copia"><span>Su correo, para recibir una copia (opcional):</span><input type="email" class="ln" id="f-copia" autocomplete="email" inputmode="email"></label></p>
     <p class="est-envio" id="est-envio" role="status"></p>
     <p><button type="button" class="b-enviar">Guardar y enviar a Carlo</button> <button type="button" class="b-copiar sec2">Copiar respuestas</button> <button type="button" class="b-bajar sec2">Descargar copia</button> <button type="button" class="b-imprimir sec2">Imprimir o PDF</button></p>
   </div>
@@ -246,7 +247,7 @@ tr:first-child th{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;
   function avisar(t){var a=document.getElementById('aviso');a.textContent=t;a.classList.add('ver');setTimeout(function(){a.classList.remove('ver');},2600);}
   function cada(c,f){[].forEach.call(document.querySelectorAll(c),function(b){b.addEventListener('click',f);});}
   // Envío a Carlo: FormSubmit reenvía las respuestas a su correo. Solo se envía cuando el doctor toca el botón.
-  var ENVIO='';
+  var ENVIO='https://formsubmit.co/ajax/carlo.galarza.pagani@gmail.com';
   var enviando=false;
   function estadoEnvio(t){var e=document.getElementById('est-envio');if(e)e.textContent=t;}
   cada('.b-enviar',function(){
@@ -256,7 +257,9 @@ tr:first-child th{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;
     enviando=true;estadoEnvio('Enviando…');
     var nombre=limpio(document.getElementById('f-nombre').value)||'Dr. Felipe Criollo Palacios';
     var datos={_subject:'Cuestionario de la ficha médica inteligente · '+nombre,_template:'box',_captcha:'false',
-      'Enviado por':nombre,'Fecha':new Date().toLocaleString('es-EC')};
+      'Enviado por':nombre,'Fecha y hora':new Date().toLocaleString('es-EC',{dateStyle:'full',timeStyle:'long'})};
+    var cc=limpio(document.getElementById('f-copia').value);
+    if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cc)){datos._cc=cc;datos['Copia enviada a']=cc;}
     // Una entrada por sección, para que el correo se lea ordenado
     resumen().split(/\n(?=== )/).forEach(function(b,i){
       var ls=b.trim().split('\n');if(!i)return;
