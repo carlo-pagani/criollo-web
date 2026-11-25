@@ -311,7 +311,7 @@
       ir('enviar');
     });
     marco(3, [el('h2', { texto: medico ? 'Datos para responderle' : 'Sus datos' }),
-      el('p', { class: 'ce-sub', texto: 'Los usamos solo para identificar el caso, contactarte y emitir la factura.' }), form]);
+      el('p', { class: 'ce-sub', texto: 'Los usamos solo para identificar el caso, contactarle y emitir la factura.' }), form]);
   };
 
   function textoCaso() {
